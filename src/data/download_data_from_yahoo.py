@@ -13,8 +13,10 @@ import sys
 import pandas as pd
 import yfinance as yf
 
-# TODO cambiar la ruta de ROOT_DIR_PROJECT por ruta relativa-
-# ROOT_DIR_PROJECT = "/Users/nataliaacevedo/modelo_tesis_volatilidad/data/yahoo"
+# obtain the root path of the project
+root_path = os.path.abspath(
+    os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
+)
 
 
 def download_data_from_yahoo(
@@ -25,10 +27,6 @@ def download_data_from_yahoo(
 ):
     """Download specified stocks from Yahoo Finance and save them to individual CSV files."""
 
-    # obtain the root path of the project
-    root_path = os.path.abspath(
-        os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
-    )
     print(root_path)
 
     # Create the root directory if it does not exist
