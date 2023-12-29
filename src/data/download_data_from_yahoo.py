@@ -9,15 +9,16 @@ Este script descarga los precios de cierre ajustados de las acciones de yahoo fi
 
 import os
 import sys
-
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import pandas as pd
 import yfinance as yf
 
-# obtain the root path of the project
-root_path = os.path.abspath(
-    os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
-)
+from constants import ROOT_DIR_PROJECT
 
+## obtain the root path of the project
+#ROOT_DIR_PROJECT = os.path.abspath(
+#    os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
+#)
 
 def download_data_from_yahoo(
     stocks_list,
@@ -27,12 +28,11 @@ def download_data_from_yahoo(
 ):
     """Download specified stocks from Yahoo Finance and save them to individual CSV files."""
 
-    print(root_path)
 
     # Create the root directory if it does not exist
-    if not os.path.exists(os.path.join(root_path, root_dir, "raw")):
-        os.makedirs(os.path.join(root_path, root_dir, "raw"))
-        print(f"--MSG-- Created directory {root_path}/{root_dir}/raw")
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "raw")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "raw"))
+        print(f"--MSG-- Created directory {ROOT_DIR_PROJECT}/{root_dir}/raw")
 
     # Process each stock in the stocks list. Stock is the nemotechnic of the stock
     for stock_name in stocks_list:

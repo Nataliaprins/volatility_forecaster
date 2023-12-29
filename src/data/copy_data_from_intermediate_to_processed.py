@@ -12,23 +12,15 @@ import os
 import sys
 
 import pandas as pd
-
+# add the path to the root directory of the project to the sys.path list
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from constants import ROOT_DIR_PROJECT
-#
-# ROOT_DIR_PROJECT = get_project_root()
-# import pandas as pd
-#
-# RELATIVE_PATH = "data/yahoo/intermediate"
-# obtain the root path of the project
-
-ROOT_DIR_PROJECT = os.path.abspath(
-    os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
-)
-
 
 def copy_data_from_intermediate_to_processed(root_dir):
+
+
     """Copy all files from intermediate/ to processed/."""
 
     # Get the list of files in intermediate/
