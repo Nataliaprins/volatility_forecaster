@@ -19,12 +19,11 @@
 
 """
 
-import os
-
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
+from constants  import ROOT_DIR_PROJECT
 import pandas as pd 
 
-#TODO cambiar la ruta de ROOT_DIR_PROJECT por ruta relativa
-ROOT_DIR_PROJECT =  "/Users/nataliaacevedo/modelo_tesis_volatilidad/data/yahoo"
 
 def train_test_split(
     yield_type,
@@ -38,16 +37,16 @@ def train_test_split(
     """TODO:"""
     # Get the list of files in processed/
     processed_files = [f for f in os.listdir(
-        os.path.join(root_dir, "processed/prices/")) if not f.endswith('.DS_Store')]
+        os.path.join(ROOT_DIR_PROJECT,root_dir, "processed/prices/")) if not f.endswith('.DS_Store')]
 
-    if not os.path.exists(os.path.join("data", root_dir, "processed/train")):
-        os.makedirs(os.path.join("data", root_dir, "processed/train"))
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/train")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/train"))
 
-    if not os.path.exists(os.path.join("data", root_dir, "processed/test")):
-        os.makedirs(os.path.join("data", root_dir, "processed/test"))
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/test")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/test"))
 
-    if not os.path.exists(os.path.join("data", root_dir, "processed/full")):
-        os.makedirs(os.path.join("data", root_dir, "processed/full"))
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/full")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/full"))
 
     processed_files = [
         file
@@ -62,7 +61,7 @@ def train_test_split(
     for processed_file in processed_files:
         # Read the file
         df = pd.read_csv(
-            os.path.join("data", root_dir, "processed/prices/", processed_file),
+            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file),
             parse_dates=True,
             index_col=0,
         )
@@ -88,32 +87,31 @@ def train_test_split(
         )
 
         full_file_name = (
-            "full_" + yield_type + config_text + "_data_" + processed_file[:-4] + ".csv"
+            "full_" + yield_type + config_text + processed_file[:-4] + ".csv"
         )
         train_file_name = (
             "train_"
             + yield_type
             + config_text
-            + "_data_"
             + processed_file[:-4]
             + ".csv"
         )
         test_file_name = (
-            "test_" + yield_type + config_text + "_data_" + processed_file[:-4] + ".csv"
+            "test_" + yield_type + config_text + processed_file[:-4] + ".csv"
         )
 
         # Save the files
-        file_name = os.path.join("data", root_dir, "processed", "full", full_file_name)
+        file_name = os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "full", full_file_name)
         train_data_full.to_csv(file_name, index=True)
         print(f"--MSG-- File saved to {file_name}")
 
         # Save the files
-        file_name = os.path.join("data", root_dir, "processed","train", train_file_name)
+        file_name = os.path.join(ROOT_DIR_PROJECT, root_dir, "processed","train", train_file_name)
         train_data.to_csv(file_name, index=True)
         print(f"--MSG-- File saved to {file_name}")
 
         # Save the files
-        file_name = os.path.join("data", root_dir, "processed", "test", test_file_name)
+        file_name = os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "test", test_file_name)
         test_data.to_csv(file_name, index=True)
         print(f"--MSG-- File saved to {file_name}")
 
@@ -194,5 +192,5 @@ if __name__ == "__main__":
     train_test_split(
         yield_type="log_yield",
         max_lag=5,
-        root_dir= ROOT_DIR_PROJECT, 
+        root_dir= "yahoo", 
     )
