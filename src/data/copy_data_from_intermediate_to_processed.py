@@ -23,7 +23,7 @@ from constants import ROOT_DIR_PROJECT
 # RELATIVE_PATH = "data/yahoo/intermediate"
 # obtain the root path of the project
 
-root_path = os.path.abspath(
+ROOT_DIR_PROJECT = os.path.abspath(
     os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
 )
 
@@ -32,19 +32,19 @@ def copy_data_from_intermediate_to_processed(root_dir):
     """Copy all files from intermediate/ to processed/."""
 
     # Get the list of files in intermediate/
-    intermediate_files = os.listdir(os.path.join(root_path, root_dir, "intermediate"))
+    intermediate_files = os.listdir(os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate"))
 
     #
     # Creates the folder 'processed/prices' inside 'root_dir' if not exists
-    if not os.path.exists(os.path.join(root_path, root_dir, "processed", "prices")):
-        os.makedirs(os.path.join(root_path, root_dir, "processed", "prices"))
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices"))
 
     # Process each file in intermediate/
     for intermediate_file in intermediate_files:
         # Read the file
         if intermediate_file.endswith(".csv"):
             df = pd.read_csv(
-                os.path.join(root_path, root_dir, "intermediate", intermediate_file),
+                os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate", intermediate_file),
                 parse_dates=True,
                 index_col=0,
             )
@@ -52,7 +52,7 @@ def copy_data_from_intermediate_to_processed(root_dir):
             # Save the file
             df.to_csv(
                 os.path.join(
-                    root_path, root_dir, "processed/prices", intermediate_file
+                    ROOT_DIR_PROJECT, root_dir, "processed/prices", intermediate_file
                 ),
                 index=True,
             )

@@ -1,1 +1,1 @@
-ROOT_DIR_PROJECT = "home/natalia/modelo_202312/data/"
+ROOT_DIR_PROJECT = "/Users/nataliaacevedo/modelo_202312/data"
