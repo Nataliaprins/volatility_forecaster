@@ -15,7 +15,7 @@ import pandas as pd
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-# from constants import get_project_root
+from constants import ROOT_DIR_PROJECT
 #
 # ROOT_DIR_PROJECT = get_project_root()
 # import pandas as pd
