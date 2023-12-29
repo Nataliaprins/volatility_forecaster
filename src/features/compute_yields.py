@@ -13,8 +13,8 @@
 import os
 import pandas as pd
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from constants import ROOT_DIR_PROJECT
+sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
+from constants  import ROOT_DIR_PROJECT
 
 
 # Adds a column called "yields" for each file in data/yahoo/processed/, which
@@ -41,9 +41,10 @@ def compute_yields(
         # Compute the yields
         df["yield"] = df["price"].pct_change()
 
+    
         # Save the file
         df.to_csv(
-            os.path.join("data", root_dir, "processed/prices/", processed_file),
+            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file),
             index=True,
         )
         print(f"--MSG-- File saved to {processed_file}")
@@ -51,5 +52,5 @@ def compute_yields(
     # Print message
     print("--MSG-- All files processed.")
 
-    if __name__ == "__main__":
-        compute_yields("yahoo")
+if __name__ == "__main__":
+    compute_yields("yahoo")
