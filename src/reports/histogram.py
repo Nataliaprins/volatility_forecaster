@@ -21,12 +21,15 @@ stock name.
 #
 
 # Import libraries
-import os, sys
+import os
+import sys
+
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import scipy.stats as stats
-import numpy as np 
+
 from constants import ROOT_DIR_PROJECT
 
 
@@ -45,11 +48,13 @@ def plot_histogram(
     """
 
     # Create the directory if it does not exist
-    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT,root_dir, "reports/histogram/")):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT,root_dir, "reports/histogram/"))
+    if not os.path.exists(
+        os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/histogram/")
+    ):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/histogram/"))
 
     # Get the list of files
-    files = os.listdir(os.path.join(ROOT_DIR_PROJECT,root_dir, "processed", "prices"))
+    files = os.listdir(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices"))
 
     # Iterate over the files
     for file in files:
@@ -57,34 +62,41 @@ def plot_histogram(
         if file == ".DS_Store":
             continue
         # Load the data
-        df = pd.read_csv(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices", file))
-        #drop na values
+        df = pd.read_csv(
+            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices", file)
+        )
+        # drop na values
         df = df.dropna()
 
         # Create the histogram
-        fig = px.histogram(df, x="log_yield",
-                           title=f"Histogram of {file[:-4]}",
-                           labels={"log_yield": "Log yield"},    
-                           )
+        fig = px.histogram(
+            df,
+            x="log_yield",
+            title=f"Histogram of {file[:-4]}",
+            labels={"log_yield": "Log yield"},
+        )
         # fit a normal distribution to the log_yield
         mu, std = stats.norm.fit(np.array(df["log_yield"]))
         # Create a sequence of numbers from min to max (x-axis)
-        x_data = np.linspace(min(df['log_yield']), max(df['log_yield']), 100)
+        x_data = np.linspace(min(df["log_yield"]), max(df["log_yield"]), 100)
         # Create the normal distribution for the range
         normal_dist = stats.norm.pdf(x_data, mu, std)
 
         # Add the normal distribution to the histogram
-        fig.add_scatter(x=x_data, y=normal_dist, mode='lines', name='Normal distribution')
-        
+        fig.add_scatter(
+            x=x_data, y=normal_dist, mode="lines", name="Normal distribution"
+        )
+
         # Save the histogram
         file_name = os.path.join(
-            "data", root_dir, f"reports/histogram/{file[:-4]}.html"
+            ROOT_DIR_PROJECT, root_dir, f"reports/histogram/{file[:-4]}.html"
         )
         fig.write_html(file_name)
 
         print(f"--MSG-- File saved to {file_name}")
 
+
 if __name__ == "__main__":
     plot_histogram(
-        root_dir= "yahoo",
+        root_dir="yahoo",
     )
