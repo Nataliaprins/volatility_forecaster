@@ -49,8 +49,8 @@ def plot_yield_time_line(
 
     # TODO - Natalia: revisar la importación de la función load_data
     df = load_data(stock_name, root_dir)
-    # df = df.reset_index()
-    # df = df.sort_values(by="Date")
+    df = df.reset_index()
+    df = df.sort_values(by="Date")
 
     fig = go.Figure(
         data=[
