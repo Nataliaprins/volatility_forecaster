@@ -36,6 +36,6 @@ def load_data(stock_name: str, root_dir: str) -> pd.DataFrame:
         
 if __name__ == "__main__":
     load_data(
-        stock_name="aapl",
+        stock_name="googl",
         root_dir="yahoo",
     )

@@ -39,7 +39,8 @@ def plot_yield_time_line(
 
     """
     # Create the directory if it does not exist
-    os.makedirs(os.path.join(ROOT_DIR_PROJECT,root_dir, "reports/yield_time_line/"), exist_ok=True)
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT,root_dir, "reports/yield_time_line/")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT,root_dir, "reports/yield_time_line/"))
 
     # df = pd.read_csv(
     #    os.path.join(root_dir, "processed","prices", "data_" + f"{stock_name}.csv"),
@@ -50,7 +51,8 @@ def plot_yield_time_line(
     # TODO - Natalia: revisar la importación de la función load_data
     df = load_data(stock_name, root_dir)
     df = df.reset_index()
-    df = df.sort_values(by="Date")
+  
+   
 
     fig = go.Figure(
         data=[
@@ -59,22 +61,29 @@ def plot_yield_time_line(
                 y=df["log_yield"],
                 mode="lines",
                 line=dict(color="rgb(31, 119, 180)"),
+                name="log_yield",
             )
         ]
     )
 
     fig.update_layout(
-        title="Yield time line",
+        title="Yield time line"+ f" {stock_name}",
         xaxis_title="Date",
         yaxis_title="Yield",
         font=dict(family="Courier New, monospace", size=18, color="#7f7f7f"),
     )
 
+    # Save the plot as html file
+    fig.write_html(
+        os.path.join(ROOT_DIR_PROJECT,root_dir,"reports", "yield_time_line", f"{stock_name}_yield_time_line.html")
+    )
+
     return fig
+
 
 
 if __name__ == "__main__":
     plot_yield_time_line(
-        stock_name="aapl",
+        stock_name="msft",
         root_dir="yahoo",
     ).show()
