@@ -1,4 +1,4 @@
-"create a funtcion to plot acf  for a given time series with plotly"
+"create a function to plot acf  for a given time series with plotly"
 import os
 import sys
 
@@ -48,9 +48,6 @@ def acf_plot(
     corr_array_acf = acf(serie, alpha=0.05, nlags=lags)
     lower_y_acf = corr_array_acf[1][:, 0] - corr_array_acf[0]
     upper_y_acf = corr_array_acf[1][:, 1] - corr_array_acf[0]
-    # estimate the pacf values
-    corr_array_pacf = pacf(serie, alpha=0.05, nlags=lags)
-    lower_y_pacf = corr_array_pacf[1][:, 0] - corr_array_pacf[0]
 
     # create the pacf plot with plotly
 
@@ -103,5 +100,5 @@ def acf_plot(
 
 if __name__ == "__main__":
     acf_plot(
-        stock_name="aapl", root_dir="yahoo", lags=40, type="acf", both=False, alpha=0.05
+        stock_name="msft", root_dir="yahoo", lags=40, type="acf", both=False, alpha=0.05
     ).show()
