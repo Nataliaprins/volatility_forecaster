@@ -11,3 +11,5 @@ wheel           ==  0.41.2
 pandas          ==  2.1.1
 yfinance        ==  0.2.33
 statsmodels     ==  0.13.0
+keras           ==  3.0.2
+tensorflow      ==  2.15.0
