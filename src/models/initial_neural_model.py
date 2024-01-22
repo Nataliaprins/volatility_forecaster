@@ -1,4 +1,4 @@
-"this function initializes the neural network model and loads the weights from the saved model with keras"
+" this function initializes the neural network model and loads the weights from the saved model with keras"
 # import the libraries
 import os
 import sys
