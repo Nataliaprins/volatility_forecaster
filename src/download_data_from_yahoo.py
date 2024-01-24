@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long
 """
 Este script descarga los precios de cierre ajustados de las acciones de yahoo finance.
 
@@ -8,19 +9,15 @@ Este script descarga los precios de cierre ajustados de las acciones de yahoo fi
 """
 
 import os
-import sys
 
 # sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import pandas as pd
 import yfinance as yf
 
-# from .constants import ROOT_DIR_PROJECT
-import constants
+# from src import constants
+from constants import ROOT_DIR_PROJECT
 
-## obtain the root path of the project
-# ROOT_DIR_PROJECT = os.path.abspath(
-#    os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
-# )
+# import sys
 
 
 def download_data_from_yahoo(
@@ -32,7 +29,7 @@ def download_data_from_yahoo(
     """Download specified stocks from Yahoo Finance and save them to individual CSV files."""
 
     # Create the root directory if it does not exist
-    if not os.path.exists(os.path.join(constants.ROOT_DIR_PROJECT, root_dir, "raw")):
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "raw")):
         os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "raw"))
         print(f"--MSG-- Created directory {ROOT_DIR_PROJECT}/{root_dir}/raw")
 

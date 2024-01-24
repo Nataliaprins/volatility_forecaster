@@ -11,21 +11,14 @@ Adds a column with the daily log yields of the adjusted close prices.
 
 """
 
-import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
+import os
+
+# sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
 import numpy as np
 import pandas as pd
+
 from constants import ROOT_DIR_PROJECT
 
-
-
-
-# Adds a column called "log_yields" for each file in data/yahoo/processed/, which
-# contains the daily log yields of the adjusted close prices.
-
-#from src.constants import ROOT_DIR_PROJECT
-#TODO cambiar la ruta de ROOT_DIR_PROJECT por ruta relativa
-#ROOT_DIR_PROJECT = "/Users/nataliaacevedo/modelo_tesis_volatilidad/data/yahoo"
 
 def compute_log_yield(
     root_dir,
@@ -33,17 +26,24 @@ def compute_log_yield(
     """Adds a column with the daily log yields of the adjusted close prices."""
 
     # Get the list of files in processed/
-    processed_files = [f for f in os.listdir(
-        os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")) if not f.endswith('.DS_Store')]
+    processed_files = [
+        f
+        for f in os.listdir(
+            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")
+        )
+        if not f.endswith(".DS_Store")
+    ]
 
     # Process each file in processed/
     for processed_file in processed_files:
         # Read the file
         df = pd.read_csv(
-            os.path.join(ROOT_DIR_PROJECT,root_dir, "processed", "prices",processed_file),
+            os.path.join(
+                ROOT_DIR_PROJECT, root_dir, "processed", "prices", processed_file
+            ),
             parse_dates=True,
             index_col=0,
-            encoding='utf-8'
+            encoding="utf-8",
         )
 
         # Compute the log yields
@@ -51,16 +51,16 @@ def compute_log_yield(
 
         # Save the file
         df.to_csv(
-            os.path.join(ROOT_DIR_PROJECT ,root_dir, "processed/prices/", processed_file),
+            os.path.join(
+                ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file
+            ),
             index=True,
-            )
+        )
         print(f"--MSG-- File saved to {processed_file}")
 
     # Print message
     print("--MSG-- All files processed.")
 
+
 if __name__ == "__main__":
-    compute_log_yield(
-        root_dir= "yahoo"
-        )
-         
+    compute_log_yield(root_dir="yahoo")
