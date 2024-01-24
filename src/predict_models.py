@@ -126,11 +126,13 @@
 """
 
 
-import glob, os, sys
-sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
+import glob
+import os
+
 import joblib
 import pandas as pd
-from sklearn.linear_model import LinearRegression 
+from sklearn.linear_model import LinearRegression
+
 from constants import ROOT_DIR_PROJECT
 
 
@@ -142,7 +144,7 @@ def predict_models(
 
     #
     # Obtains the list of available models in the folder.
-    path_to_models = os.path.join(ROOT_DIR_PROJECT,root_dir, "models", pattern)
+    path_to_models = os.path.join(ROOT_DIR_PROJECT, root_dir, "models", pattern)
     model_paths = glob.glob(path_to_models)
 
     for model_path in model_paths:
@@ -159,7 +161,11 @@ def predict_models(
         # Obtains the data
         for particle in ["train", "test", "full"]:
             file_path = os.path.join(
-                ROOT_DIR_PROJECT,root_dir, "processed", str(particle), str(particle)+ "_" + data_file_name + ".csv"
+                ROOT_DIR_PROJECT,
+                root_dir,
+                "processed",
+                str(particle),
+                str(particle) + "_" + data_file_name + ".csv",
             )
             #
             isolated_data_path = "/".join(file_path.split("/")[:-1])
@@ -190,9 +196,9 @@ def predict_models(
             print("        with model:")
             print(f"        {model_path}")
 
+
 if __name__ == "__main__":
     predict_models(
-        root_dir= "yahoo",
+        root_dir="yahoo",
         pattern="LinearRegression*",
     )
-

@@ -9,21 +9,11 @@
 --MSG-- All files copied from raw/ to intermediate/ removing NA.
 
 """
-
 import os
-import sys
-# add the path to the root directory of the project to the sys.path list
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
 import pandas as pd
+
 from constants import ROOT_DIR_PROJECT
-
-# TODO cambiar la ruta de ROOT_DIR_PROJECT por ruta relativa
-# ROOT_DIR_PROJECT = "/Users/nataliaacevedo/modelo_tesis_volatilidad/data/yahoo"
-
-# obtain the root path of the project
-ROOT_DIR_PROJECT = os.path.abspath(
-    os.path.join(os.getcwd(), os.pardir, "modelo_202312", "data")
-)
 
 
 def copy_data_from_raw_to_intermetidate(root_dir):

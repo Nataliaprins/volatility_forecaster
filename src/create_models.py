@@ -15,13 +15,11 @@
 --MSG-- Models saved to data/yahoo/models/DecisionTreeRegressor_yield_lag_5_train_189_test_63_data_googl.joblib
 """
 import os
-import sys
 from datetime import datetime
 
 import joblib
 from sklearn.linear_model import LinearRegression
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from constants import ROOT_DIR_PROJECT
 
 

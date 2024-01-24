@@ -1,6 +1,7 @@
 """Loads the the corresponding CSV file for the specified stock in processed/ directory.
 
 """
+
 import os
 
 import pandas as pd

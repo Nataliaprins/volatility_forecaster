@@ -44,13 +44,13 @@
 
 
 import glob
-import os, sys
-sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
+import os
 
 import joblib
 import pandas as pd
-from sklearn.linear_model import LinearRegression 
-from constants import ROOT_DIR_PROJECT 
+from sklearn.linear_model import LinearRegression
+
+from constants import ROOT_DIR_PROJECT
 
 
 def train_models(
@@ -61,7 +61,7 @@ def train_models(
 
     #
     # Obtains the list of available models in the folder.
-    path_to_models = os.path.join(ROOT_DIR_PROJECT,root_dir, "models", pattern)
+    path_to_models = os.path.join(ROOT_DIR_PROJECT, root_dir, "models", pattern)
     model_paths = glob.glob(path_to_models)
 
     for model_path in model_paths:
@@ -72,8 +72,12 @@ def train_models(
 
         #
         # Obtains the data
-        data_file_name = os.path.join(ROOT_DIR_PROJECT,
-            root_dir, "processed","train", "train_"+ data_file_name + ".csv"
+        data_file_name = os.path.join(
+            ROOT_DIR_PROJECT,
+            root_dir,
+            "processed",
+            "train",
+            "train_" + data_file_name + ".csv",
         )
         data = pd.read_csv(data_file_name, index_col=0)
         data = data.dropna()
@@ -83,7 +87,6 @@ def train_models(
         #
         # Loads model
         model = joblib.load(model_path)
-      
 
         # Trains model
         model.fit(train_x, train_y)
@@ -93,12 +96,9 @@ def train_models(
         joblib.dump(model, model_path)
         print(f"--MSG-- Models saved to {model_path}")
 
+
 if __name__ == "__main__":
     train_models(
-        root_dir= "yahoo",
+        root_dir="yahoo",
         pattern="LinearRegression*",
     )
-
-
-
-    

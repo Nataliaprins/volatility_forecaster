@@ -19,10 +19,11 @@
 
 """
 
-import os, sys
-sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
-from constants  import ROOT_DIR_PROJECT
-import pandas as pd 
+import os
+
+import pandas as pd
+
+from constants import ROOT_DIR_PROJECT
 
 
 def train_test_split(
@@ -36,8 +37,13 @@ def train_test_split(
 ):
     """TODO:"""
     # Get the list of files in processed/
-    processed_files = [f for f in os.listdir(
-        os.path.join(ROOT_DIR_PROJECT,root_dir, "processed/prices/")) if not f.endswith('.DS_Store')]
+    processed_files = [
+        f
+        for f in os.listdir(
+            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")
+        )
+        if not f.endswith(".DS_Store")
+    ]
 
     if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/train")):
         os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/train"))
@@ -54,14 +60,15 @@ def train_test_split(
         if not file.startswith("train_")
         and not file.startswith("test_")
         and not file.startswith("full_")
-        ]
-        
-         
+    ]
+
     #  Process each file in processed/
     for processed_file in processed_files:
         # Read the file
         df = pd.read_csv(
-            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file),
+            os.path.join(
+                ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file
+            ),
             parse_dates=True,
             index_col=0,
         )
@@ -90,28 +97,30 @@ def train_test_split(
             "full_" + yield_type + config_text + processed_file[:-4] + ".csv"
         )
         train_file_name = (
-            "train_"
-            + yield_type
-            + config_text
-            + processed_file[:-4]
-            + ".csv"
+            "train_" + yield_type + config_text + processed_file[:-4] + ".csv"
         )
         test_file_name = (
             "test_" + yield_type + config_text + processed_file[:-4] + ".csv"
         )
 
         # Save the files
-        file_name = os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "full", full_file_name)
+        file_name = os.path.join(
+            ROOT_DIR_PROJECT, root_dir, "processed", "full", full_file_name
+        )
         train_data_full.to_csv(file_name, index=True)
         print(f"--MSG-- File saved to {file_name}")
 
         # Save the files
-        file_name = os.path.join(ROOT_DIR_PROJECT, root_dir, "processed","train", train_file_name)
+        file_name = os.path.join(
+            ROOT_DIR_PROJECT, root_dir, "processed", "train", train_file_name
+        )
         train_data.to_csv(file_name, index=True)
         print(f"--MSG-- File saved to {file_name}")
 
         # Save the files
-        file_name = os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "test", test_file_name)
+        file_name = os.path.join(
+            ROOT_DIR_PROJECT, root_dir, "processed", "test", test_file_name
+        )
         test_data.to_csv(file_name, index=True)
         print(f"--MSG-- File saved to {file_name}")
 
@@ -188,9 +197,10 @@ def apply_train_test_split(
 
     return train_data, test_data, text
 
+
 if __name__ == "__main__":
     train_test_split(
         yield_type="log_yield",
         max_lag=5,
-        root_dir= "yahoo", 
+        root_dir="yahoo",
     )

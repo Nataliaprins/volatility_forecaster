@@ -1,16 +1,13 @@
 "create a function to plot pacf for a given time series with plotly"
 import os
-import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from statsmodels.tsa.stattools import acf, pacf
+from statsmodels.tsa.stattools import pacf
 
 from constants import ROOT_DIR_PROJECT
-from data.load_data import load_data
+from load_data import load_data
 
 
 def pacf_plot(

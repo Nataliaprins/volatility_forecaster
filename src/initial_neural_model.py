@@ -1,14 +1,11 @@
 " this function initializes the neural network model and loads the weights from the saved model with keras"
 # import the libraries
 import os
-import sys
 from datetime import datetime
 
 import joblib
 from keras.layers import Dense
 from keras.models import Sequential
-
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from constants import ROOT_DIR_PROJECT
 
@@ -48,6 +45,7 @@ def initial_neural_model(root_dir):
         neural_model.compile(loss="mse", optimizer="adam", metrics=["mse", "mae"])
         joblib.dump(neural_model, file_name)
         print(f"--MSG-- Models saved to {file_name}")
+        print(neural_model.summary())
 
 
 if __name__ == "__main__":

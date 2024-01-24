@@ -9,26 +9,25 @@
 
 """
 import os
-import sys
 
 import pandas as pd
-# add the path to the root directory of the project to the sys.path list
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from constants import ROOT_DIR_PROJECT
 
+
 def copy_data_from_intermediate_to_processed(root_dir):
-
-
     """Copy all files from intermediate/ to processed/."""
 
     # Get the list of files in intermediate/
-    intermediate_files = os.listdir(os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate"))
+    intermediate_files = os.listdir(
+        os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate")
+    )
 
     #
     # Creates the folder 'processed/prices' inside 'root_dir' if not exists
-    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices")):
+    if not os.path.exists(
+        os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices")
+    ):
         os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices"))
 
     # Process each file in intermediate/
@@ -36,7 +35,9 @@ def copy_data_from_intermediate_to_processed(root_dir):
         # Read the file
         if intermediate_file.endswith(".csv"):
             df = pd.read_csv(
-                os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate", intermediate_file),
+                os.path.join(
+                    ROOT_DIR_PROJECT, root_dir, "intermediate", intermediate_file
+                ),
                 parse_dates=True,
                 index_col=0,
             )

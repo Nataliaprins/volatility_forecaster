@@ -10,11 +10,11 @@
 
 """
 
+import os
 
-import glob, os, sys
-sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error
+
 from constants import ROOT_DIR_PROJECT
 
 
@@ -23,31 +23,33 @@ def evaluate_models(
 ):
     """Trains a model based on the model type and model."""
 
-#specify folders
+    # specify folders
     folders = ["train", "test", "full"]
-# initialize list of lists
+    # initialize list of lists
     file_paths = []
 
-# iterate in the list of folders
+    # iterate in the list of folders
     for folder in folders:
-        folder_path = os.path.join(ROOT_DIR_PROJECT,root_dir, "processed", str(folder))
+        folder_path = os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", str(folder))
 
-        #get the full path with the list of files in the directory
+        # get the full path with the list of files in the directory
         folder_files = os.listdir(folder_path)
-        #choose the files that end in _full.csv, _train.csv, _test.csv
-        folder_files = [file_name
-                        for file_name in folder_files
-                        if file_name.endswith("_full.csv")
-                        or file_name.endswith("_train.csv")
-                        or file_name.endswith("_test.csv")
-                        ]
-        #get the full path of the files
-        folder_files = [os.path.join(folder_path, file_name) for file_name in folder_files]
-    
-        #add the file path to list
+        # choose the files that end in _full.csv, _train.csv, _test.csv
+        folder_files = [
+            file_name
+            for file_name in folder_files
+            if file_name.endswith("_full.csv")
+            or file_name.endswith("_train.csv")
+            or file_name.endswith("_test.csv")
+        ]
+        # get the full path of the files
+        folder_files = [
+            os.path.join(folder_path, file_name) for file_name in folder_files
+        ]
+
+        # add the file path to list
         file_paths.extend(folder_files)
 
-        
     metrics = []
     for file_path in file_paths:
         #
@@ -74,5 +76,5 @@ def evaluate_models(
 
 if __name__ == "__main__":
     evaluate_models(
-        root_dir= "yahoo",
+        root_dir="yahoo",
     )

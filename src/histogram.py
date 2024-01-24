@@ -22,9 +22,7 @@ stock name.
 
 # Import libraries
 import os
-import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
 import pandas as pd
 import plotly.express as px
