@@ -42,11 +42,20 @@ def optimize_portfolio(root_dir, pattern):
 
     #Optimize the portfolio
     #import the library
-    from pypfopt import risk_models
-    from pypfopt import expected_returns   
     from pypfopt import EfficientFrontier
 
-    EfficientFrontier(df.mean(), covariance_matrix).max_sharpe()
+    #chage df to a series
+    df = df.mean()
+
+    ef=EfficientFrontier(
+        expected_returns=df,
+        cov_matrix=covariance_matrix,
+        weight_bounds=(0,1)
+    )
+    ef.min_volatility()
+    weitghts = ef.clean_weights()
+    print(weitghts)
+    
 
 
 
