@@ -54,7 +54,7 @@ def optimize_portfolio(root_dir, pattern):
     )
     ef.min_volatility()
     weitghts = ef.clean_weights()
-    print(weitghts)
+    return(weitghts)
     
 
 
