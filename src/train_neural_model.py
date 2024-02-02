@@ -35,25 +35,22 @@ def train_neural_model(
             "processed",
             "train",
             "train_" + model_name + ".csv",
-        ) 
+        )
 
         data = pd.read_csv(data_file_name, index_col=0)
         data = data.dropna()
         train_x = data.drop(columns=["yt"])
         train_y = data["yt"]
 
-        TODO: #terminar codígo para entrenar con datos, falta fit y predict. Revisar KERAS
-        
+        # train the model
+        model.fit(train_x, train_y)
 
-                # train the model
-                model.fit(X, y)
-
-                # save the model
-                path_to_save = os.path.join(
-                    ROOT_DIR_PROJECT, root_dir, "models", f"{model_name}.joblib"
-                )
-                joblib.dump(model, path_to_save)
-                print(f"--MSG-- Models saved to {path_to_save}")
+        # save the model
+        path_to_save = os.path.join(
+            ROOT_DIR_PROJECT, root_dir, "models", f"{model_name}.joblib"
+        )
+        joblib.dump(model, path_to_save)
+        print(f"--MSG-- Models saved to {path_to_save}")
 
 
 if __name__ == "__main__":

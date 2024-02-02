@@ -6,6 +6,7 @@ from datetime import datetime
 import joblib
 from keras.layers import Dense
 from keras.models import Sequential
+from keras.layers import LSTM
 
 from constants import ROOT_DIR_PROJECT
 
@@ -39,10 +40,14 @@ def initial_neural_model(root_dir):
             "neural_network_" + date_time + "_" + name + ".joblib",
         )
         # inicialize the model
+        n_features = 1
+        n_steps = 3
         neural_model = Sequential()
-        neural_model.add(Dense(128, input_dim=5, activation="relu"))
-        neural_model.add(Dense(64, activation="relu"))
-        neural_model.compile(loss="mse", optimizer="adam", metrics=["mse", "mae"])
+        neural_model.add(LSTM(50, activation="relu", input_shape=(n_steps, n_features)))
+        neural_model.add(Dense(1))
+        neural_model.compile(optimizer="adam", loss="mse")
+
+        # save the model
         joblib.dump(neural_model, file_name)
         print(f"--MSG-- Models saved to {file_name}")
         print(neural_model.summary())

@@ -23,6 +23,10 @@ def evaluate_models(
 ):
     """Trains a model based on the model type and model."""
 
+    #create the folder if it does not exist
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "reports", "metrics")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "reports", "metrics"))    
+
     # specify folders
     folders = ["train", "test", "full"]
     # initialize list of lists
@@ -69,7 +73,7 @@ def evaluate_models(
         )
 
     metrics = pd.DataFrame(metrics).sort_values("file_path")
-    path_to_metrics = os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/metrics.csv")
+    path_to_metrics = os.path.join(ROOT_DIR_PROJECT, root_dir, "reports", "metrics/metrics.csv")
     metrics.to_csv(path_to_metrics, index=False)
     print(f"--INFO-- Metrics saved to {path_to_metrics}")
 

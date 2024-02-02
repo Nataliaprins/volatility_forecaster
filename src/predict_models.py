@@ -151,7 +151,7 @@ def predict_models(
         #
         # Obtains the model name
         data_file_name = model_path.replace(".joblib", "")
-        data_file_name = "_".join(data_file_name.split("_")[3:])
+        data_file_name = "_".join(data_file_name.split("_")[-9:])
 
         # Loads model
         model = joblib.load(model_path)
@@ -200,5 +200,5 @@ def predict_models(
 if __name__ == "__main__":
     predict_models(
         root_dir="yahoo",
-        pattern="LinearRegression*",
+        pattern="neural_network*",
     )

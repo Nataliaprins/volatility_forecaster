@@ -43,12 +43,11 @@ def calculate_portfolio_value(root_dir, pattern):
     #create a new column in the dataframe with the value of the portfolio multiplied by the weights
     df["portfolio_value"] = df.dot(weights)
 
+    #calculate the percentage change of the portfolio value
+    df["portfolio_value_pct_change"] = df["portfolio_value"].pct_change()
+
     #save the portfolio value to a csv file
     df.to_csv(os.path.join(ROOT_DIR_PROJECT, root_dir, "reports", "portfolio", "portfolio_value.csv"))
-
-
-
-
 
 
 
