@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/mlruns/0/7225a4cc3afa4955bc07bdb18c236c3b/artifacts
+end_time: 1707867245405
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7225a4cc3afa4955bc07bdb18c236c3b
+run_name: placid-shad-706
+run_uuid: 7225a4cc3afa4955bc07bdb18c236c3b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1707867245388
+status: 4
+tags: []
+user_id: nataliaacevedo

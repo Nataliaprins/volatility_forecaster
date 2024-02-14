@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/mlruns/0/9fadc29ad8744be4a10f6904d49055a3/artifacts
+end_time: 1707883991762
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9fadc29ad8744be4a10f6904d49055a3
+run_name: glamorous-frog-881
+run_uuid: 9fadc29ad8744be4a10f6904d49055a3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1707883986934
+status: 3
+tags: []
+user_id: nataliaacevedo
