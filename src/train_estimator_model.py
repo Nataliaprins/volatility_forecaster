@@ -14,7 +14,7 @@ from load_test_data_mlflow import load_test_data
 from load_train_data_mlflow import load_train_data
 
 
-#obtain data from the data folder
+
 def train_estimator_model(
     root_dir,
     train_size,
@@ -22,7 +22,8 @@ def train_estimator_model(
     model_instance,
     verbose
 ):
-    #obtain the train data from the data folder
+    
+    #obtain the path for data 
     path_to_train_data= os.path.join(ROOT_DIR_PROJECT,
                                      root_dir,
                                      "processed",
@@ -45,14 +46,18 @@ def train_estimator_model(
         train_size= train_size,
         lags= lags
         )
-    #calculate metrics
-        #eval_metrics(y_test, 
-                    #y_pred=model_instance.predict(x_test),
-                    #stock_name= data_file.split('_')[-1].replace(".csv", ""))
+
+    model_params= {"sample_weight":samples}
+    
     #start mlflow run
         print('Tracking directory:', mlflow.get_tracking_uri())
 
+        #mlflow.set_experiment("stock_name")
+        #with mlflow.start_run(run_name="linear_regression") as run:
+        
+
         with mlflow.start_run():
+            # model.set_params(**params)
             model= (model_instance)           
             model = model.fit(x_train, y_train)      
             mse, mae, r2 = eval_metrics(y_true = y_test, 
@@ -63,7 +68,12 @@ def train_estimator_model(
                 print(f"--MSG-- R2: {r2} for {data_file.split('_')[-1].replace('.csv', '')}")
                 #save the model
                 #tracking the parameters
-                mlflow.log_param("train_size", train_size)
+
+
+                #pasar un dic con los parametros e itero en keys y values para grabar
+                # for key, value in params.items():
+                #     mlflow.log_param(key, value)
+                mlflow.log_param("train_size", train_size) #estas no las necesito
                 mlflow.log_param("lags", lags) 
                 #tracking the metrics
                 mlflow.log_metric("mse", mse)
@@ -80,4 +90,5 @@ if __name__ == "__main__":
         lags= 5,
         model_instance= LinearRegression(),
         verbose= True
+        model_params= {"sample_weight":samples}
     )
