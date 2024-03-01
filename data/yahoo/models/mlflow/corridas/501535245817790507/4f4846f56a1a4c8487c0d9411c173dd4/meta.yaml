@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/corridas/501535245817790507/4f4846f56a1a4c8487c0d9411c173dd4/artifacts
+end_time: 1709323382317
+entry_point_name: ''
+experiment_id: '501535245817790507'
+lifecycle_stage: active
+run_id: 4f4846f56a1a4c8487c0d9411c173dd4
+run_name: ambitious-gnu-432
+run_uuid: 4f4846f56a1a4c8487c0d9411c173dd4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709323382306
+status: 4
+tags: []
+user_id: nataliaacevedo

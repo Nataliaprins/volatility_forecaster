@@ -6,7 +6,6 @@ from pathlib import Path
 
 import mlflow
 import mlflow.sklearn
-import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 from constants import ROOT_DIR_PROJECT
@@ -16,13 +15,10 @@ from load_train_data_mlflow import load_train_data
 # path to the data
 path_to_train_data = os.path.join(ROOT_DIR_PROJECT, "yahoo", "processed", "train", "train_*.csv")
 data_train_files = glob.glob(path_to_train_data)
+stock_name = "aapl"
 
-x_train = load_train_data(root_dir="yahoo",train_size=189, lags= 5, stock_name= "AAPL" )
-y_train = load_train_data(root_dir="yahoo",train_size=189, lags= 5, stock_name= "AAPL" )
-x_test = load_test_data(root_dir="yahoo", train_size=189, stock_name= "AAPL", lags= 5)
-y_test = load_test_data(root_dir="yahoo", train_size=189,stock_name= "AAPL", lags= 5)  
-stock_name = "AAPL"
-
+x_train, y_train = load_train_data(root_dir="yahoo",train_size=189, lags= 5, stock_name= stock_name )
+x_test, y_test = load_test_data(root_dir="yahoo", train_size=189, lags= 5, stock_name= stock_name)
 
 
 def make_experiment(train_size, lags, model_instance, model_params, verbose):
@@ -36,7 +32,8 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
     #setting tracking directory
     mlflow.set_tracking_uri(f"file://{tracking_uri}")
     print('Tracking directory:', mlflow.get_tracking_uri())
-
+    
+  
     #autologging
     mlflow.sklearn.autolog(
         log_input_examples= False,
@@ -50,20 +47,21 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
         log_post_training_metrics=True,
         serialization_format= "cloudpickle",
         registered_model_name=None,
+        artifact_location= tracking_uri,
         )
     #save the name of the experiment
     mlflow.set_experiment(str(stock_name))
     
     # start the experiment
 
-    with mlflow.start_run():
-        # load the data
-        data_train = load_train_data(data_train_files, train_size)
-        data_test = load_test_data()
+    with mlflow.start_run() as run:
+        run=mlflow.active_run()
+        print("Active run_id: {}".format(run.info.run_id))
+   
         # train the model
-        model_instance.fit(data_train["X"], data_train["y"], **model_params)
+        model_instance.fit(x_train, y_train)
         # make predictions
-        y_pred = model_instance.predict(data_test["X"])
+        y_pred = model_instance.predict(x_test)
         # log the parameters
         mlflow.log_param("train_size", train_size)
         mlflow.log_param("lags", lags)
