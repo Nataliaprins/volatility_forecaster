@@ -30,10 +30,17 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
     tracking_uri = os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow", "corridas")
         
     #setting tracking directory
-    mlflow.set_tracking_uri(f"file://{tracking_uri}")
+    from pathlib import Path
+
+    from mlflow import MlflowClient
+
+    #client = MlflowClient()
+    artifact_location = Path.cwd().joinpath("data","yahoo","models","mlflow","corridas").as_uri()
+                                     
+    mlflow.set_tracking_uri(artifact_location)
     print('Tracking directory:', mlflow.get_tracking_uri())
     
-  
+      
     #autologging
     mlflow.sklearn.autolog(
         log_input_examples= False,
@@ -47,11 +54,11 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
         log_post_training_metrics=True,
         serialization_format= "cloudpickle",
         registered_model_name=None,
-        artifact_location= tracking_uri,
+        
         )
-    #save the name of the experiment
-    mlflow.set_experiment(str(stock_name))
     
+    #set the experiment
+    mlflow.set_experiment(str(stock_name))
     # start the experiment
 
     with mlflow.start_run() as run:
