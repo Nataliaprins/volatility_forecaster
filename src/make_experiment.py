@@ -9,6 +9,7 @@ import mlflow.sklearn
 from sklearn.linear_model import LinearRegression
 
 from constants import ROOT_DIR_PROJECT
+from eval_metrics_mlflow import eval_metrics
 from load_test_data_mlflow import load_test_data
 from load_train_data_mlflow import load_train_data
 
@@ -20,6 +21,7 @@ stock_name = "msft"
 x_train, y_train = load_train_data(root_dir="yahoo",train_size=189, lags= 5, stock_name= stock_name )
 x_test, y_test = load_test_data(root_dir="yahoo", train_size=189, lags= 5, stock_name= stock_name)
 
+#TODO: hacer el for para iterar entre acciones y agregar el gridsearch en model params para guardar los mejores parámetros.
 
 
 def make_experiment(train_size, lags, model_instance, model_params, verbose):
@@ -62,15 +64,17 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
         model_instance.fit(x_train, y_train)
         # make predictions
         y_pred = model_instance.predict(x_test)
+        # evaluate the model
+        mse, mae, r2 = eval_metrics(y_test, y_pred)
         # log the parameters
         mlflow.log_param("train_size", train_size)
         mlflow.log_param("lags", lags)
         mlflow.log_param("model_instance", model_instance)
         mlflow.log_param("model_params", model_params)
         # log the metrics
-        mlflow.log_metric("mse", 0.5)
-        mlflow.log_metric("mae", 0.5)
-        mlflow.log_metric("r2", 0.5)
+        mlflow.log_metric("mse", mse)
+        mlflow.log_metric("mae", mae)
+        mlflow.log_metric("r2", r2)
         # log the model
         mlflow.sklearn.log_model(model_instance, "model")
         
