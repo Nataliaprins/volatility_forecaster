@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/994854762645957558/3be66a6ebacc470985d267d38d102345/artifacts
+end_time: 1709609766796
+entry_point_name: ''
+experiment_id: '994854762645957558'
+lifecycle_stage: active
+run_id: 3be66a6ebacc470985d267d38d102345
+run_name: nimble-fly-661
+run_uuid: 3be66a6ebacc470985d267d38d102345
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709609749403
+status: 3
+tags: []
+user_id: nataliaacevedo

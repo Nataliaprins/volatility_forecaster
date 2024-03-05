@@ -15,28 +15,21 @@ from load_train_data_mlflow import load_train_data
 # path to the data
 path_to_train_data = os.path.join(ROOT_DIR_PROJECT, "yahoo", "processed", "train", "train_*.csv")
 data_train_files = glob.glob(path_to_train_data)
-stock_name = "aapl"
+stock_name = "msft"
 
 x_train, y_train = load_train_data(root_dir="yahoo",train_size=189, lags= 5, stock_name= stock_name )
 x_test, y_test = load_test_data(root_dir="yahoo", train_size=189, lags= 5, stock_name= stock_name)
 
 
+
 def make_experiment(train_size, lags, model_instance, model_params, verbose):
     """this function is used to make an experiment with the given parameters using mlflow tracking"""
     #create the working directory
-    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models","mlflow", "corridas")):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models","mlflow", "corridas"))
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow" ))
 
-    tracking_uri = os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow", "corridas")
-        
     #setting tracking directory
-    from pathlib import Path
-
-    from mlflow import MlflowClient
-
-    #client = MlflowClient()
-    artifact_location = Path.cwd().joinpath("data","yahoo","models","mlflow","corridas").as_uri()
-                                     
+    artifact_location = Path.cwd().joinpath("data","yahoo","models","mlflow", "mlruns").as_uri()
     mlflow.set_tracking_uri(artifact_location)
     print('Tracking directory:', mlflow.get_tracking_uri())
     
