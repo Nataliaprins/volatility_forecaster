@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/748572123082458337/fdd9d13267ff497483ee27c569a461d7/artifacts
+end_time: 1709756413093
+entry_point_name: ''
+experiment_id: '748572123082458337'
+lifecycle_stage: active
+run_id: fdd9d13267ff497483ee27c569a461d7
+run_name: smiling-zebra-143
+run_uuid: fdd9d13267ff497483ee27c569a461d7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709756408460
+status: 3
+tags: []
+user_id: nataliaacevedo

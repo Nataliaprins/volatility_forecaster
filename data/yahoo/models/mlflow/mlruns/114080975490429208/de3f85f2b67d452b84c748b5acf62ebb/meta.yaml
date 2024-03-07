@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/de3f85f2b67d452b84c748b5acf62ebb/artifacts
+end_time: 1709747406762
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: de3f85f2b67d452b84c748b5acf62ebb
+run_name: legendary-owl-95
+run_uuid: de3f85f2b67d452b84c748b5acf62ebb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709747401202
+status: 3
+tags: []
+user_id: nataliaacevedo

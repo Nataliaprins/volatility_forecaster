@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/889834570939757371/9f57a4e8e7a74788a740154e44a6c264/artifacts
+end_time: 1709686504867
+entry_point_name: ''
+experiment_id: '889834570939757371'
+lifecycle_stage: active
+run_id: 9f57a4e8e7a74788a740154e44a6c264
+run_name: invincible-gnat-209
+run_uuid: 9f57a4e8e7a74788a740154e44a6c264
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709686500649
+status: 3
+tags: []
+user_id: nataliaacevedo

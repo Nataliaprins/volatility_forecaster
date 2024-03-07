@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/748572123082458337/b56b8686b8554346b3c8c3eb14580006/artifacts
+end_time: 1709756413093
+entry_point_name: ''
+experiment_id: '748572123082458337'
+lifecycle_stage: active
+run_id: b56b8686b8554346b3c8c3eb14580006
+run_name: resilient-stag-21
+run_uuid: b56b8686b8554346b3c8c3eb14580006
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709756408460
+status: 3
+tags: []
+user_id: nataliaacevedo

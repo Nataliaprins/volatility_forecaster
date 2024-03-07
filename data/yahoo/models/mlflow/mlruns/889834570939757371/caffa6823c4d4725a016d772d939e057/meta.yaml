@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/889834570939757371/caffa6823c4d4725a016d772d939e057/artifacts
+end_time: 1709756420492
+entry_point_name: ''
+experiment_id: '889834570939757371'
+lifecycle_stage: active
+run_id: caffa6823c4d4725a016d772d939e057
+run_name: valuable-zebra-686
+run_uuid: caffa6823c4d4725a016d772d939e057
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709756415638
+status: 3
+tags: []
+user_id: nataliaacevedo

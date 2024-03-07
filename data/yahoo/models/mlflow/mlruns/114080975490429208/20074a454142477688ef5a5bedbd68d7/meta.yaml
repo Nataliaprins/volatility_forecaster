@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/20074a454142477688ef5a5bedbd68d7/artifacts
+end_time: 1709756292803
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: 20074a454142477688ef5a5bedbd68d7
+run_name: receptive-hen-554
+run_uuid: 20074a454142477688ef5a5bedbd68d7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709756287534
+status: 4
+tags: []
+user_id: nataliaacevedo

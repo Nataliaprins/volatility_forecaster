@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/444b5a1beda94b87a36e5db8d135d12a/artifacts
+end_time: 1709756292768
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: 444b5a1beda94b87a36e5db8d135d12a
+run_name: colorful-mouse-235
+run_uuid: 444b5a1beda94b87a36e5db8d135d12a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709756287534
+status: 3
+tags: []
+user_id: nataliaacevedo

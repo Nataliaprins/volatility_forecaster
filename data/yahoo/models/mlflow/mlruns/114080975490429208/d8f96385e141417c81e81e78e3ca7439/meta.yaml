@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/d8f96385e141417c81e81e78e3ca7439/artifacts
+end_time: 1709686496189
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: d8f96385e141417c81e81e78e3ca7439
+run_name: burly-squid-323
+run_uuid: d8f96385e141417c81e81e78e3ca7439
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709686490941
+status: 3
+tags: []
+user_id: nataliaacevedo
