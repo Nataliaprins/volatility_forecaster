@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/afb50bb16462413e994d757ee254d6c1/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: afb50bb16462413e994d757ee254d6c1
+run_name: bustling-stork-635
+run_uuid: afb50bb16462413e994d757ee254d6c1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710300280762
+status: 1
+tags: []
+user_id: nataliaacevedo

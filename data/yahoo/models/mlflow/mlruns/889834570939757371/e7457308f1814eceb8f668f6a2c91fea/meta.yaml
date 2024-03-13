@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/889834570939757371/e7457308f1814eceb8f668f6a2c91fea/artifacts
+end_time: 1710301202253
+entry_point_name: ''
+experiment_id: '889834570939757371'
+lifecycle_stage: active
+run_id: e7457308f1814eceb8f668f6a2c91fea
+run_name: debonair-shark-864
+run_uuid: e7457308f1814eceb8f668f6a2c91fea
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710301197966
+status: 3
+tags: []
+user_id: nataliaacevedo

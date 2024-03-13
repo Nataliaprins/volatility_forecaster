@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/c5849c5acbc141fdad866a5a007b3db3/artifacts
+end_time: 1709858330303
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: c5849c5acbc141fdad866a5a007b3db3
+run_name: chill-grub-939
+run_uuid: c5849c5acbc141fdad866a5a007b3db3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709858325479
+status: 3
+tags: []
+user_id: nataliaacevedo

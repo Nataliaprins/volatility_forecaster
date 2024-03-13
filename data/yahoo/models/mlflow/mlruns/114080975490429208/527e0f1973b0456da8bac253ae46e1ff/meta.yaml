@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/527e0f1973b0456da8bac253ae46e1ff/artifacts
+end_time: 1709858285844
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: 527e0f1973b0456da8bac253ae46e1ff
+run_name: bright-bird-826
+run_uuid: 527e0f1973b0456da8bac253ae46e1ff
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709858280258
+status: 3
+tags: []
+user_id: nataliaacevedo

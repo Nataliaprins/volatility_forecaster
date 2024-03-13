@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/f7990346491a4cdf8cfbb1306b0e98c4/artifacts
+end_time: 1710300286038
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: f7990346491a4cdf8cfbb1306b0e98c4
+run_name: auspicious-wren-786
+run_uuid: f7990346491a4cdf8cfbb1306b0e98c4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710300280762
+status: 3
+tags: []
+user_id: nataliaacevedo

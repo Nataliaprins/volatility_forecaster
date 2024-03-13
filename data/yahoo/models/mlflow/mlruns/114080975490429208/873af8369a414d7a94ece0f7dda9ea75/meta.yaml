@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/873af8369a414d7a94ece0f7dda9ea75/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: 873af8369a414d7a94ece0f7dda9ea75
+run_name: adorable-ape-866
+run_uuid: 873af8369a414d7a94ece0f7dda9ea75
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710300434951
+status: 1
+tags: []
+user_id: nataliaacevedo

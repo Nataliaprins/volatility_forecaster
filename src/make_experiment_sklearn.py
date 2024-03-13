@@ -15,7 +15,6 @@ from eval_metrics_mlflow import eval_metrics
 from load_test_data_mlflow import load_test_data
 from load_train_data_mlflow import load_train_data
 
-#TODO: hacer el for para iterar entre acciones y agregar el gridsearch en model params para guardar los mejores parámetros.
 
 def make_experiment(train_size, lags, model_instance, model_params, verbose):
     #choose the best estimator
@@ -47,7 +46,8 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
         artifact_location = Path.cwd().joinpath("data","yahoo","models","mlflow", "mlruns").as_uri()
         mlflow.set_tracking_uri(artifact_location)
         print('Tracking directory:', mlflow.get_tracking_uri())
-                  
+
+                          
         #autologging
         mlflow.sklearn.autolog(
             log_input_examples= False,
@@ -75,10 +75,23 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
     
             # train the model
             estimator.fit(x_train, y_train)
+
+            params = estimator.cv_results_['params']
+            for i, param_set in enumerate(params):
+                param_str = str(param_set)
+                mlflow.set_tag("mlflow.runName", f"model: {repr(model_instance)} Run: {i + 1} with params: {param_str}")
+                print(f"Parameters for iteration {i + 1}: {param_set}")
+            
             # make predictions
             y_pred = estimator.predict(x_test)
             # evaluate the model
             mse, mae, r2 = eval_metrics(y_test, y_pred)
+            #get params 
+            #param_name = estimator.get_params()
+            #print("params: ", param_name)
+            #set the run name
+            #mlflow.set_tag("mlflow.runName", str(param_name))
+
             # log the parameters
             mlflow.log_param("train_size", train_size)
             mlflow.log_param("lags", lags)

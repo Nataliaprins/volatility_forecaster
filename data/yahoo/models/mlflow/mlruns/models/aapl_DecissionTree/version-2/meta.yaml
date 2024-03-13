@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1709821930139
+current_stage: None
+description: ''
+last_updated_timestamp: 1709821930139
+name: aapl_DecissionTree
+run_id: 9f57a4e8e7a74788a740154e44a6c264
+run_link: ''
+source: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/889834570939757371/9f57a4e8e7a74788a740154e44a6c264/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/889834570939757371/9f57a4e8e7a74788a740154e44a6c264/artifacts/model
+user_id: null
+version: 2

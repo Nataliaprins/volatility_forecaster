@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/b33268671a244d14a1adc237be50932c/artifacts
+end_time: 1709858330303
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: b33268671a244d14a1adc237be50932c
+run_name: glamorous-shrike-526
+run_uuid: b33268671a244d14a1adc237be50932c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1709858325479
+status: 3
+tags: []
+user_id: nataliaacevedo

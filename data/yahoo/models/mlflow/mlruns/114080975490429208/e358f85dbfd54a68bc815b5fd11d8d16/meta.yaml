@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/114080975490429208/e358f85dbfd54a68bc815b5fd11d8d16/artifacts
+end_time: 1710301188385
+entry_point_name: ''
+experiment_id: '114080975490429208'
+lifecycle_stage: active
+run_id: e358f85dbfd54a68bc815b5fd11d8d16
+run_name: rebellious-shrew-727
+run_uuid: e358f85dbfd54a68bc815b5fd11d8d16
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710301183119
+status: 3
+tags: []
+user_id: nataliaacevedo

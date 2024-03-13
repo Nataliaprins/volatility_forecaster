@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/889834570939757371/26519cca13954e9c88bbff7b1697494f/artifacts
+end_time: 1710301202253
+entry_point_name: ''
+experiment_id: '889834570939757371'
+lifecycle_stage: active
+run_id: 26519cca13954e9c88bbff7b1697494f
+run_name: exultant-ram-682
+run_uuid: 26519cca13954e9c88bbff7b1697494f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1710301197966
+status: 3
+tags: []
+user_id: nataliaacevedo
