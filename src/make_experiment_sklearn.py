@@ -39,6 +39,8 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
         stock_name = data_file.split("_")[-1].split(".")[0]
         
         # obtain x_train, y_train, x_test, y_test
+        "TODO: Change for fuction ts_train_test_split"
+        
         x_train, y_train = load_train_data(root_dir="yahoo",train_size=189, lags= 5, stock_name= stock_name )
         x_test, y_test = load_test_data(root_dir="yahoo", train_size=189, lags= 5, stock_name= stock_name)
 
