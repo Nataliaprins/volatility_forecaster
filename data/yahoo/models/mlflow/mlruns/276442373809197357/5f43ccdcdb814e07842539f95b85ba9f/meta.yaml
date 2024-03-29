@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/276442373809197357/5f43ccdcdb814e07842539f95b85ba9f/artifacts
+end_time: 1711755195319
+entry_point_name: ''
+experiment_id: '276442373809197357'
+lifecycle_stage: active
+run_id: 5f43ccdcdb814e07842539f95b85ba9f
+run_name: likeable-mole-88
+run_uuid: 5f43ccdcdb814e07842539f95b85ba9f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711755189751
+status: 3
+tags: []
+user_id: nataliaacevedo

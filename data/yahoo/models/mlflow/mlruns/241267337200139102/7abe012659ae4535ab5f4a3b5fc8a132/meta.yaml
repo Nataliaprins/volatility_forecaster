@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/241267337200139102/7abe012659ae4535ab5f4a3b5fc8a132/artifacts
+end_time: 1711754014122
+entry_point_name: ''
+experiment_id: '241267337200139102'
+lifecycle_stage: active
+run_id: 7abe012659ae4535ab5f4a3b5fc8a132
+run_name: indecisive-mink-976
+run_uuid: 7abe012659ae4535ab5f4a3b5fc8a132
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711754009228
+status: 3
+tags: []
+user_id: nataliaacevedo

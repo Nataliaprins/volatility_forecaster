@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/763563488142257982/584b0af900aa45f485b0e9f5c1f91fae/artifacts
+end_time: 1711754981547
+entry_point_name: ''
+experiment_id: '763563488142257982'
+lifecycle_stage: active
+run_id: 584b0af900aa45f485b0e9f5c1f91fae
+run_name: angry-fly-356
+run_uuid: 584b0af900aa45f485b0e9f5c1f91fae
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711754976664
+status: 3
+tags: []
+user_id: nataliaacevedo

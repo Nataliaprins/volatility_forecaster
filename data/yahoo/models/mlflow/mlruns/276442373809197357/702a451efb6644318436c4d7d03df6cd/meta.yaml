@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/276442373809197357/702a451efb6644318436c4d7d03df6cd/artifacts
+end_time: 1711755195319
+entry_point_name: ''
+experiment_id: '276442373809197357'
+lifecycle_stage: active
+run_id: 702a451efb6644318436c4d7d03df6cd
+run_name: silent-gnat-927
+run_uuid: 702a451efb6644318436c4d7d03df6cd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711755189751
+status: 3
+tags: []
+user_id: nataliaacevedo

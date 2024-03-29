@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/241267337200139102/8895f176730a443398723ec6955bb1db/artifacts
+end_time: 1711755200497
+entry_point_name: ''
+experiment_id: '241267337200139102'
+lifecycle_stage: active
+run_id: 8895f176730a443398723ec6955bb1db
+run_name: polite-steed-788
+run_uuid: 8895f176730a443398723ec6955bb1db
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711755195550
+status: 3
+tags: []
+user_id: nataliaacevedo

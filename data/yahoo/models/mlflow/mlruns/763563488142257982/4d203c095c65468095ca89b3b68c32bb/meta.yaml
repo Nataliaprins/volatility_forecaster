@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/763563488142257982/4d203c095c65468095ca89b3b68c32bb/artifacts
+end_time: 1711755205645
+entry_point_name: ''
+experiment_id: '763563488142257982'
+lifecycle_stage: active
+run_id: 4d203c095c65468095ca89b3b68c32bb
+run_name: suave-jay-490
+run_uuid: 4d203c095c65468095ca89b3b68c32bb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711755200731
+status: 3
+tags: []
+user_id: nataliaacevedo

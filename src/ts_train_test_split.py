@@ -8,7 +8,7 @@ from constants import ROOT_DIR_PROJECT
 from load_data import load_data
 
 
-def ts_train_test_split(root_dir, train_size, stock_name, lags):
+def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):
     # load the data 
     df = load_data(stock_name, root_dir)
     df.dropna(inplace=True)
@@ -31,20 +31,21 @@ def ts_train_test_split(root_dir, train_size, stock_name, lags):
     y = lagged_df["yt"] # target
 
     #split the data with TimeSeriesSplit
-    ts_cv = TimeSeriesSplit(n_splits=3,
+    ts_cv = TimeSeriesSplit(n_splits=n_splits,
                             max_train_size= int(len(x) * train_size))
     for train_index, test_index in ts_cv.split(x):
-        x_train, x_test = x.iloc[train_index], x.iloc[test_index]
-        y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+       x_train, x_test = x.iloc[train_index], x.iloc[test_index]
+       y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
         
 
-    return x_train, x_test, y_train, y_test
+    return  x, y
 
 if __name__ == "__main__":
     ts_train_test_split(
         root_dir= "yahoo",
         lags=3,  
+        n_splits=5,
         train_size=0.75, 
         stock_name="googl")
     

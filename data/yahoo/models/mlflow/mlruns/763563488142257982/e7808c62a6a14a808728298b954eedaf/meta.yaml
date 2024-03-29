@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/763563488142257982/e7808c62a6a14a808728298b954eedaf/artifacts
+end_time: 1711755205645
+entry_point_name: ''
+experiment_id: '763563488142257982'
+lifecycle_stage: active
+run_id: e7808c62a6a14a808728298b954eedaf
+run_name: ambitious-colt-560
+run_uuid: e7808c62a6a14a808728298b954eedaf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711755200731
+status: 3
+tags: []
+user_id: nataliaacevedo

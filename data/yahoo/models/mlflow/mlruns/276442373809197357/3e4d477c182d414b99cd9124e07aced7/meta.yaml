@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/276442373809197357/3e4d477c182d414b99cd9124e07aced7/artifacts
+end_time: 1711753979860
+entry_point_name: ''
+experiment_id: '276442373809197357'
+lifecycle_stage: active
+run_id: 3e4d477c182d414b99cd9124e07aced7
+run_name: funny-lark-287
+run_uuid: 3e4d477c182d414b99cd9124e07aced7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711753960063
+status: 3
+tags: []
+user_id: nataliaacevedo

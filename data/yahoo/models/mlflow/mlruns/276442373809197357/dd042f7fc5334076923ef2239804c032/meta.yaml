@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/276442373809197357/dd042f7fc5334076923ef2239804c032/artifacts
+end_time: 1711753965599
+entry_point_name: ''
+experiment_id: '276442373809197357'
+lifecycle_stage: active
+run_id: dd042f7fc5334076923ef2239804c032
+run_name: dapper-elk-441
+run_uuid: dd042f7fc5334076923ef2239804c032
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711753960063
+status: 3
+tags: []
+user_id: nataliaacevedo

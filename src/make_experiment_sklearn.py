@@ -3,27 +3,26 @@
 import glob
 import os
 from pathlib import Path
+from pprint import pprint
 
 import mlflow
 import mlflow.sklearn
+import pandas as pd
+from mlflow import MlflowClient
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
 from sklearn.tree import DecisionTreeRegressor
 
 from constants import ROOT_DIR_PROJECT
 from eval_metrics_mlflow import eval_metrics
+from load_data import load_data
 from load_test_data_mlflow import load_test_data
 from load_train_data_mlflow import load_train_data
+from ts_train_test_split import ts_train_test_split
 
 
-def make_experiment(train_size, lags, model_instance, model_params, verbose):
-    #choose the best estimator
-    estimator = GridSearchCV(model_instance, 
-                                 model_params, 
-                                 cv=5,
-                                 verbose=verbose,
-                                 return_train_score=False,
-                                 )
+def make_experiment(train_size, lags, model_instance, model_params, verbose, root_dir, n_splits):
+
 
     #create the working directory
     if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow")):
@@ -37,13 +36,20 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
     for data_file in data_files:
         # define the stock name
         stock_name = data_file.split("_")[-1].split(".")[0]
+       
+        # obtain X and Y
+        x, y = ts_train_test_split(root_dir= root_dir, train_size=train_size, lags= lags, stock_name= stock_name, n_splits= n_splits)
         
-        # obtain x_train, y_train, x_test, y_test
-        "TODO: Change for fuction ts_train_test_split"
-        
-        x_train, y_train = load_train_data(root_dir="yahoo",train_size=189, lags= 5, stock_name= stock_name )
-        x_test, y_test = load_test_data(root_dir="yahoo", train_size=189, lags= 5, stock_name= stock_name)
-
+        #choose the best estimator
+        estimator = GridSearchCV(model_instance, 
+                                 model_params, 
+                                 cv= TimeSeriesSplit(n_splits= n_splits,max_train_size= int(len(x) * train_size)),
+                                 verbose=verbose,
+                                 return_train_score=False,
+                                 scoring= "max_error", 
+                                 refit=True,
+                                 )          
+           
         # setting tracking directory
         artifact_location = Path.cwd().joinpath("data","yahoo","models","mlflow", "mlruns").as_uri()
         mlflow.set_tracking_uri(artifact_location)
@@ -67,50 +73,46 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose):
 
         #set the experiment if it exists
         mlflow.set_experiment(str(stock_name))
-        
-        # start the experiment
-      
+
+        # get the run data
+        def fetch_logged_data(run_id):
+            client = MlflowClient()
+            data = client.get_run(run_id).data
+            tags = {k: v for k, v in data.tags.items() if not k.startswith("mlflow.")}
+            artifacts = [f.path for f in client.list_artifacts(run_id, "model")]
+            return data.params, data.metrics, tags, artifacts
+
+        # start the experiment      
         with mlflow.start_run() as run:
             # set the run name            
-            run=mlflow.active_run()
-            print("Active run_id: {}".format(run.info.run_id))
+            #run=mlflow.active_run()
+            #print("Active run_id: {}".format(run.info.run_id))
     
             # train the model
-            estimator.fit(x_train, y_train)
+            estimator.fit(x, y)                      
+            run_id = mlflow.active_run().info.run_id 
+            parametros = pd.DataFrame(estimator.cv_results_)  
+            print(parametros)
+            #show data logged in the run
+            params, metrics, tags, artifacts = fetch_logged_data(run_id)
+            
+            for key, value in metrics.items():
+                print(f"Key: {key}, Value: {value}")
 
-            params = estimator.cv_results_['params']
+
+            #params = estimator.cv_results_['params']
             for i, param_set in enumerate(params):
                 param_str = str(param_set)
                 mlflow.set_tag("mlflow.runName", f"model: {repr(model_instance)} Run: {i + 1} with params: {param_str}")
                 print(f"Parameters for iteration {i + 1}: {param_set}")
             
-            # make predictions
-            y_pred = estimator.predict(x_test)
-            # evaluate the model
-            mse, mae, r2 = eval_metrics(y_test, y_pred)
-            #get params 
-            #param_name = estimator.get_params()
-            #print("params: ", param_name)
-            #set the run name
-            #mlflow.set_tag("mlflow.runName", str(param_name))
-
-            # log the parameters
-            mlflow.log_param("train_size", train_size)
-            mlflow.log_param("lags", lags)
-            mlflow.log_param("model_instance", model_instance)
-            mlflow.log_param("model_params", model_params)
-            # log the metrics
-            mlflow.log_metric("mse", mse)
-            mlflow.log_metric("mae", mae)
-            mlflow.log_metric("r2", r2)
-            # log the model
-            mlflow.sklearn.log_model(model_instance, "model")
-
-
+       
 if __name__ == "__main__":
-    make_experiment(train_size=189,
-                    lags= 5, 
-                    model_instance = DecisionTreeRegressor(), 
-                    model_params= {"max_depth":[None, 2]}, 
-                    verbose= True)
+    make_experiment(train_size=0.75,
+                    lags= 3, 
+                    model_instance = LinearRegression(), 
+                    model_params= {"fit_intercept": [True, False], "n_jobs": [1, 2, 3]}, 
+                    verbose= True, 
+                    root_dir= "yahoo",
+                    n_splits=5)
     print("Experiment made")

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/241267337200139102/febf97d246f34eb0bf8d62ed9a56022c/artifacts
+end_time: 1711754976586
+entry_point_name: ''
+experiment_id: '241267337200139102'
+lifecycle_stage: active
+run_id: febf97d246f34eb0bf8d62ed9a56022c
+run_name: 'model: DecisionTreeRegressor() Run: 11 with params: return_train_score'
+run_uuid: febf97d246f34eb0bf8d62ed9a56022c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711754971642
+status: 3
+tags: []
+user_id: nataliaacevedo

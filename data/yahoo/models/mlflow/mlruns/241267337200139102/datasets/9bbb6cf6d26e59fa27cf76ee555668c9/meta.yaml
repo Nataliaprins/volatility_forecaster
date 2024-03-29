@@ -1,0 +1,9 @@
+digest: a1ddf7e3
+name: dataset
+profile: '{"num_rows": 244, "num_elements": 732}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "lag_1", "required": true},
+  {"type": "double", "name": "lag_2", "required": true}, {"type": "double", "name":
+  "lag_3", "required": true}]}'
+source: '{"tags": {"mlflow.user": "nataliaacevedo", "mlflow.source.name": "/Users/nataliaacevedo/modelo_202312/src/make_experiment_sklearn.py",
+  "mlflow.source.type": "LOCAL", "mlflow.source.git.commit": "f29ef546a8ff82d69c7edafcd14dd80f408a4f01"}}'
+source_type: code
