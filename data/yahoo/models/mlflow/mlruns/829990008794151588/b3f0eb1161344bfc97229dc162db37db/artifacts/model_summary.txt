@@ -1,0 +1,29 @@
+                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                     yt   R-squared (uncentered):                   0.078
+Model:                            OLS   Adj. R-squared (uncentered):              0.058
+Method:                 Least Squares   F-statistic:                              4.006
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):                     0.00165
+Time:                        20:08:10   Log-Likelihood:                          515.36
+No. Observations:                 242   AIC:                                     -1021.
+Df Residuals:                     237   BIC:                                     -1003.
+Df Model:                           5                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+lag_1         -0.2429      0.065     -3.750      0.000      -0.371      -0.115
+lag_2          0.0617      0.067      0.926      0.355      -0.070       0.193
+lag_3          0.0237      0.067      0.354      0.723      -0.108       0.156
+lag_4         -0.0199      0.067     -0.298      0.766      -0.152       0.112
+lag_5          0.0776      0.065      1.196      0.233      -0.050       0.205
+==============================================================================
+Omnibus:                       25.351   Durbin-Watson:                   1.980
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               92.186
+Skew:                          -0.287   Prob(JB):                     9.59e-21
+Kurtosis:                       5.969   Cond. No.                         1.53
+==============================================================================
+
+Notes:
+[1] R² is computed without centering (uncentered) since the model does not contain a constant.
+[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.

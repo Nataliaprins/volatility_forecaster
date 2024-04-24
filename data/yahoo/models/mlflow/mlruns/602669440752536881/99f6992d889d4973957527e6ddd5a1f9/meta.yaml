@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/602669440752536881/99f6992d889d4973957527e6ddd5a1f9/artifacts
+end_time: 1713920888382
+entry_point_name: ''
+experiment_id: '602669440752536881'
+lifecycle_stage: active
+run_id: 99f6992d889d4973957527e6ddd5a1f9
+run_name: statsmodels_msft
+run_uuid: 99f6992d889d4973957527e6ddd5a1f9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1713920886278
+status: 3
+tags: []
+user_id: nataliaacevedo

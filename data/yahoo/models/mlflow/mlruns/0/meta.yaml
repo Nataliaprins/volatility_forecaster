@@ -1,6 +1,6 @@
-artifact_location: mlflow-artifacts:/0
-creation_time: 1711753921946
+artifact_location: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/0
+creation_time: 1713920787441
 experiment_id: '0'
-last_update_time: 1711753921946
+last_update_time: 1713920787441
 lifecycle_stage: active
 name: Default

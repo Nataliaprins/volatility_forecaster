@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/829990008794151588/f4fd4446b2e34a5692398cd02d8f4b2d/artifacts
+end_time: 1713920877074
+entry_point_name: ''
+experiment_id: '829990008794151588'
+lifecycle_stage: active
+run_id: f4fd4446b2e34a5692398cd02d8f4b2d
+run_name: 'model: LinearRegression() Run: 12 with params: return_train_score'
+run_uuid: f4fd4446b2e34a5692398cd02d8f4b2d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1713920872610
+status: 3
+tags: []
+user_id: nataliaacevedo

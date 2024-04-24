@@ -10,6 +10,7 @@ import mlflow.sklearn
 import pandas as pd
 from mlflow import MlflowClient
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
 from sklearn.tree import DecisionTreeRegressor
 
@@ -84,28 +85,26 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose, roo
 
         # start the experiment      
         with mlflow.start_run() as run:
-            # set the run name            
-            #run=mlflow.active_run()
-            #print("Active run_id: {}".format(run.info.run_id))
-    
+      
             # train the model
             estimator.fit(x, y)                      
             run_id = mlflow.active_run().info.run_id 
             parametros = pd.DataFrame(estimator.cv_results_)  
             print(parametros)
+                      
             #show data logged in the run
             params, metrics, tags, artifacts = fetch_logged_data(run_id)
             
             for key, value in metrics.items():
                 print(f"Key: {key}, Value: {value}")
 
-
             #params = estimator.cv_results_['params']
             for i, param_set in enumerate(params):
                 param_str = str(param_set)
                 mlflow.set_tag("mlflow.runName", f"model: {repr(model_instance)} Run: {i + 1} with params: {param_str}")
                 print(f"Parameters for iteration {i + 1}: {param_set}")
-            
+
+                        
        
 if __name__ == "__main__":
     make_experiment(train_size=0.75,

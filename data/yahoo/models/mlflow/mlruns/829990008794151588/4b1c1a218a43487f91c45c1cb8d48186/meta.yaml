@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/829990008794151588/4b1c1a218a43487f91c45c1cb8d48186/artifacts
+end_time: 1713920876940
+entry_point_name: ''
+experiment_id: '829990008794151588'
+lifecycle_stage: active
+run_id: 4b1c1a218a43487f91c45c1cb8d48186
+run_name: delightful-quail-540
+run_uuid: 4b1c1a218a43487f91c45c1cb8d48186
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1713920872610
+status: 3
+tags: []
+user_id: nataliaacevedo

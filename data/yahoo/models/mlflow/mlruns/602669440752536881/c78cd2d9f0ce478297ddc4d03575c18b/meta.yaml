@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/602669440752536881/c78cd2d9f0ce478297ddc4d03575c18b/artifacts
+end_time: 1713920872407
+entry_point_name: ''
+experiment_id: '602669440752536881'
+lifecycle_stage: active
+run_id: c78cd2d9f0ce478297ddc4d03575c18b
+run_name: overjoyed-sloth-520
+run_uuid: c78cd2d9f0ce478297ddc4d03575c18b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1713920868082
+status: 3
+tags: []
+user_id: nataliaacevedo

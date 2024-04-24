@@ -1,1 +1,0 @@
-TimeSeriesSplit(gap=0, max_train_size=183, n_splits=3, test_size=None)

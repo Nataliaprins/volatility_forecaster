@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/602669440752536881/5019abd1610643919850120c8a9ce33a/artifacts
+end_time: 1713920872407
+entry_point_name: ''
+experiment_id: '602669440752536881'
+lifecycle_stage: active
+run_id: 5019abd1610643919850120c8a9ce33a
+run_name: adventurous-lamb-553
+run_uuid: 5019abd1610643919850120c8a9ce33a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1713920868082
+status: 3
+tags: []
+user_id: nataliaacevedo
