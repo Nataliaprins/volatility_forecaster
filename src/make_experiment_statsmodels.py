@@ -15,7 +15,7 @@ from constants import ROOT_DIR_PROJECT
 from ts_train_test_split import ts_train_test_split
 
 
-def make_experiment_statsmodels(train_size, lags, model_params, verbose, root_dir, n_splits):    
+def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, verbose, root_dir, n_splits):    
     
          #create the working directory
     if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow")):
@@ -72,24 +72,24 @@ def make_experiment_statsmodels(train_size, lags, model_params, verbose, root_di
             return data.params, data.metrics, tags, artifacts
         
         #start the experiment
-        with mlflow.start_run(run_name="statsmodels_"+ stock_name) as run:
-            #fit the model
+        with mlflow.start_run(run_name="statsmodels_"+ stock_name + model_instance) as run:
+            #fit the model passed in the argument model_instance
             model = sm.OLS(y, x).fit()
+
+
+           
+
             #evaluate the model
             y_pred = model.predict(x)
             mse = mean_squared_error(y, y_pred)
             
             #log the metrics
             mlflow.log_metric("mse", mse)
-            
-            
-       
-
-
 
 
 if __name__ == "__main__":
     make_experiment_statsmodels(
+        model_instance= "sm.OLS",
         root_dir= "yahoo",
         train_size= 0.8,
         lags= 5,
