@@ -3,6 +3,7 @@ import glob
 import os
 
 import pandas as pd
+from pypfopt import risk_models
 
 from constants import ROOT_DIR_PROJECT
 
@@ -41,9 +42,12 @@ def calculate_covariance_matrix(root_dir, pattern):
         df = df.rename(columns={"yt_predicted": file.split("_")[-2]})
     # drop na values
     df = df.dropna()
+    print(df.head())
 
     # calculate the covariance matrix
     covariance_matrix = df.cov()
+    print(covariance_matrix)
+    # print(covariance_matrix)
 
     # Save the covariance matrix
     covariance_matrix.to_csv(
@@ -54,6 +58,8 @@ def calculate_covariance_matrix(root_dir, pattern):
             f"{pattern}_covariance_matrix.csv",
         )
     )
+
+    print("Covariance matrix saved")
 
 
 if __name__ == "__main__":

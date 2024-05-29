@@ -6,35 +6,48 @@ import pandas as pd
 
 from constants import ROOT_DIR_PROJECT
 
+from optimize_portfolio import optimize_portfolio
 
-def calculate_ratios_portfolio(root_dir, rf):
+
+def calculate_ratios_portfolio(root_dir, rf, pattern):
     """
     This function calculates the information ratio for each portfolio in the folder
-    
+
     """
     # get the list of files in the folder
-    path_to_portfolios= os.path.join(ROOT_DIR_PROJECT,root_dir,"data","reports","portfolio", "*.csv")
-    portfolio_files = glob.glob(path_to_portfolios) 
-    
-    #Calculate sharpe ratio for each portfolio
+
+    path_to_portfolios = os.path.join(
+        ROOT_DIR_PROJECT, root_dir, "reports", "portfolio", f"*{pattern}.csv"
+    )
+
+    portfolio_files = glob.glob(path_to_portfolios)
+
+    # read the portfolios files
     for file in portfolio_files:
-        #read the file
-        df = pd.read_csv(file, index_col=0)
-        #calculate th average return of the portfolio
-        avg_return = df["portfolio_value_pct_change"].mean()
+        df_portfolio = pd.read_csv(file, index_col=0)
 
+        # extract the stock names from the columns of the dataframe if the column name starts with 'log_yield'
+        stock_list = [
+            col for col in df_portfolio.columns if col.startswith("log_yield")
+        ]
+        # extract the stock name from stock_list
+        stock_name = [stock.split("_")[2] for stock in stock_list]
+        # create a dictionary to store the average return for each stock in the portfolio
+        avg_returns = {}
+        for stock in stock_name:
+            avg_returns[stock] = df_portfolio[f"log_yield_{stock}"].mean()
 
-        #df["excess_return"] = df["portfolio_value_pct_change"] - float(rf)
-        #calculate the standard deviation of the excess return
-        std_excess_return = df["excess_return"].std()
-        #calculate the information ratio
-        df["information_ratio"] = df["excess_return"] / std_excess_return
-        #save the information ratio to a csv file
-        df.to_csv(ROOT_DIR_PROJECT + root_dir + "/reports/portfolio/" + file)
+    # import the weiths of the optimized portfolio
+    weights = optimize_portfolio(root_dir, pattern)
 
-  
-  
-    return None
+    # multiply the weights by the average returns
+    rdto_port = 0
+    for stock in stock_name:
+        rdto_port += weights[stock] * avg_returns[stock]
+
+    # return the information of portfolio and the weights
+    return rdto_port, weights
+
 
 if __name__ == "__main__":
-    calculate_ratios_portfolio(root_dir="yahoo", rf="0.02")
+    calculate_ratios_portfolio(root_dir="yahoo", rf="0.02", pattern="LinearRegression")
