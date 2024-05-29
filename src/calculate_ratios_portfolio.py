@@ -3,13 +3,14 @@ import glob
 import os
 
 import pandas as pd
+import numpy as np
 
 from constants import ROOT_DIR_PROJECT
 
 from optimize_portfolio import optimize_portfolio
 
 
-def calculate_ratios_portfolio(root_dir, rf, pattern):
+def calculate_ratios_portfolio(root_dir, rf, pattern, betha, rm):
     """
     This function calculates the information ratio for each portfolio in the folder
 
@@ -45,9 +46,54 @@ def calculate_ratios_portfolio(root_dir, rf, pattern):
     for stock in stock_name:
         rdto_port += weights[stock] * avg_returns[stock]
 
+    # read the covariance matrix
+    cov_matrix = pd.read_csv(
+        os.path.join(
+            ROOT_DIR_PROJECT,
+            root_dir,
+            "reports",
+            "covariance_matrix",
+            f"{pattern}_covariance_matrix.csv",
+        ),
+        index_col=0,
+    )
+    print(cov_matrix)
+
+    # multiply the weights by the covariance matrix
+    weights_values = np.array(list(weights.values()))
+    print(weights_values)
+    cov_matrix_values = np.array(cov_matrix)
+    print(cov_matrix_values)
+
+    # calculate the product of the weights and the covariance matrix
+    product = np.dot(weights_values, cov_matrix_values)
+    print(product)
+    # transpose the weights list
+    weights_values_t = weights_values.reshape(-1, 3)
+    print(weights_values_t)
+    # multiply the transposed weights by the product
+    var_port = np.dot(weights_values_t, product)
+    print(var_port)
+
+    # calculate the shrpe ratio
+    sharpe_ratio = (rdto_port - float(rf)) / np.sqrt(var_port)
+    print(sharpe_ratio)
+
+    # calculate the Treynor ratio
+    treynor_ratio = (rdto_port - float(rf)) / betha
+
+    # calculate the Jensen's alpha
+    jensen_alpha = rdto_port - (float(rf) + betha * (float(rm) - float(rf)))
+
     # return the information of portfolio and the weights
-    return rdto_port, weights
+    return rdto_port, weights, var_port, sharpe_ratio, treynor_ratio, jensen_alpha
 
 
 if __name__ == "__main__":
-    calculate_ratios_portfolio(root_dir="yahoo", rf="0.02", pattern="LinearRegression")
+    calculate_ratios_portfolio(
+        root_dir="yahoo",
+        rf="0.0002",
+        pattern="LinearRegression",
+        betha=0.5,
+        rm="0.0005",
+    )
