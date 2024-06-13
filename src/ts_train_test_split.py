@@ -1,6 +1,7 @@
 import glob
 import os
 
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
@@ -33,13 +34,17 @@ def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):
     #split the data with TimeSeriesSplit
     ts_cv = TimeSeriesSplit(n_splits=n_splits,
                             max_train_size= int(len(x) * train_size))
+    
     for train_index, test_index in ts_cv.split(x):
        x_train, x_test = x.iloc[train_index], x.iloc[test_index]
        y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+       
 
-        
+    return x, y, x_train, x_test, y_train, y_test
 
-    return  x, y
+
+       
+
 
 if __name__ == "__main__":
     ts_train_test_split(

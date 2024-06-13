@@ -8,13 +8,12 @@ import numpy as np
 from keras.layers import LSTM, Dense
 from keras.models import Sequential
 from keras.optimizers import Adam
-from kerastuner.tuners import RandomSearch
+from keras_tuner.tuners import RandomSearch
 from sklearn.model_selection import TimeSeriesSplit
 
 from constants import ROOT_DIR_PROJECT
 from create_sequences import create_sequences
 from load_data import load_data
-from ts_train_test_split import ts_train_test_split
 
 
 def lstm_model(lags,  root_dir, stock_name):
@@ -48,17 +47,25 @@ def lstm_model(lags,  root_dir, stock_name):
             project_name="lstm_tuner")
     
         # split the data into train and test
-        tscv = ts_train_test_split(n_splits=5)
+        tscv = TimeSeriesSplit(n_splits=5)
 
-    
-     
-   
+        for train_index, test_index in tscv.split(X):
+            X_train, X_test = X[train_index], X[test_index]
+            y_train, y_test = y[train_index], y[test_index]
+            tuner.search(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
+
+
+        # Obtener el mejor modelo
+        best_model = tuner.get_best_models(num_models=1)[0]
+
+        # Entrenar el mejor modelo en todo el conjunto de entrenamiento
+        history = best_model.fit(X_train, y_train, epochs=50, validation_data=(X_test, y_test))
+
+        # Evaluar el modelo
+        loss = best_model.evaluate(X_test, y_test)
+        print(f'Model Validation Loss: {loss}')
+
         
-
-
-        
-
-
 
 if __name__ == "__main__":
     lstm_model(
