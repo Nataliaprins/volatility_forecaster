@@ -55,7 +55,7 @@ def download_data_from_yahoo(
 if __name__ == "__main__":
     download_data_from_yahoo(
         stocks_list=["AAPL", "MSFT", "GOOGL"],
-        start_date="2020-01-01",
-        end_date="2020-12-31",
+        start_date="2018-01-01",
+        end_date="2024-05-31",
         root_dir="yahoo",
     )

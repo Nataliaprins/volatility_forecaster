@@ -32,6 +32,7 @@ def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):
     y = lagged_df["yt"] # target
 
     #split the data with TimeSeriesSplit
+    
     ts_cv = TimeSeriesSplit(n_splits=n_splits,
                             max_train_size= int(len(x) * train_size))
     
