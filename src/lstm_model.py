@@ -30,11 +30,11 @@ def lstm_model(  root_dir, seq_length, train_size, epoch):
         serie= df["rolling_std"]
 
         #scale the data with min max scaler
-        #scaler = MinMaxScaler(feature_range=(0, 1))
-        #scaled_data = scaler.fit_transform(serie.values.reshape(-1, 1))
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        scaled_data = scaler.fit_transform(serie.values.reshape(-1, 1))
 
         #create sequences
-        X, y = create_sequences(serie, seq_length)
+        X, y = create_sequences(scaled_data, seq_length)
         print(X.shape, y.shape)
 
         # define the LSTM model using keras and keras tuner
@@ -44,10 +44,11 @@ def lstm_model(  root_dir, seq_length, train_size, epoch):
             model.add(LSTM(units=hp.Int("units", 
                                         min_value=32, max_value=512, step=32), 
                                         input_shape=(seq_length, 1)))
-            model.add(Dense(1))
             model.add(Dropout(hp.Float("dropout", min_value=0.1, max_value=0.5, step=0.1)))
-            model.add(BatchNormalization())
-            learning_rate = hp.Float('learning_rate', min_value=1e-4, max_value=1e-2, sampling='LOG')
+            model.add(Dense(1))
+        
+            #model.add(BatchNormalization())
+            learning_rate = hp.Float('learning_rate', min_value=1e-6, max_value=1e-2, sampling='LOG')
             model.compile(optimizer=Adam(learning_rate=learning_rate), loss="mse")
             return model    
 
@@ -87,12 +88,15 @@ def lstm_model(  root_dir, seq_length, train_size, epoch):
         
         #graph the loss and the accuracy
         # Pérdida de entrenamiento y validación
-        # Pérdida de entrenamiento y validación
         loss = history_dict['loss']
         val_loss = history_dict['val_loss']
 
         # Número de épocas
         epochs = range(1, len(loss) + 1)
+
+        # reescale the data
+        predicted = scaler.inverse_transform(predicted)
+        y_test = scaler.inverse_transform(y_test)
 
         # Graficar la pérdida de entrenamiento y validación
         plt.figure(figsize=(10, 6))
@@ -115,7 +119,7 @@ def lstm_model(  root_dir, seq_length, train_size, epoch):
 if __name__ == "__main__":
     lstm_model( 
         root_dir="yahoo",
-        seq_length=5,
-        train_size=0.8,
-        epoch=30,)
+        seq_length=7,
+        train_size=0.7,
+        epoch=10)
 
