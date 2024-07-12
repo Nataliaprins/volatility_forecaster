@@ -6,7 +6,7 @@ import os
 
 import pandas as pd
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
 
 
 def load_data(stock_name: str, root_dir: str) -> pd.DataFrame:

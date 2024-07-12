@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 from statsmodels.tsa.stattools import pacf
 
 from constants import ROOT_DIR_PROJECT
-from load_data import load_data
+from src.pull_data.load_data import load_data
 
 
 def pacf_plot(

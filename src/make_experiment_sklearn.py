@@ -16,10 +16,10 @@ from sklearn.tree import DecisionTreeRegressor
 
 from constants import ROOT_DIR_PROJECT
 from eval_metrics_mlflow import eval_metrics
-from load_data import load_data
 from load_test_data_mlflow import load_test_data
 from load_train_data_mlflow import load_train_data
-from ts_train_test_split import ts_train_test_split
+from src.pull_data.load_data import load_data
+from src.train_test_split.ts_train_test_split import ts_train_test_split
 
 
 def make_experiment(train_size, lags, model_instance, model_params, verbose, root_dir, n_splits):

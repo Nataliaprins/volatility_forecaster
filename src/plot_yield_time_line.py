@@ -19,7 +19,7 @@ import plotly.graph_objects as go
 from constants import ROOT_DIR_PROJECT
 
 # import the load_data function from load_data.py
-from load_data import load_data
+from src.pull_data.load_data import load_data
 
 
 def plot_yield_time_line(

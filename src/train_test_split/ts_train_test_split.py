@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
 from constants import ROOT_DIR_PROJECT
-from load_data import load_data
+from src.pull_data.load_data import load_data
 
 
 def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):

@@ -11,7 +11,7 @@ import os
 
 import pandas as pd
 
-from constants import ROLLING_WINDOW, ROOT_DIR_PROJECT
+from src.constants import ROLLING_WINDOW, ROOT_DIR_PROJECT
 
 
 def compute_rolling_std(root_dir):

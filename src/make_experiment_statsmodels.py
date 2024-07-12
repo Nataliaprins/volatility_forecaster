@@ -12,7 +12,7 @@ from mlflow import MlflowClient
 from sklearn.metrics import mean_squared_error
 
 from constants import ROOT_DIR_PROJECT
-from ts_train_test_split import ts_train_test_split
+from src.train_test_split.ts_train_test_split import ts_train_test_split
 
 
 def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, verbose, root_dir, n_splits):    

@@ -9,8 +9,8 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
 from constants import ROOT_DIR_PROJECT
-from load_data import load_data
-from ts_train_test_split import ts_train_test_split
+from src.pull_data.load_data import load_data
+from src.train_test_split.ts_train_test_split import ts_train_test_split
 
 
 def make_experiment_keras(root_dir,

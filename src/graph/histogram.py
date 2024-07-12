@@ -28,7 +28,7 @@ import pandas as pd
 import plotly.express as px
 import scipy.stats as stats
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
 
 
 # Import functions

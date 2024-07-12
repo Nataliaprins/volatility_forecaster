@@ -15,7 +15,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 from constants import ROOT_DIR_PROJECT
 from create_sequences import create_sequences
-from load_data import load_data
+from src.pull_data.load_data import load_data
 
 
 def lstm_model(  root_dir, seq_length, train_size, epoch):
