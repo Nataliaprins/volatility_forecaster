@@ -5,19 +5,19 @@ import os
 from pathlib import Path
 from pprint import pprint
 
-import mlflow
-import mlflow.sklearn
 import pandas as pd
-from mlflow import MlflowClient
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
 from sklearn.tree import DecisionTreeRegressor
 
+import mlflow
+import mlflow.sklearn
 from constants import ROOT_DIR_PROJECT
-from eval_metrics_mlflow import eval_metrics
-from load_test_data_mlflow import load_test_data
-from load_train_data_mlflow import load_train_data
+from mlflow import MlflowClient
+from src.mlflow.eval_metrics_mlflow import eval_metrics
+from src.mlflow.load_test_data_mlflow import load_test_data
+from src.mlflow.load_train_data_mlflow import load_train_data
 from src.pull_data.load_data import load_data
 from src.train_test_split.ts_train_test_split import ts_train_test_split
 

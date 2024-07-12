@@ -2,12 +2,11 @@
 import glob
 import os
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-from constants import ROOT_DIR_PROJECT
-
-from optimize_portfolio import optimize_portfolio
+from portfolio.optimize_portfolio import optimize_portfolio
+from src.constants import ROOT_DIR_PROJECT
 
 
 def calculate_ratios_portfolio(root_dir, rf, pattern, betha, rm):

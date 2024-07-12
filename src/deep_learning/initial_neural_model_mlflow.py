@@ -3,8 +3,8 @@ import glob
 import os
 
 from constants import ROOT_DIR_PROJECT
-from load_test_data_mlflow import load_test_data
-from load_train_data_mlflow import load_train_data
+from src.mlflow.load_test_data_mlflow import load_test_data
+from src.mlflow.load_train_data_mlflow import load_train_data
 
 
 def initial_neural_model(root_dir, train_size, lags, n_features, n_steps):

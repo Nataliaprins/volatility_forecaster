@@ -1,9 +1,11 @@
 "this function builts the portfolio based on the weights and return of stock prices and saves it to a csv file"
 
-import os
 import glob
+import os
+
 import pandas as pd
-from constants import ROOT_DIR_PROJECT
+
+from src.constants import ROOT_DIR_PROJECT
 
 
 def build_portfolio_file(root_dir, pattern):

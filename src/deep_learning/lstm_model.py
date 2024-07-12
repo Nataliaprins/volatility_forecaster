@@ -13,8 +13,8 @@ from keras_tuner.tuners import RandomSearch
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.preprocessing import MinMaxScaler
 
-from constants import ROOT_DIR_PROJECT
-from create_sequences import create_sequences
+from src.constants import ROOT_DIR_PROJECT
+from src.preprocessing.create_sequences import create_sequences
 from src.pull_data.load_data import load_data
 
 

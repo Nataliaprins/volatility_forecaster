@@ -5,7 +5,7 @@ import os
 import pandas as pd
 from pypfopt import risk_models
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
 
 
 def calculate_covariance_matrix(root_dir, pattern):

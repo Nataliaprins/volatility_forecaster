@@ -16,7 +16,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # import the ROOT_DIR_PROJECT from constants.py
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
 
 # import the load_data function from load_data.py
 from src.pull_data.load_data import load_data

@@ -9,9 +9,9 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 from constants import ROOT_DIR_PROJECT
-from eval_metrics_mlflow import eval_metrics
-from load_test_data_mlflow import load_test_data
-from load_train_data_mlflow import load_train_data
+from src.mlflow.eval_metrics_mlflow import eval_metrics
+from src.mlflow.load_test_data_mlflow import load_test_data
+from src.mlflow.load_train_data_mlflow import load_train_data
 
 
 

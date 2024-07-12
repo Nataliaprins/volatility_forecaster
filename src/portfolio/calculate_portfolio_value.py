@@ -1,11 +1,14 @@
 "this fuction takes the weights of the portfolio and the "
 "current prices of the assets and returns the value of the portfolio"
 
-import os
-import pandas as pd
 import glob
-from optimize_portfolio import optimize_portfolio 
-from constants import ROOT_DIR_PROJECT
+import os
+
+import pandas as pd
+
+from src.constants import ROOT_DIR_PROJECT
+from src.portfolio.optimize_portfolio import optimize_portfolio
+
 
 def calculate_portfolio_value(root_dir, pattern):
 

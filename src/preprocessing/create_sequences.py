@@ -5,7 +5,7 @@ import os
 
 import numpy as np
 
-from load_data import load_data
+from src.pull_data.load_data import load_data
 
 
 def create_sequences(data, seq_length):
