@@ -10,12 +10,11 @@ Este script descarga los precios de cierre ajustados de las acciones de yahoo fi
 
 import os
 
-# sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 import pandas as pd
 import yfinance as yf
 
 # from src import constants
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
 
 # import sys
 

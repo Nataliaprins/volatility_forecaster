@@ -13,7 +13,7 @@ import os
 
 import pandas as pd
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
 
 
 def copy_data_from_raw_to_intermetidate(root_dir):

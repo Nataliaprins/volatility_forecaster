@@ -12,7 +12,7 @@ import os
 
 import pandas as pd
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
 
 
 def copy_data_from_intermediate_to_processed(root_dir):

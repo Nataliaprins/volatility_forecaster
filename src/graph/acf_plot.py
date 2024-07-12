@@ -5,6 +5,7 @@ import numpy as np
 import plotly.graph_objects as go
 from statsmodels.tsa.stattools import acf
 
+#TODO: change the import to the correct path
 from constants import ROOT_DIR_PROJECT
 from load_data import load_data
 

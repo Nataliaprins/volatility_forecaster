@@ -1,9 +1,8 @@
 # pylint: disable=invalid-name
-""" 
-Adds a column with the daily log yields of the adjusted close prices.
+"""Adds a column with the daily yields of the adjusted close prices.
 
-# >>> from .compute_log_yield  import compute_log_yield 
-# >>> compute_log_yield ("yahoo")
+# >>> from .compute_yields import compute_yields
+# >>> compute_yields("yahoo")
 --MSG-- File saved to msft.csv
 --MSG-- File saved to googl.csv
 --MSG-- File saved to aapl.csv
@@ -13,41 +12,37 @@ Adds a column with the daily log yields of the adjusted close prices.
 
 import os
 
-# sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
-import numpy as np
 import pandas as pd
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT
+
+# Adds a column called "yields" for each file in data/yahoo/processed/, which
+# contains the daily yields of the adjusted close prices.
 
 
-def compute_log_yield(
+def compute_yields(
     root_dir,
 ):
-    """Adds a column with the daily log yields of the adjusted close prices."""
+    """Adds a column with the daily yields of the adjusted close prices."""
 
     # Get the list of files in processed/
-    processed_files = [
-        f
-        for f in os.listdir(
-            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")
-        )
-        if not f.endswith(".DS_Store")
-    ]
+    processed_files = os.listdir(
+        os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")
+    )
 
     # Process each file in processed/
     for processed_file in processed_files:
         # Read the file
         df = pd.read_csv(
             os.path.join(
-                ROOT_DIR_PROJECT, root_dir, "processed", "prices", processed_file
+                ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file
             ),
             parse_dates=True,
             index_col=0,
-            encoding="utf-8",
         )
 
-        # Compute the log yields
-        df["log_yield"] = np.log(df["price"] / df["price"].shift(1))
+        # Compute the yields
+        df["yield"] = df["price"].pct_change()
 
         # Save the file
         df.to_csv(
@@ -63,4 +58,4 @@ def compute_log_yield(
 
 
 if __name__ == "__main__":
-    compute_log_yield(root_dir="yahoo")
+    compute_yields("yahoo")
