@@ -13,11 +13,10 @@ Adds a column with the daily log yields of the adjusted close prices.
 
 import os
 
-# sys.path.append(os.path.join(os.path.dirname(__file__),'..' ))
 import numpy as np
 import pandas as pd
 
-from src.constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 
 
 def compute_log_yield(
@@ -29,7 +28,7 @@ def compute_log_yield(
     processed_files = [
         f
         for f in os.listdir(
-            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")
+            os.path.join(ROOT_DIR_PROJECT, "data",root_dir, "processed/prices/")
         )
         if not f.endswith(".DS_Store")
     ]
@@ -39,7 +38,7 @@ def compute_log_yield(
         # Read the file
         df = pd.read_csv(
             os.path.join(
-                ROOT_DIR_PROJECT, root_dir, "processed", "prices", processed_file
+                ROOT_DIR_PROJECT, "data" ,root_dir, "processed", "prices", processed_file
             ),
             parse_dates=True,
             index_col=0,
@@ -52,7 +51,7 @@ def compute_log_yield(
         # Save the file
         df.to_csv(
             os.path.join(
-                ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file
+                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
             ),
             index=True,
         )
@@ -63,4 +62,4 @@ def compute_log_yield(
 
 
 if __name__ == "__main__":
-    compute_log_yield(root_dir="yahoo")
+    compute_log_yield(root_dir=project_name)

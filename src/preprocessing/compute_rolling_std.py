@@ -11,7 +11,7 @@ import os
 
 import pandas as pd
 
-from src.constants import ROLLING_WINDOW, ROOT_DIR_PROJECT
+from src.constants import ROLLING_WINDOW, ROOT_DIR_PROJECT, project_name
 
 
 def compute_rolling_std(root_dir):
@@ -19,7 +19,7 @@ def compute_rolling_std(root_dir):
 
     # Get the list of files in processed/
     processed_files = os.listdir(
-        os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")
+        os.path.join(ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/")
     )
 
     # Process each file in processed/
@@ -27,7 +27,7 @@ def compute_rolling_std(root_dir):
         # Read the file
         df = pd.read_csv(
             os.path.join(
-                ROOT_DIR_PROJECT, root_dir, "processed/prices", processed_file
+                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices", processed_file
             ),
             parse_dates=True,
             index_col=0,
@@ -39,7 +39,7 @@ def compute_rolling_std(root_dir):
         # Save the file
         df.to_csv(
             os.path.join(
-                ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file
+                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
             ),
             index=True,
         )
@@ -50,4 +50,4 @@ def compute_rolling_std(root_dir):
 
 
 if __name__ == "__main__":
-    compute_rolling_std(root_dir="yahoo")
+    compute_rolling_std(root_dir=project_name)

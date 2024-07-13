@@ -23,15 +23,11 @@ def download_data_from_yahoo(
     stocks_list,
     start_date,
     end_date,
-    root_dir,
+    
 ):
     """Download specified stocks from Yahoo Finance and save them to individual CSV files."""
 
-    # Create the root directory if it does not exist
-    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "raw")):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "raw"))
-        print(f"--MSG-- Created directory {ROOT_DIR_PROJECT}/{root_dir}/raw")
-
+    
     # Process each stock in the stocks list. Stock is the nemotechnic of the stock
     for stock_name in stocks_list:
         #
@@ -42,7 +38,7 @@ def download_data_from_yahoo(
         )
         # print(os.path.abspath(os.getcwd()))
         file_path = os.path.abspath("data/yahoo/raw")
-        file_path = os.path.join(file_path, "data_" + stock_name.lower() + ".csv")
+        file_path = os.path.join(file_path, stock_name.lower() + ".csv")
         # print (file_path)
         data_frame.to_csv(file_path, index=True)
         print(f"--MSG-- Stock prices saved to {file_path}")
@@ -55,6 +51,4 @@ if __name__ == "__main__":
     download_data_from_yahoo(
         stocks_list=["AAPL", "MSFT", "GOOGL"],
         start_date="2018-01-01",
-        end_date="2024-05-31",
-        root_dir="yahoo",
-    )
+        end_date="2024-05-31",)

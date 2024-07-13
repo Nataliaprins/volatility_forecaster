@@ -14,7 +14,7 @@ import os
 
 import pandas as pd
 
-from src.constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 
 # Adds a column called "yields" for each file in data/yahoo/processed/, which
 # contains the daily yields of the adjusted close prices.
@@ -27,7 +27,7 @@ def compute_yields(
 
     # Get the list of files in processed/
     processed_files = os.listdir(
-        os.path.join(ROOT_DIR_PROJECT, root_dir, "processed/prices/")
+        os.path.join(ROOT_DIR_PROJECT,"data" ,root_dir, "processed/prices/")
     )
 
     # Process each file in processed/
@@ -35,7 +35,7 @@ def compute_yields(
         # Read the file
         df = pd.read_csv(
             os.path.join(
-                ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file
+                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
             ),
             parse_dates=True,
             index_col=0,
@@ -47,7 +47,7 @@ def compute_yields(
         # Save the file
         df.to_csv(
             os.path.join(
-                ROOT_DIR_PROJECT, root_dir, "processed/prices/", processed_file
+                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
             ),
             index=True,
         )
@@ -58,4 +58,4 @@ def compute_yields(
 
 
 if __name__ == "__main__":
-    compute_yields("yahoo")
+    compute_yields(root_dir= project_name)

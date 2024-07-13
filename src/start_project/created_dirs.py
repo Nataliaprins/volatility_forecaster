@@ -4,9 +4,9 @@ import os
 import shutil
 import sys
 
-from src.constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 
-project_name = "yahoo"
+# TODO: convert project_name to an atributte of the function 
 
 def create_project(project_name):  
     if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "data", project_name)):
@@ -17,8 +17,8 @@ def create_project(project_name):
         os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "features"))
         os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "models"))
         os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "reports"))
-        print(f"Folders for project {project_name} created successfully")
+        print(f"--MSG-- Folders for project {project_name} created successfully")
     else:
-        print(f"Project {project_name} already exists")
+        print(f"--MSG-- Project {project_name} already exists")
 
 create_project(project_name)

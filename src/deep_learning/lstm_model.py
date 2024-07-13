@@ -14,7 +14,7 @@ from sklearn.model_selection import TimeSeriesSplit
 from sklearn.preprocessing import MinMaxScaler
 
 from src.constants import ROOT_DIR_PROJECT
-from src.preprocessing.create_sequences import create_sequences
+from src.deep_learning.create_sequences import create_sequences
 from src.pull_data.load_data import load_data
 
 

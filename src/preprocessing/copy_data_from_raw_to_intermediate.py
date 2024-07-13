@@ -13,24 +13,20 @@ import os
 
 import pandas as pd
 
-from src.constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 
 
-def copy_data_from_raw_to_intermetidate(root_dir):
+def copy_data_from_raw_to_intermetidate():
     """Copy all files from raw/ to intermediate/ removing NA."""
 
-    # Create the intermediate/ directory if not exists
-    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate")):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate"))
-
     # Get the list of files in raw/
-    raw_files = os.listdir(os.path.join(ROOT_DIR_PROJECT, root_dir, "raw"))
+    raw_files = os.listdir(os.path.join(ROOT_DIR_PROJECT , "data" , project_name, "raw"))
 
     # Process each file in raw/
     for raw_file in raw_files:
         # Read the file
         df = pd.read_csv(
-            os.path.join(ROOT_DIR_PROJECT, root_dir, "raw", raw_file),
+            os.path.join(ROOT_DIR_PROJECT, "data", project_name, "raw", raw_file),
             parse_dates=True,
             index_col=0,
             encoding="utf-8",
@@ -41,7 +37,7 @@ def copy_data_from_raw_to_intermetidate(root_dir):
 
         # Save the file
         df.to_csv(
-            os.path.join(ROOT_DIR_PROJECT, root_dir, "intermediate", raw_file),
+            os.path.join(ROOT_DIR_PROJECT, "data", project_name, "intermediate", raw_file),
             index=True,
         )
         print(f"--MSG-- File saved to {raw_file}")
@@ -51,4 +47,4 @@ def copy_data_from_raw_to_intermetidate(root_dir):
 
 
 if __name__ == "__main__":
-    copy_data_from_raw_to_intermetidate(root_dir="yahoo")
+    copy_data_from_raw_to_intermetidate()
