@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 from src.pull_data.load_data import load_data
 
 
@@ -19,8 +19,6 @@ def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):
     lagged_df = pd.DataFrame(df)  
    
     #define the lags
-   
-   
     for lag in range(1, lags + 1):
         lagged_df[f"lag_{lag}"] = lagged_df["yt"].shift(lag)
 
@@ -39,28 +37,17 @@ def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):
     for train_index, test_index in ts_cv.split(x):
        x_train, x_test = x.iloc[train_index], x.iloc[test_index]
        y_train, y_test = y.iloc[train_index], y.iloc[test_index]
-       
 
+    print(f"--INFO-- ts_train_test_split for {stock_name} from {root_dir}.")
+       
     return x, y, x_train, x_test, y_train, y_test
-
-
-       
 
 
 if __name__ == "__main__":
     ts_train_test_split(
-        root_dir= "yahoo",
+        root_dir= project_name,
         lags=3,  
         n_splits=5,
         train_size=0.75, 
         stock_name="googl")
     
-
-
-      
-
-
-
-
-
-

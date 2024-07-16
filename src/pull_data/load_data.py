@@ -6,7 +6,7 @@ import os
 
 import pandas as pd
 
-from src.constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 
 
 def load_data(stock_name: str, root_dir: str) -> pd.DataFrame:
@@ -25,10 +25,11 @@ def load_data(stock_name: str, root_dir: str) -> pd.DataFrame:
     df = pd.read_csv(
         os.path.join(
             ROOT_DIR_PROJECT,
+            "data",
             root_dir,
             "processed",
             "prices",
-            "data_" + f"{stock_name}.csv",
+            f"{stock_name}.csv",
         ),
         parse_dates=True,
         index_col=0,
@@ -41,5 +42,5 @@ def load_data(stock_name: str, root_dir: str) -> pd.DataFrame:
 if __name__ == "__main__":
     load_data(
         stock_name="googl",
-        root_dir="yahoo",
+        root_dir= project_name,
     )

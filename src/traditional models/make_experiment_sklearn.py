@@ -13,7 +13,7 @@ from sklearn.tree import DecisionTreeRegressor
 
 import mlflow
 import mlflow.sklearn
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 from mlflow import MlflowClient
 from src.mlflow.eval_metrics_mlflow import eval_metrics
 from src.mlflow.load_test_data_mlflow import load_test_data
@@ -112,6 +112,6 @@ if __name__ == "__main__":
                     model_instance = LinearRegression(), 
                     model_params= {"fit_intercept": [True, False], "n_jobs": [1, 2, 3]}, 
                     verbose= True, 
-                    root_dir= "yahoo",
+                    root_dir= project_name,
                     n_splits=5)
     print("Experiment made")
