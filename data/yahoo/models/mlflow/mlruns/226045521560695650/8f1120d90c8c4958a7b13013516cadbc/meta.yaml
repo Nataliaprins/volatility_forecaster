@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/226045521560695650/8f1120d90c8c4958a7b13013516cadbc/artifacts
+end_time: 1721272298387
+entry_point_name: ''
+experiment_id: '226045521560695650'
+lifecycle_stage: active
+run_id: 8f1120d90c8c4958a7b13013516cadbc
+run_name: orderly-mare-102
+run_uuid: 8f1120d90c8c4958a7b13013516cadbc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1721272293330
+status: 3
+tags: []
+user_id: nataliaacevedo

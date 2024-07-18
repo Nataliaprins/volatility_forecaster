@@ -14,19 +14,20 @@ from mlflow import MlflowClient
 from src.constants import ROOT_DIR_PROJECT, project_name
 from src.train_test_split.ts_train_test_split import ts_train_test_split
 
+#TODO: insertar variable model_type
 
 def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, verbose, root_dir, n_splits):    
     
     #create the working directory
-    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow")):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow" ))
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT,"data",project_name, "models", "mlflow")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data" ,project_name, "models", "mlflow" ))
 
     # obtain the data path
-    path_to_data = os.path.join(ROOT_DIR_PROJECT, "yahoo", "processed", "prices", "*.csv")
+    path_to_data = os.path.join(ROOT_DIR_PROJECT,"data",project_name, "processed", "prices", "*.csv")
     data_files= glob.glob(path_to_data)
 
     # setting tracking directory
-    artifact_location = Path.cwd().joinpath("data","yahoo","models","mlflow", "mlruns").as_uri()
+    artifact_location = Path.cwd().joinpath("data",project_name,"models","mlflow", "mlruns").as_uri()
     mlflow.set_tracking_uri(artifact_location)
     print('Tracking directory:', mlflow.get_tracking_uri())
 

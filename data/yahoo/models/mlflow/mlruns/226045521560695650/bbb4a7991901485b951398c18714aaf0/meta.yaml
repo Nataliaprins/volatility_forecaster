@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/226045521560695650/bbb4a7991901485b951398c18714aaf0/artifacts
+end_time: 1721272298387
+entry_point_name: ''
+experiment_id: '226045521560695650'
+lifecycle_stage: active
+run_id: bbb4a7991901485b951398c18714aaf0
+run_name: amusing-wolf-517
+run_uuid: bbb4a7991901485b951398c18714aaf0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1721272293330
+status: 3
+tags: []
+user_id: nataliaacevedo

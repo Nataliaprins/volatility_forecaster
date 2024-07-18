@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/226045521560695650/dbdf33026cfe458bbeb1a322744816d4/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '226045521560695650'
+lifecycle_stage: active
+run_id: dbdf33026cfe458bbeb1a322744816d4
+run_name: nosy-snake-67
+run_uuid: dbdf33026cfe458bbeb1a322744816d4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1721272241210
+status: 1
+tags: []
+user_id: nataliaacevedo

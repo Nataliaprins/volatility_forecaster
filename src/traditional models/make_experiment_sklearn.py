@@ -13,33 +13,35 @@ from sklearn.tree import DecisionTreeRegressor
 
 import mlflow
 import mlflow.sklearn
-from src.constants import ROOT_DIR_PROJECT, project_name
 from mlflow import MlflowClient
+from src.constants import ROOT_DIR_PROJECT, project_name
 from src.mlflow.eval_metrics_mlflow import eval_metrics
 from src.mlflow.load_test_data_mlflow import load_test_data
 from src.mlflow.load_train_data_mlflow import load_train_data
+from src.mlflow.setting_mlflow import autologging_mlflow
 from src.pull_data.load_data import load_data
 from src.train_test_split.ts_train_test_split import ts_train_test_split
 
 
+#TODO: insertar variable model_type
 def make_experiment(train_size, lags, model_instance, model_params, verbose, root_dir, n_splits):
 
 
     #create the working directory
-    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow")):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "yahoo", "models", "mlflow" ))
+    if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "data",project_name, "models", "mlflow")):
+        os.makedirs(os.path.join(ROOT_DIR_PROJECT,"data", project_name ,"models", "mlflow" ))
 
     # obtain the data path
-    path_to_data = os.path.join(ROOT_DIR_PROJECT, "yahoo", "processed", "prices", "*.csv")
+    path_to_data = os.path.join(ROOT_DIR_PROJECT, "data" ,project_name, "processed", "prices", "*.csv")
     data_files= glob.glob(path_to_data)
 
     # iterate over the data files
     for data_file in data_files:
         # define the stock name
-        stock_name = data_file.split("_")[-1].split(".")[0]
+        stock_name = data_file.split("/")[8].split(".")[0]
        
         # obtain X and Y
-        x, y = ts_train_test_split(root_dir= root_dir, train_size=train_size, lags= lags, stock_name= stock_name, n_splits= n_splits)
+        x, y, x_train, x_test, y_train, y_test = ts_train_test_split(root_dir= root_dir, train_size=train_size, lags= lags, stock_name= stock_name, n_splits= n_splits)
         
         #choose the best estimator
         estimator = GridSearchCV(model_instance, 
@@ -49,29 +51,10 @@ def make_experiment(train_size, lags, model_instance, model_params, verbose, roo
                                  return_train_score=False,
                                  scoring= "max_error", 
                                  refit=True,
-                                 )          
-           
-        # setting tracking directory
-        artifact_location = Path.cwd().joinpath("data","yahoo","models","mlflow", "mlruns").as_uri()
-        mlflow.set_tracking_uri(artifact_location)
-        print('Tracking directory:', mlflow.get_tracking_uri())
-
-                          
+                                 )
         #autologging
-        mlflow.sklearn.autolog(
-            log_input_examples= False,
-            log_model_signatures=True,
-            log_models=True,
-            disable=False,
-            exclusive=False,
-            disable_for_unsupported_versions=False,
-            silent=False,
-            max_tuning_runs=10,
-            log_post_training_metrics=True,
-            serialization_format= "cloudpickle",
-            registered_model_name=None,
-            )
-
+        autologging_mlflow(model_type= "sklearn")          
+       
         #set the experiment if it exists
         mlflow.set_experiment(str(stock_name))
 

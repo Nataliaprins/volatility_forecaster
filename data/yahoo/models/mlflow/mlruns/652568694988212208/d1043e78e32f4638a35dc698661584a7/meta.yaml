@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/652568694988212208/d1043e78e32f4638a35dc698661584a7/artifacts
+end_time: 1721272302914
+entry_point_name: ''
+experiment_id: '652568694988212208'
+lifecycle_stage: active
+run_id: d1043e78e32f4638a35dc698661584a7
+run_name: bold-mare-375
+run_uuid: d1043e78e32f4638a35dc698661584a7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1721272298593
+status: 3
+tags: []
+user_id: nataliaacevedo

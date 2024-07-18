@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/modelo_202312/data/yahoo/models/mlflow/mlruns/226045521560695650/9e535487936b4a549e961b155f514a67/artifacts
+end_time: 1721272298387
+entry_point_name: ''
+experiment_id: '226045521560695650'
+lifecycle_stage: active
+run_id: 9e535487936b4a549e961b155f514a67
+run_name: shivering-mole-804
+run_uuid: 9e535487936b4a549e961b155f514a67
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1721272293330
+status: 3
+tags: []
+user_id: nataliaacevedo

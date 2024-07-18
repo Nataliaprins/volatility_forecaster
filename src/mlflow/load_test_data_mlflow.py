@@ -5,7 +5,7 @@ import os
 
 import pandas as pd
 
-from constants import ROOT_DIR_PROJECT
+from src.constants import ROOT_DIR_PROJECT, project_name
 
 
 def load_test_data(root_dir, train_size, lags, stock_name):
@@ -31,7 +31,7 @@ def load_test_data(root_dir, train_size, lags, stock_name):
         
 if __name__ == "__main__":
     load_test_data(
-        root_dir="yahoo",
+        root_dir="project_name",
         train_size=189,
         lags=5,
         stock_name="aapl"
