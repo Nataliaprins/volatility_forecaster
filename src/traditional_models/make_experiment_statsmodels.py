@@ -2,24 +2,21 @@
 
 import glob
 import os
-from pathlib import Path
 
-import numpy as np
-import pandas as pd
 import statsmodels.api as sm
 from sklearn.metrics import mean_squared_error
 
 import mlflow
-from mlflow import MlflowClient
 from src.constants import ROOT_DIR_PROJECT, project_name
+from src.metrics.evaluate_models import evaluate_models
+from src.mlflow.fetch_logged_data import fetch_logged_data
 from src.mlflow.setting_mlflow import autologging_mlflow
 from src.train_test_split.ts_train_test_split import ts_train_test_split
 
 #TODO: insertar variable model_type
 
-def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, verbose, root_dir, n_splits):    
-    
-       
+def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, verbose, root_dir, n_splits, model_type):    
+          
     # obtain the data path
     path_to_data = os.path.join(ROOT_DIR_PROJECT,"data",project_name, "processed", "prices", "*.csv")
     data_files= glob.glob(path_to_data)
@@ -37,14 +34,6 @@ def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, 
         
         mlflow.set_experiment(str(stock_name))
 
-        # get the run data
-        def fetch_logged_data(run_id):
-            client = MlflowClient()
-            data = client.get_run(run_id).data
-            tags = {k: v for k, v in data.tags.items() if not k.startswith("mlflow.")}
-            artifacts = [f.path for f in client.list_artifacts(run_id, "model")]
-            return data.params, data.metrics, tags, artifacts
-        
         #start the experiment
         with mlflow.start_run(run_name="statsmodels_"+ stock_name + model_instance) as run:
             #fit the model passed in the argument model_instance
@@ -52,11 +41,12 @@ def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, 
 
             #evaluate the model
             y_pred = model.predict(x)
-            mse = mean_squared_error(y, y_pred)
-            
+            metrics = evaluate_models(y, y_pred)           
             #log the metrics
-            mlflow.log_metric("mse", mse)
-
+            mlflow.log_metric("mse", metrics["mse"])
+            mlflow.log_metric("mae", metrics["mae"])          
+    
+    print(f"--MSG: Experiment finished for {model_type}--")
 
 if __name__ == "__main__":
     make_experiment_statsmodels(
@@ -66,5 +56,6 @@ if __name__ == "__main__":
         lags= 5,
         model_params= {},
         verbose= 3,
-        n_splits= 5
+        n_splits= 5,
+        model_type= "statsmodels"
         )

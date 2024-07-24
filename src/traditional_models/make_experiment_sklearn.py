@@ -11,6 +11,8 @@ import mlflow
 import mlflow.sklearn
 from mlflow import MlflowClient
 from src.constants import ROOT_DIR_PROJECT, project_name
+from src.metrics.evaluate_models import evaluate_models
+from src.mlflow.fetch_logged_data import fetch_logged_data
 from src.mlflow.setting_mlflow import autologging_mlflow
 from src.traditional_models.selector import selector
 from src.train_test_split.ts_train_test_split import ts_train_test_split
@@ -38,31 +40,30 @@ def make_experiment(model_type, train_size, lags, model_instance, model_params, 
         #set the experiment if it exists
         mlflow.set_experiment(str(stock_name))
 
-        # get the run data
-        def fetch_logged_data(run_id):
-            client = MlflowClient()
-            data = client.get_run(run_id).data
-            tags = {k: v for k, v in data.tags.items() if not k.startswith("mlflow.")}
-            artifacts = [f.path for f in client.list_artifacts(run_id, "model")]
-            return data.params, data.metrics, tags, artifacts
-
+        
+        
         # start the experiment      
         with mlflow.start_run() as run:
       
-            # train the model
-            estimator.fit(x, y)                      
-            run_id = mlflow.active_run().info.run_id 
-                                             
-            #show data logged in the run
-            params, metrics, tags, artifacts = fetch_logged_data(run_id)
-            
-            for key, value in metrics.items():
-                print(f"Key: {key}, Value: {value}")
+            # train the model                   
+            estimator.fit(x, y)
+            best_model = estimator.best_estimator_
+            y_pred = best_model.predict(x_test)
 
-            params = estimator.cv_results_['params']
-            for i, param_set in enumerate(params):
-                param_str = str(param_set)
-                mlflow.set_tag("mlflow.runName", f"model: {repr(model_instance)} Run with params: {param_str}")
+            #evaluate the model
+            metrics = evaluate_models(y_test, y_pred)
+            #log metrics    
+            mlflow.log_metric("mse", metrics["mse"])
+            mlflow.log_metric("mae", metrics["mae"])
+
+            best_params = estimator.best_params_
+
+            # get the run data
+            params, metrics, tags, artifacts = fetch_logged_data(run.info.run_id)
+            print(params, tags, artifacts)
+            
+            #log the best model
+            mlflow.set_tag("mlflow.runName", f"model: {repr(model_instance)} Run with params: {str(best_params)}")
                    
     print(f"--MSG: Experiment finished for {model_type}--")
 
