@@ -4,6 +4,7 @@ import glob
 import os
 
 import statsmodels.api as sm
+from ARIMA_class import ARIMA_class
 from sklearn.metrics import mean_squared_error
 
 import mlflow
@@ -37,6 +38,9 @@ def make_experiment_statsmodels(train_size, lags, model_instance ,model_params, 
         #start the experiment
         with mlflow.start_run(run_name="statsmodels_"+ stock_name + model_instance) as run:
             #fit the model passed in the argument model_instance
+            model= ARIMA_class.fit(x_train, y_train, model_instance, model_params)
+
+
             model = sm.OLS(y, x).fit()
 
             #evaluate the model
