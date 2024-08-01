@@ -9,7 +9,7 @@ from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
 from volatility_forecaster.pull_data import load_data
 
 
-def fit_garch(volatility_type, y, stock_name, p=1, q=1 ):
+def fit_model(volatility_type, y, stock_name, p=1, q=1 ):
     """
     Fit a GARCH model to the data
 
@@ -40,7 +40,7 @@ def fit_garch(volatility_type, y, stock_name, p=1, q=1 ):
     return model_fit
 
 if __name__ == "__main__":
-    fit_garch(  stock_name= "googl",
+    fit_model(  stock_name= "googl",
                 p=1, 
                 q=1,
                 volatility_type= "ARCH")

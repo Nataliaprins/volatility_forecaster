@@ -8,10 +8,11 @@ from arch.univariate import GARCH
 from mlflow import log_artifact, log_metric, log_param
 from sklearn.metrics import mean_squared_error
 
-from volatility_forecaster.arch_model.fit import fit_garch
+from volatility_forecaster.arch_model.fit import fit_model
 from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.core.arch import train_test_split
+from volatility_forecaster.mlflow.setting_mlflow import autologging_mlflow
 from volatility_forecaster.pull_data import load_data
-from volatility_forecaster.train_test_split import ts_train_test_split
 
 
 def make_experiment(volatility_type, root_dir, train_size, lags, n_splits ,stock_name, p=1, q=1 ):
@@ -47,35 +48,32 @@ def make_experiment(volatility_type, root_dir, train_size, lags, n_splits ,stock
         returns = returns.dropna()  
         
         # train test split
-        #TODO: hacer una funciòn que parta solo las Y en train y test
-        
+        train, test = train_test_split.train_test_split(returns, train_size)
+
+        #Set the experiment
+        autologging_mlflow(model_type= volatility_type)
+
+        #set the experiment if it exists
+        mlflow.set_experiment(str(stock_name))
+
         #start the experiment
         with mlflow.start_run() as run:
-              
-        # train the ARCH model
-        model_fit = fit_garch(volatility_type= volatility_type, 
-                              stock_name= stock_name, 
-                              p= p, 
-                              q= q )
-    
-        #predict the model
-        y_pred = model_fit.forecast(horizon=1).variance.iloc[-1]
-        y_test = y_test.values
-    
-        #evaluate the model
-        mse = mean_squared_error(y_test, y_pred)
-        log_metric("mse", mse)
-        log_param("p", p)
-        log_param("q", q)
-        log_param("volatility_type", volatility_type)
-        log_artifact("arch_model_summary.txt")
+            #fit the model
+            model= fit_model(volatility_type, train, stock_name, p, q)
+            #forecast
+            forecast = model.forecast(horizon=lags, start= test.index[0], method='analytic')
+            y_pred=forecast.variance.tail()
+            print(y_pred)
+            
+            
+   
 
 
 if __name__ == "__main__":
     make_experiment(volatility_type= "ARCH",
                     root_dir= ROOT_DIR_PROJECT,
                     train_size= 0.8,
-                    lags= 1,
+                    lags= 5,
                     n_splits= 5,
                     stock_name= "googl",
                     p=1, 

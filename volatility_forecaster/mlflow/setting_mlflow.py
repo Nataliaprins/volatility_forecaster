@@ -22,39 +22,22 @@ def autologging_mlflow( model_type: str = "sklearn"):
     print('Tracking directory:', mlflow.get_tracking_uri())
 
     #autologging
-    if model_type == "sklearn":
-        mlflow.sklearn.autolog(
-            log_input_examples= False,
-            log_model_signatures=True,
-            log_models=True,
-            disable=False,
-            exclusive=False,
-            disable_for_unsupported_versions=False,
-            silent=False,
-            max_tuning_runs=10,
-            log_post_training_metrics=True,
-            serialization_format= "cloudpickle",
-            registered_model_name=None,
-            )
-        return print("--MSG--autologging enabled for {}".format(model_type))
-    
-    elif model_type == "statsmodels":
-        mlflow.statsmodels.autolog(
-            log_models=True,
-            disable=False,
-            exclusive=False,
-            disable_for_unsupported_versions=False,
-            silent=False,
-            registered_model_name=None,            
+    mlflow.sklearn.autolog(
+        log_input_examples= False,
+        log_model_signatures=True,
+        log_models=True,
+        disable=False,
+        exclusive=False,
+        disable_for_unsupported_versions=False,
+        silent=False,
+        max_tuning_runs=10,
+        log_post_training_metrics=True,
+        serialization_format= "cloudpickle",
+        registered_model_name=None,
         )
-        return print("--MSG--autologging enabled for {}".format(model_type))
+    return print("--MSG--autologging enabled for {}".format(model_type))
     
-    elif model_type == "tensorflow":
-        print("tensorflow not supported yet")
-        return print("--MSG--autologging enabled for {}".format(model_type))
-    else:
-        return print("--MSG--autologging not supported for {}".format(model_type))    
-    
+   
 
 if __name__ == "__main__":
     autologging_mlflow(model_type= "statsmodels")

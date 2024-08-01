@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/149733331847099990/7ac4c8f962674e1bbad04d52f56902ab/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '149733331847099990'
+lifecycle_stage: active
+run_id: 7ac4c8f962674e1bbad04d52f56902ab
+run_name: blushing-snake-51
+run_uuid: 7ac4c8f962674e1bbad04d52f56902ab
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1722471961339
+status: 1
+tags: []
+user_id: nataliaacevedo

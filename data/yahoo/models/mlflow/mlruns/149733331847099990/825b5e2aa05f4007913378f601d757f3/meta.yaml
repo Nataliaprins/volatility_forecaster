@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/149733331847099990/825b5e2aa05f4007913378f601d757f3/artifacts
+end_time: 1722471779408
+entry_point_name: ''
+experiment_id: '149733331847099990'
+lifecycle_stage: active
+run_id: 825b5e2aa05f4007913378f601d757f3
+run_name: popular-pig-26
+run_uuid: 825b5e2aa05f4007913378f601d757f3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1722471779369
+status: 3
+tags: []
+user_id: nataliaacevedo
