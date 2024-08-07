@@ -1,0 +1,17 @@
+from volatility_forecaster.arch_model.make_experiment import make_experiment
+
+
+def make_experiments(
+    param_combinations,
+    train_size,
+    fit_params,
+    forecast_params,
+):
+
+    for combination in param_combinations:
+        make_experiment(
+            param_combinations=combination,
+            train_size=train_size,
+            fit_params=fit_params,
+            forecast_params=forecast_params,
+        )
