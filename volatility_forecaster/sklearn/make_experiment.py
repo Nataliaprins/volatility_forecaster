@@ -46,11 +46,15 @@ def make_experiment(
 
         # choose the best estimator
         estimator = selector(
-            model_instance, param_dict, n_splits, x=x, y=y, train_size=train_size
+            model_instance=model_instance,
+            param_dict=param_dict,
+            n_splits=n_splits,
+            x=x,
+            train_size=train_size,
         )
 
         # autologging
-        autologging_mlflow(model_type="sklearn")
+        autologging_mlflow(model_type=model_type)
 
         # set the experiment if it exists
         mlflow.set_experiment(str(stock_name))
