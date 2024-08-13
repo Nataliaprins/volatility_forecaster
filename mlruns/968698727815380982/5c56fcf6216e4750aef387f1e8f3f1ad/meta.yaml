@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/volatility_forecaster/mlruns/968698727815380982/5c56fcf6216e4750aef387f1e8f3f1ad/artifacts
+end_time: 1723246876993
+entry_point_name: ''
+experiment_id: '968698727815380982'
+lifecycle_stage: active
+run_id: 5c56fcf6216e4750aef387f1e8f3f1ad
+run_name: marvelous-wren-77
+run_uuid: 5c56fcf6216e4750aef387f1e8f3f1ad
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1723246876985
+status: 3
+tags: []
+user_id: nataliaacevedo

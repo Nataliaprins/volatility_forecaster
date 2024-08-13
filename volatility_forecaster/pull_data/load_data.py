@@ -26,7 +26,7 @@ def load_data(stock_name: str, root_dir: str) -> pd.DataFrame:
         os.path.join(
             ROOT_DIR_PROJECT,
             "data",
-            root_dir,
+            project_name,
             "processed",
             "prices",
             f"{stock_name}.csv",
@@ -42,5 +42,5 @@ def load_data(stock_name: str, root_dir: str) -> pd.DataFrame:
 if __name__ == "__main__":
     load_data(
         stock_name="googl",
-        root_dir= project_name,
+        root_dir=project_name,
     )

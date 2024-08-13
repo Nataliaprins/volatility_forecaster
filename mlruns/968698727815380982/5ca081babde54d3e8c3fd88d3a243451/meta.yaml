@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/nataliaacevedo/volatility_forecaster/mlruns/968698727815380982/5ca081babde54d3e8c3fd88d3a243451/artifacts
+end_time: 1723246719358
+entry_point_name: ''
+experiment_id: '968698727815380982'
+lifecycle_stage: active
+run_id: 5ca081babde54d3e8c3fd88d3a243451
+run_name: fortunate-sloth-352
+run_uuid: 5ca081babde54d3e8c3fd88d3a243451
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1723246719351
+status: 3
+tags: []
+user_id: nataliaacevedo
