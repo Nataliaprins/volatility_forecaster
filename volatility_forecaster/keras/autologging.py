@@ -1,16 +1,14 @@
-"this fuction is used to log the model to mlflow"
-
+"this function sets the experiment and logs the results in mlflow for keras models."
 import os
 from pathlib import Path
 
 import mlflow
-import mlflow.sklearn
-from mlflow import MlflowClient
+import mlflow.keras
 
 from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
 
 
-def autologging_mlflow(model_type: str = "sklearn"):
+def autologging_mlflow():
 
     # create the working directory
     if not os.path.exists(
@@ -27,22 +25,12 @@ def autologging_mlflow(model_type: str = "sklearn"):
     mlflow.set_tracking_uri(artifact_location)
     print("Tracking directory:", mlflow.get_tracking_uri())
 
-    # autologging
-    mlflow.sklearn.autolog(
+    mlflow.tensorflow.autolog(
+        log_models=True,
+        log_every_epoch=True,
         log_input_examples=False,
         log_model_signatures=True,
-        log_models=True,
-        disable=False,
-        exclusive=False,
-        disable_for_unsupported_versions=False,
-        silent=False,
-        max_tuning_runs=10,
-        log_post_training_metrics=True,
-        serialization_format="cloudpickle",
-        registered_model_name=None,
+        log_datasets=True,
     )
-    return print("--MSG--autologging enabled for {}".format(model_type))
 
-
-if __name__ == "__main__":
-    autologging_mlflow(model_type="statsmodels")
+    print("--MSG--autologging enabled for keras")

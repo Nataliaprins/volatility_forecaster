@@ -25,3 +25,23 @@ def train_test_split(X, y, train_size, seq_length):
         y_test_list.append(y_test)
 
     return X_train_list, X_test_list, y_train_list, y_test_list
+
+
+if __name__ == "__main__":
+    X = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])
+    y = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    train_size = 0.7
+    seq_length = 3
+
+    X_train_list, X_test_list, y_train_list, y_test_list = train_test_split(
+        X, y, train_size, seq_length
+    )
+
+    print(X_train_list)
+    print(X_test_list)
+    print(y_train_list)
+    print(y_test_list)
+    print(len(X_train_list))
+    print(len(X_test_list))
+    print(len(y_train_list))
+    print(len(y_test))
