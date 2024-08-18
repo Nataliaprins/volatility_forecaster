@@ -24,7 +24,7 @@ def make_experiment(
     seq_length,
     train_size,
     scaler_params,
-    num_trials,
+    num_max_epochs,
 ):
 
     data_files = _get_data_files()
@@ -38,6 +38,10 @@ def make_experiment(
         xtrain, xtest, ytrain, ytest = split_time_series(xs, ys, train_size)
         print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape)
 
+        # reshape the data for LSTM in 3d
+        xtrain, xtest = _convert_to_3d(xtrain, xtest)
+        print(xtrain.shape, ytrain.shape, xtest.shape, ytest.shape)
+
         autologging_mlflow()
 
         mlflow.set_experiment(str(stock_name))
@@ -46,12 +50,21 @@ def make_experiment(
 
             # obtain the best hyperparameters
             tuner = tuning_params(
-                model=model, num_trials=num_trials, model_name=model_name
+                model=model, num_max_epochs=num_max_epochs, model_name=model_name
             )
             print(tuner.search_space_summary())
 
-            tuner.search(x=xtrain, y=ytrain, epochs=10, validation_data=(xtest, ytest))
+            tuner.search(xtrain, ytrain, epochs=50, validation_data=(xtest, ytest))
             print(tuner.results_summary())
+
+            best_model = tuner.get_best_models(num_models=1)[0]
+            best_model.summary()
+
+
+def _convert_to_3d(xtrain, xtest):
+    xtrain = xtrain.reshape(xtrain.shape[0], xtrain.shape[1], 1)
+    xtest = xtest.reshape(xtest.shape[0], xtest.shape[1], 1)
+    return xtrain, xtest
 
     # train the model
     # evaluate the model

@@ -1,12 +1,13 @@
-from kerastuner import RandomSearch
+import keras_tuner as kt
 
 
-def tuning_params(model, num_trials, model_name):
-    tuner = RandomSearch(
+def tuning_params(model, num_max_epochs, model_name):
+    tuner = kt.Hyperband(
         model,
         objective="val_loss",
-        max_trials=num_trials,
-        executions_per_trial=1,
+        max_epochs=num_max_epochs,
+        factor=3,
         project_name=str(model_name),
+        overwrite=True,
     )
     return tuner
