@@ -4,7 +4,7 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout  # type: ignore
 from tensorflow.keras.models import Sequential  # type: ignore
 from tensorflow.keras.optimizers import Adam  # type: ignore
 
-from volatility_forecaster.keras.make_experiment import make_experiment
+from volatility_forecaster.keras.make_experiments import make_experiments
 
 #
 seq_length = 7  # sequence length to create inputs and outputs
@@ -47,7 +47,7 @@ num_max_epochs = 10
 model_name = "lstm"
 
 # call make_experiment
-make_experiment(
+make_experiments(
     model_name=model_name,
     model=build_model,
     scaler_instance=scaler_instance,

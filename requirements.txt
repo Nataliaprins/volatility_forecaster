@@ -10,7 +10,8 @@ scipy
 wheel           
 pandas         
 yfinance       
-keras          
+keras     
+keras-tuner     
 tensorflow      
 pyportfolioopt
 statsmodels

@@ -1,7 +1,7 @@
 import keras_tuner as kt
 
 
-def tuning_params(model, num_max_epochs, model_name):
+def tuning_params(model, num_max_epochs, model_name, tuner_directory):
     tuner = kt.Hyperband(
         model,
         objective="val_loss",
@@ -9,5 +9,6 @@ def tuning_params(model, num_max_epochs, model_name):
         factor=3,
         project_name=str(model_name),
         overwrite=True,
+        directory=tuner_directory,
     )
     return tuner

@@ -25,5 +25,5 @@ def scale_data(data, scaling_method, **scaler_params):
         scaler_instance = PowerTransformer()
     else:
         raise ValueError("The scaler name is not valid")
-    scaled_data = scaler_instance.fit_transform(data.values.reshape(-1, 1))
+    scaled_data = scaler_instance.fit_transform(data.reshape(-1, 1))
     return scaled_data
