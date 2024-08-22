@@ -5,7 +5,7 @@ import mlflow
 import mlflow.keras
 import numpy as np
 
-from volatility_forecaster.core.keras._get_data_files import _get_data_files
+from volatility_forecaster.core._get_data_files import _get_data_files
 from volatility_forecaster.keras._convert_to_3d import _convert_to_3d
 from volatility_forecaster.keras._get_experiment_id_by_name import (
     _get_experiment_id_by_name,

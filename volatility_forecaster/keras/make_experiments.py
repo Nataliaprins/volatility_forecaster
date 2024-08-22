@@ -1,5 +1,5 @@
-from volatility_forecaster.core.keras._get_data_files import _get_data_files
-from volatility_forecaster.keras.extract_stock_name import extract_stock_name
+from volatility_forecaster.core._extract_stock_name import _extract_stock_name
+from volatility_forecaster.core._get_data_files import _get_data_files
 from volatility_forecaster.keras.make_experiment import make_experiment
 
 
@@ -14,9 +14,8 @@ def make_experiments(
 ):
 
     data_files = _get_data_files()
-
     for data_file in data_files:
-        stock_name = extract_stock_name(data_file)
+        stock_name = _extract_stock_name(data_file)
 
         make_experiment(
             stock_name=stock_name,
