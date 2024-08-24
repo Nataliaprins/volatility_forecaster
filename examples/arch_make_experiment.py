@@ -6,18 +6,19 @@ param_dict = (
     {
         "p": [1, 2],
         "q": [1, 2, 3],
-        "vol": ["GARCH", "ARCH"],
+        "vol": ["GARCH"],
+        "dist": ["skewt"],
     },
 )
 param_combinations = list(ParameterGrid(param_dict))
 
-fit_params = {"disp": "off"}
+fit_params = {"update_freq": [5, 6, 7], "disp": ["off"]}
+fit_params_combinations = list(ParameterGrid(fit_params))
 
 forecast_params = {"horizon": 2, "method": "analytic"}
 
 make_experiments(
     param_combinations=param_combinations,
     train_size=0.8,
-    fit_params=fit_params,
-    forecast_params=forecast_params,
+    fit_params_combinations=fit_params_combinations,
 )
