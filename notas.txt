@@ -1,0 +1,32 @@
+paquete ARCH
+retornar residuales normalizados
+genera series sinteticas
+pronostico in sample un paso adelante
+
+función 1: calcula pronostico(model,serie=70 ) -> pronostico un paso adelante
+función 2: calcula residuales(pronóstico,serie=70 ) -> residuales 
+función 3: optimiza parámetros(serie=70, modelo) -> modelo optimizado
+   for 1..n:
+        pronostico = calcula pronostico(modelo,serie)
+        residuales = calcula residuales(pronostico,serie)
+        mejora parámetros(residuales,modelo)
+
+función 4: calcula errores en test(serie=100, modelo_mejorado) -> errores en test
+     pronostico = calcula pronostico(modelo,serie=100)
+     toma_los ultimos_30 = serie[70:]
+     toma_los ultimos 30 pronosticados = pronostico[70:]
+     calcula residuales con los ultimos 30 de cada uno
+     calcula errores(y_true,y_pred)-> metricas
+
+función 5: pronostico n pasos hacia adelante (modelo, serie=100, horizonte=n)
+    for i in n:
+        pronostico = calcula pronostico(modelo,serie)
+        serie = serie + pronostico
+    return serie
+
+función 6: calcula serie sinteticas (modelo, serie, horizonte=n)
+    for i in n:
+        pronostico = calcula pronostico(modelo,serie)
+        pronostico = pronostico + residuales
+        serie = serie + pronostico
+    return serie

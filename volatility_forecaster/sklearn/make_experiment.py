@@ -41,6 +41,10 @@ def make_experiment(
 
     autologging_mlflow(model_type=model_type)
 
+    parameters = estimator.get_params()
+
+    run_name = f"{repr(model_type)}_"
+
     mlflow.set_experiment(str(stock_name))
 
     with mlflow.start_run() as run:

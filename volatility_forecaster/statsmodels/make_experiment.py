@@ -1,11 +1,7 @@
-import glob
-import os
-
 import mlflow
-import statsmodels.api as sm
 from statsmodels.tsa.ar_model import AutoReg
 
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.constants import project_name
 from volatility_forecaster.core._extract_stock_name import _extract_stock_name
 from volatility_forecaster.core._get_data_files import _get_data_files
 from volatility_forecaster.core.statsmodels.train_test_split import train_test_split
@@ -39,7 +35,15 @@ def make_experiment(
 
         mlflow.set_experiment(str(stock_name))
 
-        with mlflow.start_run(run_name="statsmodels_" + stock_name) as run:
+        # TODO: extraer metodo
+
+        parameters = "_".join(
+            [f"{key}:{value}" for key, value in param_combinations.items()]
+        )
+        run_name = f"Autoregresive_lags:{lags}_{parameters}"
+
+        with mlflow.start_run() as run:
+            mlflow.set_tag("mlflow.runName", run_name)
             model = AutoReg(train, lags=lags, **param_combinations)
             results = model.fit(**fit_params)
             # predict
@@ -53,7 +57,3 @@ def make_experiment(
             mse = metrics["mse"]
             mae = metrics["mae"]
             mlflow.log_metrics({"mse": mse, "mae": mae})
-            # log model
-            # mlflow.log_artifact(model)
-            # log results
-            # mlflow.log_artifact(results)
