@@ -1,0 +1,17 @@
+from volatility_forecaster.constants import ROOT_DIR_PROJECT
+from volatility_forecaster.pull_data.load_data import load_data
+
+
+def extract_serie(stock_name, column_name):
+    "Extracts a serie from a dataframe."
+    data = load_data(stock_name, root_dir=ROOT_DIR_PROJECT)
+    serie = data[column_name].dropna()
+
+    return serie
+
+
+if __name__ == "__main__":
+    extract_serie(
+        stock_name="googl",
+        column_name="log_yield",
+    )

@@ -21,10 +21,13 @@ class ArchModelWrapper(mlflow.pyfunc.PythonModel):
         self.model_fit = model.fit(**fit_params_combinations)
         return self.model_fit
 
-    def predict(self, context, model_input):
+    def predict(self, context, model_input, horizon):
+        self.model_fit.forecast(horizon=horizon)
+        return self.model_fit.forecast(horizon=horizon).mean.iloc[-1]
+
         if self.model_fit is None:
             raise ValueError("The model is not trained yet. Call the fit method first.")
-        return self.model_fit.forecast(horizon=1).variance[-1:]
+        return self.model_fit.forecast(horizon=horizon).variance.iloc[-1]
 
     def save_model(self, path):
 

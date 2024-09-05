@@ -10,7 +10,14 @@ from arch import arch_model
 
 from volatility_forecaster.arch_model._class_ArchModelWrapper import ArchModelWrapper
 from volatility_forecaster.arch_model.autologging import autologging
+from volatility_forecaster.arch_model.create_mlflow_directories import (
+    create_mlflow_directories,
+)
+from volatility_forecaster.arch_model.log_arch_model import log_arch_model
 from volatility_forecaster.arch_model.reshape_parameters import reshape_parameters
+from volatility_forecaster.arch_model.set_mlflow_tracking_uri import (
+    set_mlflow_tracking_uri,
+)
 from volatility_forecaster.arch_model.simulate_data import simulate_data
 from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
 from volatility_forecaster.core._extract_stock_name import _extract_stock_name
@@ -44,10 +51,10 @@ def make_experiment(
         run_name = "_".join(
             [f"{key}:{value}" for key, value in param_combinations_str.items()]
         )
-        model_type = param_combinations["vol"]
 
         create_mlflow_directories()
-        tracking_location = set_mlflow_tracking_uri()
+
+        set_mlflow_tracking_uri()
 
         mlflow.set_experiment(stock_name)
 
@@ -57,7 +64,7 @@ def make_experiment(
             # get run info
 
             model = ArchModelWrapper(**param_combinations)
-            res = model.fit(train, fit_params_combinations)
+            results = model.fit(train, fit_params_combinations)
 
             # log params
             if param_combinations:
@@ -87,28 +94,4 @@ def make_experiment(
             # log model
             log_arch_model(model)
 
-
-def log_arch_model(model):
-    mlflow.pyfunc.log_model(
-        artifact_path="artifacts",
-        python_model=model,
-        conda_env=None,
-        code_path=[],
-    )
-
-
-def create_mlflow_directories():
-    if not os.path.exists(
-        os.path.join(ROOT_DIR_PROJECT, "data", project_name, "models", "mlflow")
-    ):
-        os.makedirs(
-            os.path.join(ROOT_DIR_PROJECT, "data", project_name, "models", "mlflow")
-        )
-
-
-def set_mlflow_tracking_uri():
-    artifact_location = (
-        Path.cwd().joinpath("data", "yahoo", "models", "mlflow", "mlruns").as_uri()
-    )
-    mlflow.set_tracking_uri(artifact_location)
-    return mlflow.get_tracking_uri()
+            return print("--MSG: Experiment finished for ARCH model--")
