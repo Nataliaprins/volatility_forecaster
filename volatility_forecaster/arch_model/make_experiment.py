@@ -77,7 +77,7 @@ def make_experiment(
                     mlflow.log_param(param, value)
 
             # predict
-            y_pred = model.predict(None, train[:-1])
+            y_pred = model.predict(None, train[:-1], horizon=1)
             y_true = train[-len(y_pred) :]
 
             # log metrics
@@ -94,4 +94,4 @@ def make_experiment(
             # log model
             log_arch_model(model)
 
-            return print("--MSG: Experiment finished for ARCH model--")
+    return print("--MSG: Experiment finished for ARCH model--")

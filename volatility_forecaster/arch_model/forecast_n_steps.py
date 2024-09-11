@@ -24,10 +24,9 @@ def forecast_n_steps(
         prediction_numpy = prediction.to_numpy().reshape(-1, 1)
         # append the prediction to the data
         prediction_numpy = np.append(data_numpy, prediction_numpy, axis=0)
-        print(prediction_numpy)
         # update the data
         data_numpy = prediction_numpy
-        print(data_numpy)
+        print(data_numpy[-n_steps:])
 
     return prediction_numpy
 
@@ -35,7 +34,7 @@ def forecast_n_steps(
 if __name__ == "__main__":
     forecast_n_steps(
         stock_name="googl",
-        logged_model_path="/Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/546022347724216931/1e69094578184605b5bf4804fe873c96/artifacts/artifacts",
+        logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/449779083138429514/10792a8e5d0341e493f4c5905f459963/artifacts/best_estimator",
         column_name="log_yield",
         n_steps=5,
     )

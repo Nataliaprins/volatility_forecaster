@@ -6,9 +6,6 @@ def make_experiments(
     train_size,
     fit_params_combinations,
 ):
-
-    # TODO: doble for para iterar fit_params_combinations y param_combinations
-
     for combination in param_combinations:
         for fit_params_combination in fit_params_combinations:
             make_experiment(
