@@ -5,7 +5,9 @@ from volatility_forecaster.sklearn.make_experiment import make_experiment
 
 def make_experiments(
     model_type,
+    column_name,
     train_size,
+    prod_size,
     lags,
     model_instance,
     param_dict,
@@ -21,7 +23,9 @@ def make_experiments(
         make_experiment(
             stock_name=stock_name,
             model_type=model_type,
+            column_name=column_name,
             train_size=train_size,
+            prod_size=prod_size,
             lags=lags,
             model_instance=model_instance,
             param_dict=param_dict,

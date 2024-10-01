@@ -13,6 +13,8 @@ param_dict = {
 
 make_experiments(
     model_type="sklearn",
+    column_name="log_yield",
+    prod_size=0.1,
     train_size=0.75,
     lags=3,
     model_instance=model_instance,
@@ -20,4 +22,3 @@ make_experiments(
     root_dir=project_name,
     n_splits=5,
 )
-# TODO: MLruns se crea en el paso de keras tuner

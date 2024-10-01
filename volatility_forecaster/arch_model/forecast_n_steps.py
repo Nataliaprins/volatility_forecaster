@@ -4,7 +4,7 @@
 import mlflow.pyfunc
 import numpy as np
 
-from volatility_forecaster.arch_model.extract_serie import extract_serie
+from volatility_forecaster.preprocessing.extract_serie import extract_serie
 
 
 def forecast_n_steps(

@@ -1,33 +1,26 @@
-import glob
-import os
-
-import numpy as np
 import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.constants import project_name
+from volatility_forecaster.preprocessing.generate_lagged_data import (
+    generate_lagged_data,
+)
 from volatility_forecaster.pull_data.load_data import load_data
+from volatility_forecaster.train_test_split.train_test_data import train_test_data
 
 
-def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):
-    # load the data
-    df = load_data(stock_name, root_dir)
-    df.dropna(inplace=True)
-    # extract the "log_yield" column an rename it to "yt"
-    df = df["log_yield"].rename("yt")
-    # create a dataframe with the yt column
-    lagged_df = pd.DataFrame(df)
+def ts_train_test_split(
+    root_dir, column_name, prod_size, train_size, stock_name, lags, n_splits
+):
+    train_test_df = train_test_data(
+        stock_name,
+        column_name,
+        prod_size,
+        lags,
+    )
 
-    # define the lags
-    for lag in range(1, lags + 1):
-        lagged_df[f"lag_{lag}"] = lagged_df["yt"].shift(lag)
-
-    # drop the NaN values
-    lagged_df.dropna(inplace=True)
-
-    # define X and Y variables
-    x = lagged_df.drop(columns=["yt"])  # features
-    y = lagged_df["yt"]  # target
+    x = train_test_df.drop(columns=["log_yield"])  # features
+    y = train_test_df["log_yield"]  # target
 
     # split the data with TimeSeriesSplit
 
@@ -44,5 +37,11 @@ def ts_train_test_split(root_dir, train_size, stock_name, lags, n_splits):
 
 if __name__ == "__main__":
     ts_train_test_split(
-        root_dir=project_name, lags=3, n_splits=5, train_size=0.8, stock_name="googl"
+        root_dir=project_name,
+        lags=3,
+        n_splits=5,
+        train_size=0.8,
+        stock_name="googl",
+        column_name="log_yield",
+        prod_size=0.1,
     )
