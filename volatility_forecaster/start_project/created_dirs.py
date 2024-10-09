@@ -4,21 +4,26 @@ import os
 import shutil
 import sys
 
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.constants import ROOT_DIR_PROJECT
 
-# TODO: convert project_name to an atributte of the function 
+# TODO: convert project_name to an atributte of the function
 
-def create_project(project_name):  
+
+def create_project(project_name):
+
+    dir_name = ["raw", "processed", "intermediate", "features", "models", "reports"]
+
     if not os.path.exists(os.path.join(ROOT_DIR_PROJECT, "data", project_name)):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name))
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "raw"))
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "processed"))
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "intermediate"))
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "features"))
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "models"))
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "reports"))
+        for i in dir_name:
+            os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, i))
         print(f"--MSG-- Folders for project {project_name} created successfully")
+
     else:
         print(f"--MSG-- Project {project_name} already exists")
 
-create_project(project_name)
+
+create_project("colombia")
+
+
+if __name__ == "__main__":
+    create_project(project_name="colombia")
