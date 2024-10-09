@@ -1,12 +1,8 @@
 "this file is used to create a new project folder in the database"
 
 import os
-import shutil
-import sys
 
 from volatility_forecaster.constants import ROOT_DIR_PROJECT
-
-# TODO: convert project_name to an atributte of the function
 
 
 def create_project(project_name):
@@ -22,8 +18,5 @@ def create_project(project_name):
         print(f"--MSG-- Project {project_name} already exists")
 
 
-create_project("colombia")
-
-
 if __name__ == "__main__":
-    create_project(project_name="colombia")
+    create_project(project_name="yahoo")
