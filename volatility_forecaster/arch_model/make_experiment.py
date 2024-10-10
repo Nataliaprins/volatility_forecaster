@@ -5,7 +5,6 @@ import os
 import mlflow
 import mlflow.client
 
-from volatility_forecaster.arch_model.log_arch_model import log_arch_model
 from volatility_forecaster.core._extract_stock_name import _extract_stock_name
 from volatility_forecaster.core._get_data_files import _get_data_files
 from volatility_forecaster.core.arch import train_test_split
@@ -17,6 +16,7 @@ from volatility_forecaster.core.arch.param_combinations_to_string import (
 from volatility_forecaster.core.mlflow.create_mlflow_directories import (
     create_mlflow_directories,
 )
+from volatility_forecaster.core.mlflow.log_arch_model import log_arch_model
 from volatility_forecaster.core.mlflow.set_mlflow_tracking_uri import (
     set_mlflow_tracking_uri,
 )
