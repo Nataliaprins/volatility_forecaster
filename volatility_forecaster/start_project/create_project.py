@@ -17,6 +17,8 @@ def create_project(project_name):
     else:
         print(f"--MSG-- Project {project_name} already exists")
 
+    return
+
 
 if __name__ == "__main__":
     create_project(project_name="yahoo")

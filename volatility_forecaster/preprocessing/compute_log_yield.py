@@ -41,7 +41,7 @@ def compute_log_yield(
 
         print(f"--MSG-- File saved to {processed_file}")
 
-    print("--MSG-- All files processed.")
+    return print("--MSG-- All files processed.")
 
 
 if __name__ == "__main__":

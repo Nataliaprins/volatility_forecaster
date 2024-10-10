@@ -18,7 +18,6 @@ def compute_rolling_std(project_name, rolling_window):
     processed_files = _get_data_files(project_name=project_name)
 
     for processed_file in processed_files:
-
         std_df = pd.read_csv(
             processed_file,
             parse_dates=True,
@@ -29,9 +28,7 @@ def compute_rolling_std(project_name, rolling_window):
 
         std_df.to_csv(processed_file, index=True)
 
-        print(f"--MSG-- File saved to {processed_file}")
-
-    print("--MSG-- All files processed.")
+    return print("--MSG-- All files processed.")
 
 
 if __name__ == "__main__":
