@@ -7,7 +7,7 @@ import pandas as pd
 from arch import arch_model
 from mlflow.pyfunc import load_model
 
-from volatility_forecaster.arch_model._class_ArchModelWrapper import ArchModelWrapper
+from volatility_forecaster.core.arch._class_ArchModelWrapper import ArchModelWrapper
 
 
 def get_residuals(model_path, data):

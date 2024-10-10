@@ -14,7 +14,7 @@ from volatility_forecaster.pull_data.download_full_data_from_yahoo import (
 from volatility_forecaster.start_project.create_project import create_project
 
 # 1. prepare the directories for the project
-PROJECT_NAME = "USA"
+PROJECT_NAME = "yahoo"
 
 create_project(project_name=PROJECT_NAME)
 

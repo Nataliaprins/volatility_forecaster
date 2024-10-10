@@ -1,39 +1,37 @@
 "this functions is used to make the experiment with mlflow and the arch model"
 
 import os
-from pathlib import Path
 
 import mlflow
 import mlflow.client
-import pandas as pd
-from arch import arch_model
 
-from volatility_forecaster.arch_model._class_ArchModelWrapper import ArchModelWrapper
-from volatility_forecaster.arch_model.autologging import autologging
 from volatility_forecaster.arch_model.create_mlflow_directories import (
     create_mlflow_directories,
 )
 from volatility_forecaster.arch_model.log_arch_model import log_arch_model
-from volatility_forecaster.arch_model.reshape_parameters import reshape_parameters
 from volatility_forecaster.arch_model.set_mlflow_tracking_uri import (
     set_mlflow_tracking_uri,
 )
-from volatility_forecaster.arch_model.simulate_data import simulate_data
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
 from volatility_forecaster.core._extract_stock_name import _extract_stock_name
 from volatility_forecaster.core._get_data_files import _get_data_files
 from volatility_forecaster.core.arch import train_test_split
+from volatility_forecaster.core.arch._class_ArchModelWrapper import ArchModelWrapper
+from volatility_forecaster.core.arch.generate_run_name import generate_run_name
+from volatility_forecaster.core.arch.param_combinations_to_string import (
+    param_combinations_to_string,
+)
 from volatility_forecaster.metrics.evaluate_models import evaluate_models
 from volatility_forecaster.pull_data import load_data
 
 
 def make_experiment(
+    project_name,
     param_combinations,
     train_size,
     fit_params_combinations,
 ):
 
-    data_files = _get_data_files()
+    data_files = _get_data_files(project_name=project_name)
 
     for data_file in data_files:
         stock_name = _extract_stock_name(data_file)
@@ -44,13 +42,8 @@ def make_experiment(
 
         train, test = train_test_split.train_test_split(returns, train_size)
 
-        # TODO: extraer metodo
-        param_combinations_str = {
-            key: str(value) for key, value in param_combinations.items()
-        }
-        run_name = "_".join(
-            [f"{key}:{value}" for key, value in param_combinations_str.items()]
-        )
+        param_combinations_str = param_combinations_to_string(param_combinations)
+        run_name = generate_run_name(param_combinations_str)
 
         create_mlflow_directories()
 
@@ -62,7 +55,6 @@ def make_experiment(
             mlflow.set_tag("mlflow.runName", run_name)
 
             # get run info
-
             model = ArchModelWrapper(**param_combinations)
             results = model.fit(train, fit_params_combinations)
 
