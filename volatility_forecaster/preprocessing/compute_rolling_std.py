@@ -7,51 +7,32 @@
 --MSG-- File saved to aapl.csv
 --MSG-- A
 """
-import os
-
 import pandas as pd
 
-from volatility_forecaster.constants import (
-    ROLLING_WINDOW,
-    ROOT_DIR_PROJECT,
-    project_name,
-)
+from volatility_forecaster.core._get_data_files import _get_data_files
 
 
-def compute_rolling_std(root_dir):
+def compute_rolling_std(project_name, rolling_window):
     """Adds a column with the daily yields of the adjusted close prices."""
 
-    # Get the list of files in processed/
-    processed_files = os.listdir(
-        os.path.join(ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/")
-    )
+    processed_files = _get_data_files(project_name=project_name)
 
-    # Process each file in processed/
     for processed_file in processed_files:
-        # Read the file
-        df = pd.read_csv(
-            os.path.join(
-                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices", processed_file
-            ),
+
+        std_df = pd.read_csv(
+            processed_file,
             parse_dates=True,
             index_col=0,
         )
 
-        # Compute the rolling std
-        df["rolling_std"] = df["log_yield"].rolling(window=ROLLING_WINDOW).std()
+        std_df["rolling_std"] = std_df["log_yield"].rolling(window=rolling_window).std()
 
-        # Save the file
-        df.to_csv(
-            os.path.join(
-                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
-            ),
-            index=True,
-        )
+        std_df.to_csv(processed_file, index=True)
+
         print(f"--MSG-- File saved to {processed_file}")
 
-    # Print message
     print("--MSG-- All files processed.")
 
 
 if __name__ == "__main__":
-    compute_rolling_std(root_dir=project_name)
+    compute_rolling_std(project_name="yahoo", rolling_window=5)

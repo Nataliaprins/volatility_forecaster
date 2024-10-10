@@ -13,14 +13,14 @@ import os
 
 import pandas as pd
 
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.constants import ROOT_DIR_PROJECT
 
 
-def copy_data_from_raw_to_intermetidate():
+def copy_data_from_raw_to_intermetidate(project_name):
     """Copy all files from raw/ to intermediate/ removing NA."""
 
     # Get the list of files in raw/
-    raw_files = os.listdir(os.path.join(ROOT_DIR_PROJECT , "data" , project_name, "raw"))
+    raw_files = os.listdir(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "raw"))
 
     # Process each file in raw/
     for raw_file in raw_files:
@@ -37,7 +37,9 @@ def copy_data_from_raw_to_intermetidate():
 
         # Save the file
         df.to_csv(
-            os.path.join(ROOT_DIR_PROJECT, "data", project_name, "intermediate", raw_file),
+            os.path.join(
+                ROOT_DIR_PROJECT, "data", project_name, "intermediate", raw_file
+            ),
             index=True,
         )
         print(f"--MSG-- File saved to {raw_file}")
@@ -47,4 +49,4 @@ def copy_data_from_raw_to_intermetidate():
 
 
 if __name__ == "__main__":
-    copy_data_from_raw_to_intermetidate()
+    copy_data_from_raw_to_intermetidate(project_name="yahoo")

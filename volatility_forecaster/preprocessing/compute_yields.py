@@ -10,52 +10,39 @@
 
 """
 
-import os
 
 import pandas as pd
 
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.core._get_data_files import _get_data_files
 
 # Adds a column called "yields" for each file in data/yahoo/processed/, which
 # contains the daily yields of the adjusted close prices.
 
 
 def compute_yields(
-    root_dir,
+    project_name,
 ):
     """Adds a column with the daily yields of the adjusted close prices."""
 
-    # Get the list of files in processed/
-    processed_files = os.listdir(
-        os.path.join(ROOT_DIR_PROJECT,"data" ,root_dir, "processed/prices/")
-    )
+    processed_files = _get_data_files(project_name=project_name)
 
-    # Process each file in processed/
     for processed_file in processed_files:
-        # Read the file
-        df = pd.read_csv(
-            os.path.join(
-                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
-            ),
+        yield_df = pd.read_csv(
+            processed_file,
             parse_dates=True,
             index_col=0,
         )
 
-        # Compute the yields
-        df["yield"] = df["price"].pct_change()
+        yield_df["yield"] = yield_df["price"].pct_change()
 
-        # Save the file
-        df.to_csv(
-            os.path.join(
-                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
-            ),
+        yield_df.to_csv(
+            processed_file,
             index=True,
         )
         print(f"--MSG-- File saved to {processed_file}")
 
-    # Print message
     print("--MSG-- All files processed.")
 
 
 if __name__ == "__main__":
-    compute_yields(root_dir= project_name)
+    compute_yields(project_name="yahoo")

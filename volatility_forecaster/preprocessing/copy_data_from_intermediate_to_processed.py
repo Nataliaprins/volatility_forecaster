@@ -8,27 +8,30 @@
 --MSG-- All files copied from intermediate/ to processed/prices/
 
 """
+
 import os
 
 import pandas as pd
 
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.constants import ROOT_DIR_PROJECT
 
 
-def copy_data_from_intermediate_to_processed():
+def copy_data_from_intermediate_to_processed(project_name):
     """Copy all files from intermediate/ to processed/."""
 
     # Get the list of files in intermediate/
-    intermediate_files = os.listdir( 
-        os.path.join(ROOT_DIR_PROJECT, "data" ,project_name, "intermediate")
+    intermediate_files = os.listdir(
+        os.path.join(ROOT_DIR_PROJECT, "data", project_name, "intermediate")
     )
 
     #
     # Creates the folder 'processed/prices' inside 'root_dir' if not exists
     if not os.path.exists(
-        os.path.join(ROOT_DIR_PROJECT, "data" ,project_name, "processed", "prices")
+        os.path.join(ROOT_DIR_PROJECT, "data", project_name, "processed", "prices")
     ):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data" ,project_name, "processed", "prices"))
+        os.makedirs(
+            os.path.join(ROOT_DIR_PROJECT, "data", project_name, "processed", "prices")
+        )
 
     # Process each file in intermediate/
     for intermediate_file in intermediate_files:
@@ -36,7 +39,11 @@ def copy_data_from_intermediate_to_processed():
         if intermediate_file.endswith(".csv"):
             df = pd.read_csv(
                 os.path.join(
-                    ROOT_DIR_PROJECT, "data" ,project_name, "intermediate", intermediate_file
+                    ROOT_DIR_PROJECT,
+                    "data",
+                    project_name,
+                    "intermediate",
+                    intermediate_file,
                 ),
                 parse_dates=True,
                 index_col=0,
@@ -45,7 +52,12 @@ def copy_data_from_intermediate_to_processed():
             # Save the file
             df.to_csv(
                 os.path.join(
-                    ROOT_DIR_PROJECT, "data" ,project_name, "processed", "prices", intermediate_file
+                    ROOT_DIR_PROJECT,
+                    "data",
+                    project_name,
+                    "processed",
+                    "prices",
+                    intermediate_file,
                 ),
                 index=True,
             )
@@ -56,4 +68,4 @@ def copy_data_from_intermediate_to_processed():
 
 
 if __name__ == "__main__":
-    copy_data_from_intermediate_to_processed()
+    copy_data_from_intermediate_to_processed(project_name="yahoo")

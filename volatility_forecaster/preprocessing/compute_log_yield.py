@@ -11,55 +11,38 @@ Adds a column with the daily log yields of the adjusted close prices.
 
 """
 
-import os
-
 import numpy as np
 import pandas as pd
 
-from volatility_forecaster.constants import ROOT_DIR_PROJECT, project_name
+from volatility_forecaster.core._get_data_files import _get_data_files
 
 
 def compute_log_yield(
-    root_dir,
+    project_name,
 ):
     """Adds a column with the daily log yields of the adjusted close prices."""
 
-    # Get the list of files in processed/
-    processed_files = [
-        f
-        for f in os.listdir(
-            os.path.join(ROOT_DIR_PROJECT, "data",root_dir, "processed/prices/")
-        )
-        if not f.endswith(".DS_Store")
-    ]
+    processed_files = _get_data_files(project_name=project_name)
 
-    # Process each file in processed/
     for processed_file in processed_files:
-        # Read the file
-        df = pd.read_csv(
-            os.path.join(
-                ROOT_DIR_PROJECT, "data" ,root_dir, "processed", "prices", processed_file
-            ),
+
+        log_yield_df = pd.read_csv(
+            processed_file,
             parse_dates=True,
             index_col=0,
             encoding="utf-8",
         )
 
-        # Compute the log yields
-        df["log_yield"] = np.log(df["price"] / df["price"].shift(1))
-
-        # Save the file
-        df.to_csv(
-            os.path.join(
-                ROOT_DIR_PROJECT, "data" ,root_dir, "processed/prices/", processed_file
-            ),
-            index=True,
+        log_yield_df["log_yield"] = np.log(
+            log_yield_df["price"] / log_yield_df["price"].shift(1)
         )
+
+        log_yield_df.to_csv(processed_file, index=True, encoding="utf-8")
+
         print(f"--MSG-- File saved to {processed_file}")
 
-    # Print message
     print("--MSG-- All files processed.")
 
 
 if __name__ == "__main__":
-    compute_log_yield(root_dir=project_name)
+    compute_log_yield(project_name="yahoo")
