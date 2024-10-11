@@ -11,9 +11,9 @@ fit_params = {"cov_type": "HC0"}
 
 
 make_experiments(
+    project_name="yahoo",
     param_combinations=param_combinations,
     lags=lags,
-    model_type="AR",
     train_size=0.8,
     fit_params=fit_params,
 )

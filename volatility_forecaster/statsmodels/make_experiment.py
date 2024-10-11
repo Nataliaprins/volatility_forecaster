@@ -1,26 +1,26 @@
 import mlflow
 from statsmodels.tsa.ar_model import AutoReg
 
-from volatility_forecaster.constants import project_name
 from volatility_forecaster.core._extract_stock_name import _extract_stock_name
 from volatility_forecaster.core._get_data_files import _get_data_files
+from volatility_forecaster.core.statsmodels.generate_parameter_string import (
+    generate_parameter_string,
+)
 from volatility_forecaster.core.statsmodels.train_test_split import train_test_split
 from volatility_forecaster.metrics.evaluate_models import evaluate_models
 from volatility_forecaster.mlflow.setting_mlflow import autologging_mlflow
 from volatility_forecaster.pull_data import load_data
 
-# TODO: insertar variable model_type. revisar no corre
-
 
 def make_experiment(
+    project_name,
     train_size,
     lags,
     param_combinations,
     fit_params,
-    model_type,
 ):
 
-    data_files = _get_data_files()
+    data_files = _get_data_files(project_name=project_name)
 
     for data_file in data_files:
         stock_name = _extract_stock_name(data_file)
@@ -35,11 +35,7 @@ def make_experiment(
 
         mlflow.set_experiment(str(stock_name))
 
-        # TODO: extraer metodo
-
-        parameters = "_".join(
-            [f"{key}:{value}" for key, value in param_combinations.items()]
-        )
+        parameters = generate_parameter_string(param_combinations)
         run_name = f"Autoregresive_lags:{lags}_{parameters}"
 
         with mlflow.start_run() as run:
