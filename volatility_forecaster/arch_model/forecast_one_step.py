@@ -1,5 +1,3 @@
-import os
-
 import mlflow.pyfunc
 
 from volatility_forecaster.preprocessing.extract_serie import extract_serie

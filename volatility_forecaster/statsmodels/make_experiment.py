@@ -1,14 +1,17 @@
 import mlflow
+import statsmodels.api as sm
 from statsmodels.tsa.ar_model import AutoReg
 
 from volatility_forecaster.core._extract_stock_name import _extract_stock_name
 from volatility_forecaster.core._get_data_files import _get_data_files
+from volatility_forecaster.core.mlflow.log_statsmodels_model import (
+    log_statsmodels_model,
+)
 from volatility_forecaster.core.statsmodels.generate_parameter_string import (
     generate_parameter_string,
 )
 from volatility_forecaster.core.statsmodels.train_test_split import train_test_split
 from volatility_forecaster.metrics.evaluate_models import evaluate_models
-from volatility_forecaster.mlflow.setting_mlflow import autologging_mlflow
 from volatility_forecaster.pull_data import load_data
 
 
@@ -31,8 +34,7 @@ def make_experiment(
 
         train, test = train_test_split(returns, train_size)
 
-        autologging_mlflow(model_type="statsmodels")
-
+        log_statsmodels_model(project_name=project_name)
         mlflow.set_experiment(str(stock_name))
 
         parameters = generate_parameter_string(param_combinations)
