@@ -7,16 +7,19 @@ from volatility_forecaster.preprocessing.generate_lagged_data import (
 
 
 def train_test_data(
+    project_name,
     stock_name,
     column_name,
-    prod_size,
+    train_size,
     lags,
 ):
-    serie = extract_serie(stock_name, column_name)
+    serie = extract_serie(
+        stock_name, project_name=project_name, column_name=column_name
+    )
 
-    lagged_df = generate_lagged_data(lags, serie).dropna()
+    lagged_df = generate_lagged_data(serie, lags, column_name=column_name).dropna()
 
-    train_test_data = lagged_df.head(int(len(lagged_df) * (1 - prod_size)))
+    train_test_data = lagged_df.head(int(len(lagged_df) * (train_size)))
 
     train_test_data = pd.DataFrame(train_test_data)
 
@@ -24,9 +27,10 @@ def train_test_data(
 
 
 if __name__ == "__main__":
-    train_test_prod_split(
+    train_test_data(
+        project_name="yahoo",
         stock_name="googl",
         column_name="log_yield",
-        prod_size=0.1,
+        train_size=0.1,
         lags=3,
     )

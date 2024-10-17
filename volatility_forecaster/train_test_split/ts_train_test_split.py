@@ -10,13 +10,14 @@ from volatility_forecaster.train_test_split.train_test_data import train_test_da
 
 
 def ts_train_test_split(
-    root_dir, column_name, prod_size, train_size, stock_name, lags, n_splits
+    project_name, column_name, train_size, stock_name, lags, n_splits
 ):
     train_test_df = train_test_data(
-        stock_name,
-        column_name,
-        prod_size,
-        lags,
+        project_name=project_name,
+        stock_name=stock_name,
+        column_name=column_name,
+        train_size=train_size,
+        lags=lags,
     )
 
     x = train_test_df.drop(columns=["log_yield"])  # features
@@ -30,14 +31,14 @@ def ts_train_test_split(
         x_train, x_test = x.iloc[train_index], x.iloc[test_index]
         y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
-    print(f"--INFO-- ts_train_test_split for {stock_name} from {root_dir}.")
+    print(f"--INFO-- ts_train_test_split for {stock_name} from {project_name}.")
 
     return x, y, x_train, x_test, y_train, y_test
 
 
 if __name__ == "__main__":
     ts_train_test_split(
-        root_dir=project_name,
+        project_name=project_name,
         lags=3,
         n_splits=5,
         train_size=0.8,

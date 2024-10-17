@@ -1,7 +1,5 @@
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.tree import DecisionTreeRegressor
 
-from volatility_forecaster.constants import project_name
 from volatility_forecaster.sklearn.make_experiments import make_experiments
 
 model_instance = RandomForestRegressor()
@@ -10,8 +8,10 @@ param_dict = {
     "criterion": ["friedman_mse", "absolute_error"],
 }
 
+project_name = "yahoo"
 
 make_experiments(
+    project_name=project_name,
     model_type="sklearn",
     column_name="log_yield",
     prod_size=0.1,
@@ -19,6 +19,5 @@ make_experiments(
     lags=3,
     model_instance=model_instance,
     param_dict=param_dict,
-    root_dir=project_name,
     n_splits=5,
 )

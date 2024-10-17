@@ -13,6 +13,7 @@ from volatility_forecaster.train_test_split.ts_train_test_split import (
 
 
 def make_experiment(
+    project_name,
     stock_name,
     model_type,
     column_name,
@@ -21,14 +22,12 @@ def make_experiment(
     lags,
     model_instance,
     param_dict,
-    root_dir,
     n_splits,
 ):
 
     x, y, x_train, x_test, y_train, y_test = ts_train_test_split(
-        root_dir=root_dir,
+        project_name=project_name,
         train_size=train_size,
-        prod_size=prod_size,
         lags=lags,
         stock_name=stock_name,
         column_name=column_name,
