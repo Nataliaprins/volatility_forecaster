@@ -45,9 +45,9 @@ def make_experiment(
         param_combinations_str = param_combinations_to_string(param_combinations)
         run_name = generate_run_name(param_combinations_str)
 
-        create_mlflow_directories()
+        create_mlflow_directories(project_name=project_name)
 
-        set_mlflow_tracking_uri()
+        set_mlflow_tracking_uri(project_name)
 
         mlflow.set_experiment(stock_name)
 

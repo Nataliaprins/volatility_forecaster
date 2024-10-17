@@ -6,7 +6,9 @@ from tensorflow.keras.optimizers import Adam  # type: ignore
 
 from volatility_forecaster.keras.make_experiments import make_experiments
 
-#
+# define the directory where the data is stored, named in prepare_project.py
+project_name = "yahoo"
+
 seq_length = 7  # sequence length to create inputs and outputs
 scaler_instance = "min_max"
 scaler_params = {"feature_range": (0, 1)}
@@ -48,6 +50,7 @@ model_name = "lstm"
 
 # call make_experiment
 make_experiments(
+    project_name=project_name,
     model_name=model_name,
     model=build_model,
     scaler_instance=scaler_instance,

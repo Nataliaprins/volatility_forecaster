@@ -4,6 +4,7 @@ from volatility_forecaster.keras.make_experiment import make_experiment
 
 
 def make_experiments(
+    project_name,
     model_name,
     model,
     scaler_instance,
@@ -13,11 +14,12 @@ def make_experiments(
     num_max_epochs,
 ):
 
-    data_files = _get_data_files()
+    data_files = _get_data_files(project_name=project_name)
     for data_file in data_files:
         stock_name = _extract_stock_name(data_file)
 
         make_experiment(
+            project_name=project_name,
             stock_name=stock_name,
             model_name=model_name,
             model=model,
