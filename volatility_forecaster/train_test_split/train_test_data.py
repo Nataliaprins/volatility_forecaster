@@ -17,7 +17,13 @@ def train_test_data(
         stock_name, project_name=project_name, column_name=column_name
     )
 
-    lagged_df = generate_lagged_data(serie, lags, column_name=column_name).dropna()
+    lagged_df = generate_lagged_data(
+        project_name=project_name,
+        stock_name=stock_name,
+        serie=serie,
+        lags=lags,
+        column_name=column_name,
+    ).dropna()
 
     train_test_data = lagged_df.head(int(len(lagged_df) * (train_size)))
 

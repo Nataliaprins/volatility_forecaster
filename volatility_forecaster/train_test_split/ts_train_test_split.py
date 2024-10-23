@@ -1,11 +1,5 @@
-import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
-from volatility_forecaster.constants import project_name
-from volatility_forecaster.preprocessing.generate_lagged_data import (
-    generate_lagged_data,
-)
-from volatility_forecaster.pull_data.load_data import load_data
 from volatility_forecaster.train_test_split.train_test_data import train_test_data
 
 
@@ -38,11 +32,10 @@ def ts_train_test_split(
 
 if __name__ == "__main__":
     ts_train_test_split(
-        project_name=project_name,
+        project_name="yahoo",
         lags=3,
         n_splits=5,
         train_size=0.8,
         stock_name="googl",
         column_name="log_yield",
-        prod_size=0.1,
     )

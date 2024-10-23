@@ -7,7 +7,12 @@ import pandas as pd
 from volatility_forecaster.constants import ROOT_DIR_PROJECT
 
 
-def save_files(dataframe, project_name, processed_folder, file_name):
+def save_files(
+    dataframe,
+    project_name,
+    processed_folder,
+    file_name,
+):
 
     path = os.path.join(
         ROOT_DIR_PROJECT,

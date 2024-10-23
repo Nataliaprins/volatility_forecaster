@@ -18,7 +18,6 @@ def make_experiment(
     model_type,
     column_name,
     train_size,
-    prod_size,
     lags,
     model_instance,
     param_dict,

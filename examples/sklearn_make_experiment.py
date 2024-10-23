@@ -14,7 +14,6 @@ make_experiments(
     project_name=project_name,
     model_type="sklearn",
     column_name="log_yield",
-    prod_size=0.1,
     train_size=0.75,
     lags=3,
     model_instance=model_instance,
