@@ -1,5 +1,6 @@
 from sklearn.model_selection import TimeSeriesSplit
 
+from volatility_forecaster.core._save_files import save_files
 from volatility_forecaster.train_test_split.train_test_data import train_test_data
 
 
@@ -24,6 +25,35 @@ def ts_train_test_split(
     for train_index, test_index in ts_cv.split(x):
         x_train, x_test = x.iloc[train_index], x.iloc[test_index]
         y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+
+    save_files(
+        dataframe=x_train,
+        project_name=project_name,
+        processed_folder="train_test",
+        model_name="sklearn",
+        file_name=f"{stock_name}_x_train.csv",
+    )
+    save_files(
+        dataframe=x_test,
+        project_name=project_name,
+        processed_folder="train_test",
+        model_name="sklearn",
+        file_name=f"{stock_name}_x_test.csv",
+    )
+    save_files(
+        dataframe=y_train,
+        project_name=project_name,
+        processed_folder="train_test",
+        model_name="sklearn",
+        file_name=f"{stock_name}_y_train.csv",
+    )
+    save_files(
+        dataframe=y_test,
+        project_name=project_name,
+        processed_folder="train_test",
+        model_name="sklearn",
+        file_name=f"{stock_name}_y_test.csv",
+    )
 
     print(f"--INFO-- ts_train_test_split for {stock_name} from {project_name}.")
 

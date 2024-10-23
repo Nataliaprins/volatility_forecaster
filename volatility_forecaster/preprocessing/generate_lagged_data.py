@@ -18,6 +18,7 @@ def generate_lagged_data(
         dataframe=serie,
         project_name=project_name,
         processed_folder="lags",
+        model_name="sklearn",
         file_name=f"lagged_data_{stock_name}_lag_{lags}.csv",
     )
 
