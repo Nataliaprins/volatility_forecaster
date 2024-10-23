@@ -32,7 +32,12 @@ def make_experiment(
 
         returns = data["log_yield"].dropna()
 
-        train, test = train_test_split(returns, train_size)
+        train, test = train_test_split(
+            data=returns,
+            project_name=project_name,
+            stock_name=stock_name,
+            ratio=train_size,
+        )
 
         log_statsmodels_model(project_name=project_name)
         mlflow.set_experiment(str(stock_name))

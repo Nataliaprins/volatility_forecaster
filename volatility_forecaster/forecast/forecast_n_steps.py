@@ -8,12 +8,13 @@ from volatility_forecaster.preprocessing.extract_serie import extract_serie
 
 
 def forecast_n_steps(
+    project_name,
     stock_name,
     logged_model_path,
     column_name,
     n_steps,
 ):
-    data = extract_serie(stock_name, column_name=column_name)
+    data = extract_serie(stock_name, project_name=project_name, column_name=column_name)
     data_numpy = data.to_numpy().reshape(-1, 1)
 
     for _ in range(n_steps):
@@ -33,8 +34,9 @@ def forecast_n_steps(
 
 if __name__ == "__main__":
     forecast_n_steps(
+        project_name="yahoo",
         stock_name="googl",
-        logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/449779083138429514/10792a8e5d0341e493f4c5905f459963/artifacts/best_estimator",
+        logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/158973272966166127/197bedaf8fde4057bb4ea53b75e30f5f/artifacts/model",
         column_name="log_yield",
         n_steps=5,
     )

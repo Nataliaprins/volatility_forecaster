@@ -1,11 +1,17 @@
-from volatility_forecaster.constants import ROOT_DIR_PROJECT
+import pandas as pd
+
 from volatility_forecaster.pull_data.load_data import load_data
 
 
-def extract_serie(stock_name, project_name, column_name):
+def extract_serie(
+    stock_name,
+    project_name,
+    column_name,
+):
     "Extracts a serie from a dataframe."
     data = load_data(stock_name, project_name)
     serie = data[column_name].dropna()
+    serie = pd.DataFrame(serie)
 
     return serie
 
