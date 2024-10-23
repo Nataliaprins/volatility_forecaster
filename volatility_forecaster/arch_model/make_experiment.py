@@ -40,7 +40,12 @@ def make_experiment(
         returns = data["log_yield"]
         returns = returns.dropna()
 
-        train, test = train_test_split.train_test_split(returns, train_size)
+        train, test = train_test_split.train_test_split(
+            data=returns,
+            project_name=project_name,
+            stock_name=stock_name,
+            ratio=train_size,
+        )
 
         param_combinations_str = param_combinations_to_string(param_combinations)
         run_name = generate_run_name(param_combinations_str)
