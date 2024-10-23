@@ -60,3 +60,4 @@ def make_experiment(
             mse = metrics["mse"]
             mae = metrics["mae"]
             mlflow.log_metrics({"mse": mse, "mae": mae})
+    return "--MSG: Experiment finished for statsmodels --"
