@@ -12,13 +12,15 @@ def train_test_split(data, project_name, stock_name, ratio):
         dataframe=train,
         project_name=project_name,
         processed_folder="train_test",
-        file_name=f"statsmodels_{stock_name}_train.csv",
+        model_name="statsmodels",
+        file_name=f"{stock_name}_train.csv",
     )
 
     save_files(
         dataframe=test,
         project_name=project_name,
         processed_folder="train_test",
+        model_name="statsmodels",
         file_name=f"statsmodels_{stock_name}_test.csv",
     )
     return train, test

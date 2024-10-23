@@ -12,6 +12,7 @@ def save_files(
     project_name,
     processed_folder,
     file_name,
+    model_name,
 ):
 
     path = os.path.join(
@@ -20,12 +21,18 @@ def save_files(
         project_name,
         "processed",
         processed_folder,
+        model_name,
     )
 
     if not os.path.exists(os.path.join(path)):
         os.makedirs(
             os.path.join(
-                ROOT_DIR_PROJECT, "data", project_name, "processed", processed_folder
+                ROOT_DIR_PROJECT,
+                "data",
+                project_name,
+                "processed",
+                processed_folder,
+                model_name,
             )
         )
 
@@ -34,9 +41,10 @@ def save_files(
 
 
 if __name__ == "__main__":
-    save_file(
+    save_files(
         dataframe=pd.DataFrame(),
         project_name="yahoo",
         processed_folder="train_test",
+        model_name="arch",
         file_name="test.csv",
     )
