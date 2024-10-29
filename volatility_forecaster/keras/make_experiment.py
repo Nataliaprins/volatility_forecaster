@@ -30,15 +30,15 @@ def make_experiment(
     num_max_epochs,
 ):
 
-    serie = (
-        extract_serie(
-            stock_name=stock_name, project_name=project_name, column_name="log_yield"
-        ),
+    serie = extract_serie(
+        stock_name=stock_name, project_name=project_name, column_name="log_yield"
     )
-    serie = np.random.rand(2000)
+    # serie = np.random.rand(2000)
     scaled_data = scale_data(serie, scaler_instance, **scaler_params)
     xs, ys = create_sequences(scaled_data, seq_length)
-    xtrain, xtest, ytrain, ytest = split_time_series(xs, ys, train_size)
+    xtrain, xtest, ytrain, ytest = split_time_series(
+        project_name, stock_name, xs, ys, train_size
+    )
     xtrain, xtest = _convert_to_3d(xtrain, xtest)
 
     autologging_mlflow()
