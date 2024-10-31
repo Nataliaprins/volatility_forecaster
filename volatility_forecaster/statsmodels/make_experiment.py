@@ -51,6 +51,7 @@ def make_experiment(
             results = model.fit(**fit_params)
             # predict
             ypred = results.predict(start=len(train), end=len(train) + len(test) - 1)
+            print(ypred)
             # log parameters
             mlflow.log_params(param_combinations)
             mlflow.log_param("lags", lags)

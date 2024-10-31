@@ -5,7 +5,12 @@ from volatility_forecaster.train_test_split.train_test_data import train_test_da
 
 
 def ts_train_test_split(
-    project_name, column_name, train_size, stock_name, lags, n_splits
+    project_name,
+    column_name,
+    train_size,
+    stock_name,
+    lags,
+    n_splits,
 ):
     train_test_df = train_test_data(
         project_name=project_name,
@@ -26,34 +31,45 @@ def ts_train_test_split(
         x_train, x_test = x.iloc[train_index], x.iloc[test_index]
         y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
-    save_files(
-        dataframe=x_train,
-        project_name=project_name,
-        processed_folder="train_test",
-        model_name="sklearn",
-        file_name=f"{stock_name}_x_train.csv",
-    )
-    save_files(
-        dataframe=x_test,
-        project_name=project_name,
-        processed_folder="train_test",
-        model_name="sklearn",
-        file_name=f"{stock_name}_x_test.csv",
-    )
-    save_files(
-        dataframe=y_train,
-        project_name=project_name,
-        processed_folder="train_test",
-        model_name="sklearn",
-        file_name=f"{stock_name}_y_train.csv",
-    )
-    save_files(
-        dataframe=y_test,
-        project_name=project_name,
-        processed_folder="train_test",
-        model_name="sklearn",
-        file_name=f"{stock_name}_y_test.csv",
-    )
+    files = {"x_train": x_train, "x_test": x_test, "y_train": y_train, "y_test": y_test}
+
+    for file_name, file in files.items():
+        save_files(
+            dataframe=file,
+            project_name=project_name,
+            processed_folder="train_test",
+            model_name="sklearn",
+            file_name=f"sklearn_{stock_name}_{file_name}.csv",
+        )
+
+    # save_files(
+    #    dataframe=x_train,
+    #    project_name=project_name,
+    #    processed_folder="train_test",
+    #    model_name="sklearn",
+    #    file_name=f"{stock_name}_x_train.csv",
+    # )
+    # save_files(
+    #    dataframe=x_test,
+    #    project_name=project_name,
+    #    processed_folder="train_test",
+    #    model_name="sklearn",
+    #    file_name=f"{stock_name}_x_test.csv",
+    # )
+    # save_files(
+    #    dataframe=y_train,
+    #    project_name=project_name,
+    #    processed_folder="train_test",
+    #    model_name="sklearn",
+    #    file_name=f"{stock_name}_y_train.csv",
+    # )
+    # save_files(
+    #    dataframe=y_test,
+    #    project_name=project_name,
+    #    processed_folder="train_test",
+    #    model_name="sklearn",
+    #    file_name=f"{stock_name}_y_test.csv",
+    # )
 
     print(f"--INFO-- ts_train_test_split for {stock_name} from {project_name}.")
 

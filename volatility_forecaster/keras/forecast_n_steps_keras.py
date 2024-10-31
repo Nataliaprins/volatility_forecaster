@@ -20,6 +20,7 @@ def forecast_n_step_keras(
     x_features = pd.read_csv(os.path.join(path, f"{stock_name}_xtest.csv"))
     loaded_model = mlflow.tensorflow.load_model(logged_model_path)
     prediction = loaded_model.predict(x_features[-n_steps:])
+    # TODO: hacer que se peguen los pronósticos y se metan en x
     print(prediction)
     return prediction
 
