@@ -3,21 +3,18 @@ import os
 
 import numpy as np
 import plotly.graph_objects as go
-from constants import ROOT_DIR_PROJECT
 from plotly.subplots import make_subplots
 from statsmodels.tsa.stattools import pacf
 
+from volatility_forecaster.constants import ROOT_DIR_PROJECT
+from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
 from volatility_forecaster.pull_data.load_data import load_data
 
 
 def pacf_plot(
     stock_name,
-    root_dir: str,
+    project_name: str,
     lags=None,
-    type=str,
-    both=False,
-    alpha=0.05,
-    figsize=(10, 5),
 ):
     """
     stock: a pandas series
@@ -29,13 +26,10 @@ def pacf_plot(
     figsize: size of the figure
     """
     # Create the directory if it does not exist
-    if not os.path.exists(
-        os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/acf_pacf_plot/")
-    ):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/acf_pacf_plot/"))
+    create_reports_dir(project_name)
 
     # load the data
-    df = load_data(stock_name, root_dir)
+    df = load_data(stock_name, project_name)
     df = df.reset_index()
     df = df.dropna()
 
@@ -86,7 +80,11 @@ def pacf_plot(
 
     # save the plot
     file_name = os.path.join(
-        ROOT_DIR_PROJECT, root_dir, "reports/acf_pacf_plot/", f"{stock_name}_pacf.html"
+        ROOT_DIR_PROJECT,
+        "data",
+        project_name,
+        "reports/graphs",
+        f"{stock_name}_pacf.html",
     )
     fig.write_html(file_name)
     print(f"--MSG-- acf plot for {stock_name} stock was saved in {file_name}")
@@ -97,4 +95,7 @@ def pacf_plot(
 
 
 if __name__ == "__main__":
-    pacf_plot(stock_name="msft", root_dir="yahoo", lags=40, alpha=0.05).show()
+    pacf_plot(
+        stock_name="msft",
+        project_name="yahoo",
+    ).show()
