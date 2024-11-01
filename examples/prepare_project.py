@@ -1,5 +1,6 @@
 "preprocessing the data for the project"
 
+from volatility_forecaster.core.directories import create_project
 from volatility_forecaster.preprocessing.compute_log_yield import compute_log_yield
 from volatility_forecaster.preprocessing.compute_rolling_std import compute_rolling_std
 from volatility_forecaster.preprocessing.copy_data_from_intermediate_to_processed import (
@@ -11,7 +12,6 @@ from volatility_forecaster.preprocessing.copy_data_from_raw_to_intermediate impo
 from volatility_forecaster.pull_data.download_full_data_from_yahoo import (
     download_full_data_from_yahoo,
 )
-from volatility_forecaster.start_project.create_project import create_project
 
 # 1. prepare the directories for the project
 PROJECT_NAME = "yahoo"
