@@ -6,35 +6,26 @@ import plotly.graph_objects as go
 from statsmodels.tsa.stattools import acf
 
 from volatility_forecaster.constants import ROOT_DIR_PROJECT
+from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
 from volatility_forecaster.pull_data.load_data import load_data
 
 
 def acf_plot(
     stock_name,
-    root_dir: str,
+    project_name: str,
     lags=None,
-    type=str,
-    both=False,
-    alpha=0.05,
-    figsize=(10, 5),
 ):
     """
     stock: a pandas series
     lags: number of lags to include in the plot
-    acf: whether to plot acf
-    pacf: whether to plot pacf
-    both: whether to plot both acf and pacf
-    alpha: significance level for confidence intervals
-    figsize: size of the figure
+
     """
     # Create the directory if it does not exist
-    if not os.path.exists(
-        os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/acf_pacf_plot/")
-    ):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/acf_pacf_plot/"))
+
+    create_reports_dir(project_name)
 
     # load the data
-    df = load_data(stock_name, root_dir)
+    df = load_data(stock_name, project_name)
     df = df.reset_index()
     df = df.dropna()
 
@@ -84,7 +75,11 @@ def acf_plot(
 
     # save the plot
     file_name = os.path.join(
-        ROOT_DIR_PROJECT, root_dir, "reports/acf_pacf_plot/", f"{stock_name}_acf.html"
+        ROOT_DIR_PROJECT,
+        "data",
+        project_name,
+        "reports/graphs/",
+        f"{stock_name}_acf.html",
     )
     fig.write_html(file_name)
     print(f"--MSG-- acf plot for {stock_name} stock was saved in {file_name}")
@@ -96,5 +91,7 @@ def acf_plot(
 
 if __name__ == "__main__":
     acf_plot(
-        stock_name="msft", root_dir="yahoo", lags=40, type="acf", both=False, alpha=0.05
+        stock_name="msft",
+        project_name="yahoo",
+        lags=40,
     ).show()
