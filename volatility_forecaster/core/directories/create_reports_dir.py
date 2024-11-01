@@ -5,11 +5,20 @@ from volatility_forecaster.constants import ROOT_DIR_PROJECT
 
 
 def create_reports_dir(project_name):
-    if not os.path.exists(
-        os.path.join(ROOT_DIR_PROJECT, "data", project_name, "reports")
-    ):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, "data", project_name, "reports"))
-        print(f"--MSG-- Folder for reports created successfully")
+
+    list_report_dir = [
+        "forecasting",
+        "graphs",
+    ]
+    for i in list_report_dir:
+        if not os.path.exists(
+            os.path.join(ROOT_DIR_PROJECT, "data", project_name, "reports", i)
+        ):
+            os.makedirs(
+                os.path.join(ROOT_DIR_PROJECT, "data", project_name, "reports", i)
+            )
+            print("--MSG-- Folder for reports created successfully")
+
     return
 
 

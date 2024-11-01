@@ -1,5 +1,10 @@
+from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
 from volatility_forecaster.core.forecast.n_step_forecast import n_step_forecast
 from volatility_forecaster.core.forecast.one_step_forecast import one_step_forecast
+
+create_reports_dir(project_name="yahoo")
+
+# forecasting one step ahead and n steps ahead. Only forecast_n_step_ahead is saved in a csv file
 
 forecast_one_step_ahead = one_step_forecast(
     model_type="statsmodels",
@@ -10,8 +15,6 @@ forecast_one_step_ahead = one_step_forecast(
     lags=3,
 )
 print(forecast_one_step_ahead)
-
-
 forecast_n_step_ahead = n_step_forecast(
     model_type="statsmodels",
     project_name="yahoo",
