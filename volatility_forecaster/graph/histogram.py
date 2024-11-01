@@ -29,11 +29,12 @@ import plotly.express as px
 import scipy.stats as stats
 
 from volatility_forecaster.constants import ROOT_DIR_PROJECT
+from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
 
 
 # Import functions
 def plot_histogram(
-    root_dir: str,
+    project_name: str,
 ):
     """Plots a histogram of the column 'log_yield' using plotly for each
     file in the processed/ directory. The histogram is saved in the
@@ -46,22 +47,20 @@ def plot_histogram(
     """
 
     # Create the directory if it does not exist
-    if not os.path.exists(
-        os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/histogram/")
-    ):
-        os.makedirs(os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/histogram/"))
+    create_reports_dir(project_name)
 
     # Get the list of files
-    files = os.listdir(os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices"))
+    files = os.listdir(
+        os.path.join(ROOT_DIR_PROJECT, "data", project_name, "processed", "prices")
+    )
 
     # Iterate over the files
     for file in files:
         # Skip the .DS_Store file
-        if file == ".DS_Store":
-            continue
-        # Load the data
         df = pd.read_csv(
-            os.path.join(ROOT_DIR_PROJECT, root_dir, "processed", "prices", file)
+            os.path.join(
+                ROOT_DIR_PROJECT, "data", project_name, "processed", "prices", file
+            )
         )
         # drop na values
         df = df.dropna()
@@ -87,14 +86,19 @@ def plot_histogram(
 
         # Save the histogram
         file_name = os.path.join(
-            ROOT_DIR_PROJECT, root_dir, f"reports/histogram/{file[:-4]}.html"
+            ROOT_DIR_PROJECT,
+            "data",
+            project_name,
+            f"reports/graphs/histogram_{file[:-4]}.html",
         )
         fig.write_html(file_name)
 
         print(f"--MSG-- File saved to {file_name}")
 
+        return fig.show()
+
 
 if __name__ == "__main__":
     plot_histogram(
-        root_dir="yahoo",
+        project_name="yahoo",
     )
