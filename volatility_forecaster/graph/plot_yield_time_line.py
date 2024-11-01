@@ -12,11 +12,11 @@
 
 import os
 
-import pandas as pd
 import plotly.graph_objects as go
 
 # import the ROOT_DIR_PROJECT from constants.py
 from volatility_forecaster.constants import ROOT_DIR_PROJECT
+from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
 
 # import the load_data function from load_data.py
 from volatility_forecaster.pull_data.load_data import load_data
@@ -24,7 +24,7 @@ from volatility_forecaster.pull_data.load_data import load_data
 
 def plot_yield_time_line(
     stock_name: str,
-    root_dir: str,
+    project_name: str,
 ):
     """Plots as a time line the yield column of an specific stock using plotly.
 
@@ -34,21 +34,10 @@ def plot_yield_time_line(
 
     """
     # Create the directory if it does not exist
-    if not os.path.exists(
-        os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/yield_time_line/")
-    ):
-        os.makedirs(
-            os.path.join(ROOT_DIR_PROJECT, root_dir, "reports/yield_time_line/")
-        )
-
-    # df = pd.read_csv(
-    #    os.path.join(root_dir, "processed","prices", "data_" + f"{stock_name}.csv"),
-    #    parse_dates=True,
-    #    index_col=0,
-    # )
+    create_reports_dir(project_name)
 
     # TODO - Natalia: revisar la importación de la función load_data
-    df = load_data(stock_name, root_dir)
+    df = load_data(stock_name, project_name).dropna()
     df = df.reset_index()
 
     fig = go.Figure(
@@ -74,9 +63,10 @@ def plot_yield_time_line(
     fig.write_html(
         os.path.join(
             ROOT_DIR_PROJECT,
-            root_dir,
+            "data",
+            project_name,
             "reports",
-            "yield_time_line",
+            "graphs",
             f"{stock_name}_yield_time_line.html",
         )
     )
@@ -87,5 +77,5 @@ def plot_yield_time_line(
 if __name__ == "__main__":
     plot_yield_time_line(
         stock_name="msft",
-        root_dir="yahoo",
+        project_name="yahoo",
     ).show()
