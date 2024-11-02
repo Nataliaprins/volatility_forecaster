@@ -14,11 +14,8 @@ import os
 
 import plotly.graph_objects as go
 
-# import the ROOT_DIR_PROJECT from constants.py
 from volatility_forecaster.constants import ROOT_DIR_PROJECT
 from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
-
-# import the load_data function from load_data.py
 from volatility_forecaster.pull_data.load_data import load_data
 
 
@@ -33,10 +30,8 @@ def plot_yield_time_line(
         root_dir (str): Root directory.
 
     """
-    # Create the directory if it does not exist
     create_reports_dir(project_name)
 
-    # TODO - Natalia: revisar la importación de la función load_data
     df = load_data(stock_name, project_name).dropna()
     df = df.reset_index()
 
@@ -71,7 +66,7 @@ def plot_yield_time_line(
         )
     )
 
-    return fig
+    return fig.show()
 
 
 if __name__ == "__main__":

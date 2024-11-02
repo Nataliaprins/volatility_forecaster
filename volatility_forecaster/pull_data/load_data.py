@@ -21,6 +21,8 @@ def load_data(stock_name: str, project_name: str) -> pd.DataFrame:
 
     """
 
+    # TODO: revisar que para con los idices al importar el DF
+
     # Read the file
     prices_df = pd.read_csv(
         os.path.join(

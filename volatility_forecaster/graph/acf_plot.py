@@ -86,7 +86,7 @@ def acf_plot(
 
     # create the pacf plot with plotly
 
-    return fig
+    return fig.show()
 
 
 if __name__ == "__main__":
