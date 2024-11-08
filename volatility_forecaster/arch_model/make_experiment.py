@@ -4,6 +4,8 @@ import os
 
 import mlflow
 import mlflow.client
+import mlflow.tracking
+import pandas as pd
 
 from volatility_forecaster.core._extract_stock_name import _extract_stock_name
 from volatility_forecaster.core._get_data_files import _get_data_files
@@ -39,6 +41,8 @@ def make_experiment(
         data = load_data.load_data(stock_name, project_name)
         returns = data["log_yield"]
         returns = returns.dropna()
+        std_dev = data["rolling_std"].dropna()
+        print(std_dev)
 
         train, test = train_test_split.train_test_split(
             data=returns,
@@ -61,7 +65,7 @@ def make_experiment(
 
             # get run info
             model = ArchModelWrapper(**param_combinations)
-            results = model.fit(train, fit_params_combinations)
+            model.fit(train, fit_params_combinations)
 
             # log params
             if param_combinations:
@@ -75,7 +79,15 @@ def make_experiment(
 
             # predict
             y_pred = model.predict(None, train)
-            y_true = train[-len(y_pred) :]
+            index = y_pred.name
+            index = index.strftime("%Y-%m-%d")
+            # TODO: y_true debe ser un array de numpy
+            # y_true extract the data from the data in the index value, an 10 positions after
+            index_position = std_dev.index.get_loc(index)
+            y_true = std_dev.iloc[index_position : index_position + 7]
+
+            # y_true = pd.Series(y_true, index=[index])
+            # print(y_true)
 
             # log metrics
             metrics = evaluate_models(y_true, y_pred)

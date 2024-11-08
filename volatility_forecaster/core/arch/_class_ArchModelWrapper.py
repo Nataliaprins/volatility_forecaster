@@ -25,8 +25,8 @@ class ArchModelWrapper(mlflow.pyfunc.PythonModel):
         if self.model_fit is None:
             raise ValueError("The model is not trained yet. Call the fit method first.")
 
-        self.model_fit.forecast(horizon=1).variance.iloc[-1]
-        return self.model_fit.forecast().variance.iloc[-1]
+        self.model_fit.forecast(horizon=7).variance.iloc[-1]
+        return self.model_fit.forecast(horizon=7).variance.iloc[-1]
 
     def save_model(self, path):
 
