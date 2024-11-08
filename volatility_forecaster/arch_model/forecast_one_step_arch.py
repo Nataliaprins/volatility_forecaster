@@ -11,14 +11,15 @@ def forecast_one_step_arch(
 ):
     data = extract_serie(stock_name, project_name=project_name, column_name=column_name)
     loaded_model = mlflow.pyfunc.load_model(logged_model_path)
-    prediction = loaded_model.predict(data)
+    model_input = {"data": data, "horizon": 1}
+    prediction = loaded_model.predict(model_input)
     return prediction
 
 
 if __name__ == "__main__":
     forecast_one_step_arch(
         project_name="yahoo",
-        stock_name="googl",
-        logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/158973272966166127/e163c8aadf5645c59e9847f23cbbe20f/artifacts/model",
+        stock_name="aapl",
+        logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/490905807558364708/0f0bf6a1285544859dce1ab9206c94fb/artifacts/artifacts",
         column_name="log_yield",
     )

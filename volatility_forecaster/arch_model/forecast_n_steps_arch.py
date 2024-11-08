@@ -15,28 +15,18 @@ def forecast_n_steps_arch(
     n_steps,
 ):
     data = extract_serie(stock_name, project_name=project_name, column_name=column_name)
-    data_numpy = data.to_numpy().reshape(-1, 1)
+    loaded_model = mlflow.pyfunc.load_model(logged_model_path)
+    model_input = {"data": data, "horizon": n_steps}
+    prediction = loaded_model.predict(model_input)
 
-    for _ in range(n_steps):
-        # load the model
-        loaded_model = mlflow.pyfunc.load_model(logged_model_path)
-        # predict one step
-        prediction = loaded_model.predict(data_numpy)
-        prediction_numpy = prediction.to_numpy().reshape(-1, 1)
-        # append the prediction to the data
-        prediction_numpy = np.append(data_numpy, prediction_numpy, axis=0)
-        # update the data
-        data_numpy = prediction_numpy
-        print(data_numpy[-n_steps:])
-
-    return prediction_numpy
+    return prediction
 
 
 if __name__ == "__main__":
     forecast_n_steps_arch(
         project_name="yahoo",
-        stock_name="googl",
-        logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/158973272966166127/197bedaf8fde4057bb4ea53b75e30f5f/artifacts/model",
+        stock_name="aapl",
+        logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/490905807558364708/0f0bf6a1285544859dce1ab9206c94fb/artifacts/artifacts",
         column_name="log_yield",
-        n_steps=5,
+        n_steps=10,
     )

@@ -5,9 +5,15 @@ import mlflow.pyfunc
 from arch import arch_model
 
 
-class ArchModelWrapper(mlflow.pyfunc.PythonModel):
+class ArchModelWrapper(mlflow.pyfunc.PythonModel):  # mlflow.pyfunc.PythonModel
 
-    def __init__(self, vol, p, q, dist):
+    def __init__(
+        self,
+        vol,
+        p,
+        q,
+        dist,
+    ):
         self.vol = vol
         self.p = p
         self.q = q
@@ -25,8 +31,13 @@ class ArchModelWrapper(mlflow.pyfunc.PythonModel):
         if self.model_fit is None:
             raise ValueError("The model is not trained yet. Call the fit method first.")
 
-        self.model_fit.forecast(horizon=7).variance.iloc[-1]
-        return self.model_fit.forecast(horizon=7).variance.iloc[-1]
+        horizon = model_input.get("horizon", 1)
+        data = model_input["data"]
+        forecast = self.model_fit.forecast(
+            horizon=horizon, method="analytic"
+        ).variance.iloc[-1]
+
+        return forecast
 
     def save_model(self, path):
 
