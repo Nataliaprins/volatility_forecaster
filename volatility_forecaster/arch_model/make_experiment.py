@@ -78,16 +78,14 @@ def make_experiment(
                     mlflow.log_param(param, value)
 
             # predict
-            y_pred = model.predict(None, train)
+            model_input = {"data": train, "horizon": len(test)}
+            y_pred = model.predict(None, model_input)
+
             index = y_pred.name
             index = index.strftime("%Y-%m-%d")
-            # TODO: y_true debe ser un array de numpy
-            # y_true extract the data from the data in the index value, an 10 positions after
-            index_position = std_dev.index.get_loc(index)
-            y_true = std_dev.iloc[index_position : index_position + 7]
 
-            # y_true = pd.Series(y_true, index=[index])
-            # print(y_true)
+            index_position = std_dev.index.get_loc(index)
+            y_true = std_dev.iloc[index_position : index_position + len(test)]
 
             # log metrics
             metrics = evaluate_models(y_true, y_pred)
