@@ -21,7 +21,7 @@ def save_forecast(project_name, model_type, stock_name, forecast_n_step_ahead):
             project_name,
             "reports",
             "forecasting",
-            f"{model_type}_{stock_name}_n_step_forecast.csv",
+            f"{model_type}_{stock_name}_{len(forecast_n_step_ahead)}_step_forecast.csv",
         ),
         index=False,
     )

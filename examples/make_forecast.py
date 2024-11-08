@@ -1,6 +1,7 @@
 from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
 from volatility_forecaster.core.forecast.n_step_forecast import n_step_forecast
 from volatility_forecaster.core.forecast.one_step_forecast import one_step_forecast
+from volatility_forecaster.reports.save_forecast import save_forecast
 
 create_reports_dir(project_name="yahoo")
 
@@ -26,3 +27,10 @@ forecast_n_step_ahead = n_step_forecast(
     lags=3,
 )
 print(forecast_n_step_ahead)
+
+save_forecast(
+    project_name="yahoo",
+    model_type="arch",
+    stock_name="aapl",
+    forecast_n_step_ahead=forecast_n_step_ahead,
+)
