@@ -4,7 +4,7 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout  # type: ignore
 from tensorflow.keras.models import Sequential  # type: ignore
 from tensorflow.keras.optimizers import Adam  # type: ignore
 
-from volatility_forecaster.keras.make_experiments import make_experiments
+from src.keras.make_experiments import make_experiments
 
 # define the directory where the data is stored, named in prepare_project.py
 project_name = "yahoo"

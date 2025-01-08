@@ -1,6 +1,5 @@
 from sklearn.model_selection import ParameterGrid
-
-from volatility_forecaster.arch_model.make_experiments import make_experiments
+from src.arch_model.make_experiments import make_experiments
 
 project_dir = "yahoo"
 

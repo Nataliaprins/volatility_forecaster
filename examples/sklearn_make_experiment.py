@@ -1,6 +1,5 @@
 from sklearn.ensemble import RandomForestRegressor
-
-from volatility_forecaster.sklearn.make_experiments import make_experiments
+from src.sklearn.make_experiments import make_experiments
 
 model_instance = RandomForestRegressor()
 param_dict = {

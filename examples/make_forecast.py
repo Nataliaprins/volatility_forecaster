@@ -1,29 +1,34 @@
-from volatility_forecaster.core.directories.create_reports_dir import create_reports_dir
-from volatility_forecaster.core.forecast.n_step_forecast import n_step_forecast
-from volatility_forecaster.core.forecast.one_step_forecast import one_step_forecast
-from volatility_forecaster.reports.save_forecast import save_forecast
+from src.core.directories.create_reports_dir import create_reports_dir
+from src.core.forecast.n_step_forecast import n_step_forecast
+from src.core.forecast.one_step_forecast import one_step_forecast
+from src.reports.save_forecast import save_forecast
 
-create_reports_dir(project_name="yahoo")
+project_name = "yahoo"
+logged_model_path = "file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/695742625896702102/89f5b9a9885143a0bf3f458838bf5eef/artifacts/model"
+model_type = "keras"
+stock_name = "aapl"
+column_name = "log_yield"
+n_steps = 10
 
-# forecasting one step ahead and n steps ahead. Only forecast_n_step_ahead is saved in a csv file
-# TODO: sacar logged_model_path como variable
+create_reports_dir(project_name=project_name)
+
 forecast_one_step_ahead = one_step_forecast(
-    model_type="arch",
-    project_name="yahoo",
-    stock_name="aapl",
-    logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/688701903655886023/7fa307ec171a470092021060cd1aae0c/artifacts/artifacts",
-    column_name="log_yield",
+    model_type=model_type,
+    project_name=project_name,
+    stock_name=stock_name,
+    logged_model_path=logged_model_path,
+    column_name=column_name,
     lags=1,
 )
 print(forecast_one_step_ahead)
 
 forecast_n_step_ahead = n_step_forecast(
-    model_type="arch",
-    project_name="yahoo",
-    stock_name="aapl",
-    logged_model_path="file:///Users/nataliaacevedo/volatility_forecaster/data/yahoo/models/mlflow/mlruns/688701903655886023/7fa307ec171a470092021060cd1aae0c/artifacts/artifacts",
-    column_name="log_yield",
-    n_steps=10,
+    model_type=model_type,
+    project_name=project_name,
+    stock_name=stock_name,
+    logged_model_path=logged_model_path,
+    column_name=column_name,
+    n_steps=n_steps,
     lags=3,
 )
 print(forecast_n_step_ahead)

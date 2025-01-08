@@ -1,6 +1,5 @@
 from sklearn.model_selection import ParameterGrid
-
-from volatility_forecaster.statsmodels.make_experiments import make_experiments
+from src.statsmodels.make_experiments import make_experiments
 
 param_dict = {
     "trend": ["c", "t"],

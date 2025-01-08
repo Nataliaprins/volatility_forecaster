@@ -1,0 +1,98 @@
+"this functions is used to make the experiment with mlflow and the arch model"
+
+import os
+
+import pandas as pd
+
+import mlflow
+import mlflow.client
+import mlflow.tracking
+from src.core._extract_stock_name import _extract_stock_name
+from src.core._get_data_files import _get_data_files
+from src.core.arch import train_test_split
+from src.core.arch._class_ArchModelWrapper import ArchModelWrapper
+from src.core.arch.generate_run_name import generate_run_name
+from src.core.arch.param_combinations_to_string import param_combinations_to_string
+from src.core.mlflow.create_mlflow_directories import create_mlflow_directories
+from src.core.mlflow.log_arch_model import log_arch_model
+from src.core.mlflow.set_mlflow_tracking_uri import set_mlflow_tracking_uri
+from src.metrics.evaluate_models import evaluate_models
+from src.pull_data import load_data
+
+
+def make_experiment(
+    project_name,
+    param_combinations,
+    train_size,
+    fit_params_combinations,
+):
+
+    data_files = _get_data_files(project_name=project_name)
+
+    for data_file in data_files:
+        stock_name = _extract_stock_name(data_file)
+
+        data = load_data.load_data(stock_name, project_name)
+        returns = data["log_yield"]
+        returns = returns.dropna()
+        std_dev = data["rolling_std"].dropna()
+        print(std_dev)
+
+        train, test = train_test_split.train_test_split(
+            data=returns,
+            project_name=project_name,
+            stock_name=stock_name,
+            ratio=train_size,
+        )
+
+        param_combinations_str = param_combinations_to_string(param_combinations)
+        run_name = generate_run_name(param_combinations_str)
+
+        create_mlflow_directories(project_name=project_name)
+
+        set_mlflow_tracking_uri(project_name)
+
+        mlflow.set_experiment(stock_name)
+
+        with mlflow.start_run():
+            mlflow.set_tag("mlflow.runName", run_name)
+
+            # get run info
+            model = ArchModelWrapper(**param_combinations)
+            model.fit(train, fit_params_combinations)
+
+            # log params
+            if param_combinations:
+                for param, value in param_combinations.items():
+                    mlflow.log_param(param, value)
+
+            # log fit params
+            if fit_params_combinations:
+                for param, value in fit_params_combinations.items():
+                    mlflow.log_param(param, value)
+
+            # predict
+            model_input = {"data": train, "horizon": len(test)}
+            y_pred = model.predict(None, model_input)
+
+            index = y_pred.name
+            index = index.strftime("%Y-%m-%d")
+
+            index_position = std_dev.index.get_loc(index)
+            y_true = std_dev.iloc[index_position : index_position + len(test)]
+
+            # log metrics
+            metrics = evaluate_models(y_true, y_pred)
+            for metric, value in metrics.items():
+                mlflow.log_metric(metric, value)
+
+            run = mlflow.active_run()
+            artifact_uri = run.info.artifact_uri
+            model.save_model(artifact_uri)
+            mlflow.log_artifact(
+                os.path.join(artifact_uri.replace("file://", ""), "arch_model.pkl")
+            )
+            # log model
+            log_arch_model(model)
+
+    return print("--MSG: Experiment finished for ARCH model--")
