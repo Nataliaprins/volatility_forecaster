@@ -17,7 +17,7 @@ https://github.com/Nataliaprins/volatility_forecaster.git
 
 ### 3. Example code:
 
-Use the examples in "examples" folder for interacting correctly with the API.
+Use the examples in "examples" folder for interacting correctly with the package.
 
 
 

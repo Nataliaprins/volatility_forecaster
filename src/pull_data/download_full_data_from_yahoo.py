@@ -17,10 +17,9 @@ def download_full_data_from_yahoo(
     for stock_name in stocks_list:
         stock_data = download_stock_data(stock_name, start_date, end_date)
 
-        prices_df = pd.DataFrame(
-            {"price": stock_data["Adj Close"]},
-            index=pd.date_range(start=start_date, end=end_date),
-        )
+        prices_df = pd.DataFrame(stock_data["Close"])
+        prices_df.index.name = "Date"
+        prices_df.columns = ["price"]
 
         file_path = generate_stock_filepath(project_name, stock_name)
 
@@ -30,8 +29,8 @@ def download_full_data_from_yahoo(
 
 if __name__ == "__main__":
     download_full_data_from_yahoo(
-        stocks_list=["AAPL", "MSFT", "GOOGL"],
+        stocks_list=["^GSPC"],
         start_date="2018-01-01",
         end_date="2024-05-31",
-        project_name="yahoo",
+        project_name="sp500",
     )

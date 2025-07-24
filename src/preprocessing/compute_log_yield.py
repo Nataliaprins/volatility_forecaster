@@ -1,8 +1,8 @@
 # pylint: disable=invalid-name
-""" 
+"""
 Adds a column with the daily log yields of the adjusted close prices.
 
-# >>> from .compute_log_yield  import compute_log_yield 
+# >>> from .compute_log_yield  import compute_log_yield
 # >>> compute_log_yield ("yahoo")
 --MSG-- File saved to msft.csv
 --MSG-- File saved to googl.csv
