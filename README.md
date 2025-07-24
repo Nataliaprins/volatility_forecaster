@@ -1,4 +1,4 @@
-# Volatility Forecaster API
+# Volatility Forecaster Package
 
 ### Generate predictions for financial time series volatility.
 
